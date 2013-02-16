@@ -1,0 +1,90 @@
+16.2.2013 18:34:30 test.modelling.TestModelSelectionEvolution main
+INFO: Initializing evolution
+16.2.2013 18:34:30 test.modelling.TestModelSelectionEvolution main
+INFO: For data: ConstLinConst(inst=300,in1=-1.0..2.0,out1=in1<0.0:0.0,in1>2.0:1.0,in1)
+16.2.2013 18:34:41 test.modelling.TestModelSelectionEvolution main
+INFO: 0: Infinity [5, 2, 12, 8, 10, 4, 6, 0, 3, 14]
+16.2.2013 18:34:44 test.modelling.TestModelSelectionEvolution createVisualization
+INFO:   (... saving visualization)
+16.2.2013 18:34:52 test.modelling.TestModelSelectionEvolution main
+INFO: 1: Infinity [5, 2, 12, 8, 10, 4, 6, 0, 3, 14]
+16.2.2013 18:34:53 test.modelling.TestModelSelectionEvolution createVisualization
+INFO:   (... saving visualization)
+16.2.2013 18:35:01 test.modelling.TestModelSelectionEvolution main
+INFO: 2: Infinity [8, 14, 0, 7, 3, 7, 1, 4, 2, 12]
+16.2.2013 18:35:02 test.modelling.TestModelSelectionEvolution createVisualization
+INFO:   (... saving visualization)
+16.2.2013 18:35:10 test.modelling.TestModelSelectionEvolution main
+INFO: 3: Infinity [5, 8, 1, 8, 10, 4, 6, 0, 3, 14]
+16.2.2013 18:35:10 test.modelling.TestModelSelectionEvolution createVisualization
+INFO:   (... saving visualization)
+16.2.2013 18:35:19 test.modelling.TestModelSelectionEvolution main
+INFO: 4: Infinity [3, 14, 1, 7, 10, 4, 11, 4, 3, 14]
+16.2.2013 18:35:19 test.modelling.TestModelSelectionEvolution createVisualization
+INFO:   (... saving visualization)
+16.2.2013 18:35:28 test.modelling.TestModelSelectionEvolution main
+INFO: 5: Infinity [3, 8, 1, 8, 10, 4, 11, 2, 7, 14]
+16.2.2013 18:35:29 test.modelling.TestModelSelectionEvolution createVisualization
+INFO:   (... saving visualization)
+16.2.2013 18:35:39 test.modelling.TestModelSelectionEvolution main
+INFO: 6: Infinity [8, 8, 1, 7, 10, 4, 6, 0, 3, 14]
+16.2.2013 18:35:39 test.modelling.TestModelSelectionEvolution createVisualization
+INFO:   (... saving visualization)
+16.2.2013 18:35:48 test.modelling.TestModelSelectionEvolution main
+INFO: 7: Infinity [3, 11, 1, 7, 10, 4, 11, 2, 3, 14]
+16.2.2013 18:35:49 test.modelling.TestModelSelectionEvolution createVisualization
+INFO:   (... saving visualization)
+16.2.2013 18:35:58 test.modelling.TestModelSelectionEvolution main
+INFO: 8: Infinity [5, 8, 10, 7, 10, 4, 6, 0, 3, 14]
+16.2.2013 18:35:59 test.modelling.TestModelSelectionEvolution createVisualization
+INFO:   (... saving visualization)
+16.2.2013 18:36:09 test.modelling.TestModelSelectionEvolution main
+INFO: 9: Infinity [8, 8, 1, 7, 10, 4, 6, 0, 3, 14]
+16.2.2013 18:36:10 test.modelling.TestModelSelectionEvolution createVisualization
+INFO:   (... saving visualization)
+16.2.2013 18:36:20 test.modelling.TestModelSelectionEvolution main
+INFO: 10: Infinity [8, 8, 10, 7, 10, 4, 11, 0, 3, 14]
+16.2.2013 18:36:21 test.modelling.TestModelSelectionEvolution createVisualization
+INFO:   (... saving visualization)
+16.2.2013 18:36:35 test.modelling.TestModelSelectionEvolution main
+INFO: 11: Infinity [8, 8, 1, 7, 11, 4, 6, 2, 3, 14]
+16.2.2013 18:36:35 test.modelling.TestModelSelectionEvolution createVisualization
+INFO:   (... saving visualization)
+16.2.2013 18:36:48 test.modelling.TestModelSelectionEvolution main
+INFO: 12: Infinity [8, 11, 1, 7, 3, 4, 6, 0, 3, 14]
+16.2.2013 18:36:49 test.modelling.TestModelSelectionEvolution createVisualization
+INFO:   (... saving visualization)
+16.2.2013 18:37:00 test.modelling.TestModelSelectionEvolution main
+INFO: 13: Infinity [1, 8, 1, 7, 11, 4, 6, 0, 3, 14]
+16.2.2013 18:37:00 test.modelling.TestModelSelectionEvolution createVisualization
+INFO:   (... saving visualization)
+16.2.2013 18:37:10 test.modelling.TestModelSelectionEvolution main
+INFO: 14: Infinity [8, 11, 1, 7, 11, 4, 6, 0, 3, 14]
+16.2.2013 18:37:11 test.modelling.TestModelSelectionEvolution createVisualization
+INFO:   (... saving visualization)
+16.2.2013 18:37:22 test.modelling.TestModelSelectionEvolution main
+INFO: 15: Infinity [8, 8, 1, 7, 11, 4, 6, 2, 3, 14]
+16.2.2013 18:37:23 test.modelling.TestModelSelectionEvolution createVisualization
+INFO:   (... saving visualization)
+16.2.2013 18:37:33 test.modelling.TestModelSelectionEvolution main
+INFO: 16: Infinity [8, 8, 1, 7, 11, 4, 6, 2, 3, 14]
+16.2.2013 18:37:34 test.modelling.TestModelSelectionEvolution createVisualization
+INFO:   (... saving visualization)
+16.2.2013 18:37:45 test.modelling.TestModelSelectionEvolution main
+INFO: 17: Infinity [1, 8, 1, 7, 11, 4, 6, 2, 3, 14]
+16.2.2013 18:37:45 test.modelling.TestModelSelectionEvolution createVisualization
+INFO:   (... saving visualization)
+16.2.2013 18:37:57 test.modelling.TestModelSelectionEvolution main
+INFO: 18: Infinity [1, 8, 1, 7, 3, 4, 6, 0, 3, 14]
+16.2.2013 18:37:57 test.modelling.TestModelSelectionEvolution createVisualization
+INFO:   (... saving visualization)
+16.2.2013 18:38:09 test.modelling.TestModelSelectionEvolution main
+INFO: 19: Infinity [1, 8, 1, 7, 11, 4, 6, 2, 3, 14]
+16.2.2013 18:38:10 test.modelling.TestModelSelectionEvolution createVisualization
+INFO:   (... saving visualization)
+16.2.2013 18:38:21 test.modelling.TestModelSelectionEvolution main
+INFO: 20: Infinity [1, 8, 1, 7, 11, 4, 6, 2, 3, 14]
+16.2.2013 18:38:22 test.modelling.TestModelSelectionEvolution createVisualization
+INFO:   (... saving visualization)
+16.2.2013 18:38:23 test.modelling.TestModelSelectionEvolution main
+INFO: Terminated.

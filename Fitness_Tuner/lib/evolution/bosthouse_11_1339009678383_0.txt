@@ -1,0 +1,54 @@
+<configuration.models.ConnectableModelConfig>
+  <maxLearningVectors>-1</maxLearningVectors>
+  <maxInputsNumber>-1</maxInputsNumber>
+  <name>ConnectableModel(111111111111)|BaggingModel[9x SigmoidModel,RapidNeuralNet(net=3x4,epsilon=0.00001,learn=0.675,momentum=0.023)]|</name>
+  <config class="configuration.models.ensemble.BaggingModelConfig">
+    <classRef>game.models.ensemble.ModelBagging</classRef>
+    <maxLearningVectors>-1</maxLearningVectors>
+    <maxInputsNumber>-1</maxInputsNumber>
+    <modelsNumber>9</modelsNumber>
+    <baseModelsDef>RANDOM</baseModelsDef>
+    <baseModelCfgs>
+      <configuration.models.single.SigmoidModelConfig>
+        <classRef>game.models.single.SigmoidModel</classRef>
+        <maxLearningVectors>-1</maxLearningVectors>
+        <maxInputsNumber>-1</maxInputsNumber>
+        <trainerClassName>QuasiNewtonTrainer</trainerClassName>
+        <validationPercent>30</validationPercent>
+        <validationEnabled>true</validationEnabled>
+      </configuration.models.single.SigmoidModelConfig>
+      <configuration.models.single.rapidMiner.RapidNeuralNetConfig>
+        <classRef>game.models.single.rapidMiner.RapidNeuralNetModel</classRef>
+        <maxLearningVectors>-1</maxLearningVectors>
+        <maxInputsNumber>-1</maxInputsNumber>
+        <firstLayerNeurons>3</firstLayerNeurons>
+        <secondLayerNeurons>4</secondLayerNeurons>
+        <errorEpsilon>1.0E-5</errorEpsilon>
+        <learningRate>0.6752801296598754</learningRate>
+        <momentum>0.023012423577852825</momentum>
+      </configuration.models.single.rapidMiner.RapidNeuralNetConfig>
+    </baseModelCfgs>
+  </config>
+  <selectedInputs>
+    <boolean>true</boolean>
+    <boolean>true</boolean>
+    <boolean>true</boolean>
+    <boolean>true</boolean>
+    <boolean>true</boolean>
+    <boolean>true</boolean>
+    <boolean>true</boolean>
+    <boolean>true</boolean>
+    <boolean>true</boolean>
+    <boolean>true</boolean>
+    <boolean>true</boolean>
+    <boolean>true</boolean>
+  </selectedInputs>
+  <preprocessingMethods>
+    <elements class="string-array">
+      <string>NormalizationPreprocessing</string>
+    </elements>
+    <elementEnabled>
+      <boolean>true</boolean>
+    </elementEnabled>
+  </preprocessingMethods>
+</configuration.models.ConnectableModelConfig>

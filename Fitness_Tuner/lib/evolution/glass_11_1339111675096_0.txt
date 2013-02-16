@@ -1,0 +1,32 @@
+<configuration.classifiers.ConnectableClassifierConfig>
+  <maxLearningVectors>-1</maxLearningVectors>
+  <maxInputsNumber>-1</maxInputsNumber>
+  <name>ConnectableClassifier(111111111)|WekaRandomForest(trees=81)|</name>
+  <config class="configuration.classifiers.single.weka.WekaRandomForestConfig">
+    <classRef>game.classifiers.single.weka.WekaRandomForestClassifier</classRef>
+    <maxLearningVectors>-1</maxLearningVectors>
+    <maxInputsNumber>-1</maxInputsNumber>
+    <numberOfTrees>81</numberOfTrees>
+  </config>
+  <selectedInputs>
+    <boolean>true</boolean>
+    <boolean>true</boolean>
+    <boolean>true</boolean>
+    <boolean>true</boolean>
+    <boolean>true</boolean>
+    <boolean>true</boolean>
+    <boolean>true</boolean>
+    <boolean>true</boolean>
+    <boolean>true</boolean>
+  </selectedInputs>
+  <preprocessingMethods>
+    <elements class="string-array">
+      <string>NormalizationPreprocessing</string>
+      <string>CloneBalancePreprocessing</string>
+    </elements>
+    <elementEnabled>
+      <boolean>true</boolean>
+      <boolean>true</boolean>
+    </elementEnabled>
+  </preprocessingMethods>
+</configuration.classifiers.ConnectableClassifierConfig>

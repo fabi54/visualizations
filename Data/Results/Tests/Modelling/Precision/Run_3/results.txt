@@ -1,0 +1,16 @@
+data	template	mean_square_error
+GausPeakRnd(inst=1000,in1=0.0..1.0,out1=fn:30x gauss noise 0.0)	DecisionTree(min=2,variance=0.001,folds=3,pruning=true)	0.014529113698718853
+GausPeakRnd(inst=1000,in1=0.0..1.0,out1=fn:30x gauss noise 0.0)	Exp	0.08602589201705134
+GausPeakRnd(inst=1000,in1=0.0..1.0,out1=fn:30x gauss noise 0.0)	Gaussian	0.0397250385884513
+GausPeakRnd(inst=1000,in1=0.0..1.0,out1=fn:30x gauss noise 0.0)	KNN(k=1,vote=false,measure=EuclideanDistance)	0.0
+GausPeakRnd(inst=1000,in1=0.0..1.0,out1=fn:30x gauss noise 0.0)	Linear	0.08615612794900135
+GausPeakRnd(inst=1000,in1=0.0..1.0,out1=fn:30x gauss noise 0.0)	LocalPolynomial(deg=2,measure=EuclideanDistance,k=5,closestTest=false)	5.142533194125868E-4
+GausPeakRnd(inst=1000,in1=0.0..1.0,out1=fn:30x gauss noise 0.0)	NeuralNet(net=-1x0,error=0.01,learn=0.3,momentum=0.2,norm=true)	0.0474497660860988
+GausPeakRnd(inst=1000,in1=0.0..1.0,out1=fn:30x gauss noise 0.0)	Polynomial(degree=2)	0.03969100748524007
+GausPeakRnd(inst=1000,in1=0.0..1.0,out1=fn:30x gauss noise 0.0)	RBF(neurons=2,ridge=0.01,scale=2)	0.04165282799913286
+GausPeakRnd(inst=1000,in1=0.0..1.0,out1=fn:30x gauss noise 0.0)	Sigmoid	0.060530971288502954
+GausPeakRnd(inst=1000,in1=0.0..1.0,out1=fn:30x gauss noise 0.0)	Sine	0.0859171408057088
+GausPeakRnd(inst=1000,in1=0.0..1.0,out1=fn:30x gauss noise 0.0)	SVM(svm=C_SVC,C=2^1,gamma=2^0)	0.14837631928802336
+GausPeakRnd(inst=1000,in1=0.0..1.0,out1=fn:30x gauss noise 0.0)	Polynomial(degree=2)	0.03969100748524007
+GausPeakRnd(inst=1000,in1=0.0..1.0,out1=fn:30x gauss noise 0.0)	Polynomial(degree=5)	0.039407019870002814
+GausPeakRnd(inst=1000,in1=0.0..1.0,out1=fn:30x gauss noise 0.0)	Polynomial(degree=7)	0.03277183998978651

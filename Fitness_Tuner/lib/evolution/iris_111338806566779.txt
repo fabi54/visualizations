@@ -1,0 +1,31 @@
+<configuration.classifiers.ConnectableClassifierConfig>
+  <maxLearningVectors>-1</maxLearningVectors>
+  <maxInputsNumber>-1</maxInputsNumber>
+  <name>ConnectableClassifier(1111)|RapidNeuralNetClassifier(net=-1x7,epsilon=0.00001,learn=0.3,momentum=0.371)|</name>
+  <config class="configuration.classifiers.single.rapidMiner.RapidNeuralNetClassifierConfig">
+    <classRef>game.classifiers.single.rapidMiner.RapidNeuralNetClassifier</classRef>
+    <maxLearningVectors>-1</maxLearningVectors>
+    <maxInputsNumber>-1</maxInputsNumber>
+    <firstLayerNeurons>-1</firstLayerNeurons>
+    <secondLayerNeurons>7</secondLayerNeurons>
+    <errorEpsilon>1.0E-5</errorEpsilon>
+    <learningRate>0.3</learningRate>
+    <momentum>0.37099448113532507</momentum>
+  </config>
+  <selectedInputs>
+    <boolean>true</boolean>
+    <boolean>true</boolean>
+    <boolean>true</boolean>
+    <boolean>true</boolean>
+  </selectedInputs>
+  <preprocessingMethods>
+    <elements class="string-array">
+      <string>NormalizationPreprocessing</string>
+      <string>CloneBalancePreprocessing</string>
+    </elements>
+    <elementEnabled>
+      <boolean>true</boolean>
+      <boolean>false</boolean>
+    </elementEnabled>
+  </preprocessingMethods>
+</configuration.classifiers.ConnectableClassifierConfig>

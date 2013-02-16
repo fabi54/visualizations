@@ -36,6 +36,9 @@ public class MinkowskiDistanceDotSizeModel extends DotSizeModelBase {
 	
 	@Override
 	public int getSize(double[] inputs, double[] outputs, int index, int[] inputIndices, int[] outputIndices) {
+		if (rangeSize == 0) {
+			return minSize;
+		}
 		double distance = 0.0;
 		int ai = 0;
 		for (int i = 0; i < inputs.length; i++) { // TODO ManyToOne
@@ -46,6 +49,9 @@ public class MinkowskiDistanceDotSizeModel extends DotSizeModelBase {
 			}
 		}
 		distance = Math.pow(distance, (1 / p));
+		if (rangeDist == 0) {
+			return (distance == minDist) ? (minSize + rangeSize) : minSize;
+		}
 		distance = (distance - minDist) / rangeDist;
 		return (int) Math.min(rangeSize + minSize, Math.max(minSize, (minSize + ((1 - distance) * rangeSize))));
 	}

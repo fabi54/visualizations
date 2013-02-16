@@ -6,5 +6,6 @@
 	<classpathentry kind="lib" path="lib/jcool-1.0-SNAPSHOT.jar"/>
 	<classpathentry kind="lib" path="lib/configurations-0.6.1-SNAPSHOT.jar"/>
 	<classpathentry kind="lib" path="lib/jfreechart.jar"/>
+	<classpathentry kind="lib" path="lib/Modgen_0.13.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

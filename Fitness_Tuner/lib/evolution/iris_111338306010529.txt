@@ -1,0 +1,46 @@
+<configuration.classifiers.ConnectableClassifierConfig>
+  <maxLearningVectors>-1</maxLearningVectors>
+  <maxInputsNumber>-1</maxInputsNumber>
+  <name>ConnectableClassifier(1111)|ClassifierArbitrating{5x ClassifierModel{&lt;outputs&gt;x SigmoidModel}}|</name>
+  <config class="configuration.classifiers.ensemble.ClassifierArbitratingConfig">
+    <classRef>game.classifiers.ensemble.ClassifierArbitrating</classRef>
+    <maxLearningVectors>-1</maxLearningVectors>
+    <maxInputsNumber>-1</maxInputsNumber>
+    <modelsNumber>5</modelsNumber>
+    <baseModelsDef>RANDOM</baseModelsDef>
+    <baseModelCfgs>
+      <configuration.classifiers.single.ClassifierModelConfig>
+        <classRef>game.classifiers.single.ClassifierModel</classRef>
+        <maxLearningVectors>-1</maxLearningVectors>
+        <maxInputsNumber>-1</maxInputsNumber>
+        <baseModelsDef>RANDOM</baseModelsDef>
+        <baseModelCfgs>
+          <configuration.models.single.SigmoidModelConfig>
+            <classRef>game.models.single.SigmoidModel</classRef>
+            <maxLearningVectors>-1</maxLearningVectors>
+            <maxInputsNumber>-1</maxInputsNumber>
+            <trainerClassName>QuasiNewtonTrainer</trainerClassName>
+            <validationPercent>30</validationPercent>
+            <validationEnabled>true</validationEnabled>
+          </configuration.models.single.SigmoidModelConfig>
+        </baseModelCfgs>
+      </configuration.classifiers.single.ClassifierModelConfig>
+    </baseModelCfgs>
+  </config>
+  <selectedInputs>
+    <boolean>true</boolean>
+    <boolean>true</boolean>
+    <boolean>true</boolean>
+    <boolean>true</boolean>
+  </selectedInputs>
+  <preprocessingMethods>
+    <elements class="string-array">
+      <string>NormalizationPreprocessing</string>
+      <string>CloneBalancePreprocessing</string>
+    </elements>
+    <elementEnabled>
+      <boolean>true</boolean>
+      <boolean>false</boolean>
+    </elementEnabled>
+  </preprocessingMethods>
+</configuration.classifiers.ConnectableClassifierConfig>

@@ -1,0 +1,10 @@
+<game.classifiers.ConnectableClassifier>
+<game.classifiers.single.weka.WekaRandomForestClassifier>
+<inputs>9</inputs>
+<outputs>6</outputs>
+<cFunctionName>WekaRandomForestClassifier_7920425493700</cFunctionName>
+</game.classifiers.single.weka.WekaRandomForestClassifier>
+<inputs>9</inputs>
+<outputs>6</outputs>
+<cFunctionName>ConnectableClassifier_7920425453262</cFunctionName>
+</game.classifiers.ConnectableClassifier>

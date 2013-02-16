@@ -1,0 +1,44 @@
+<configuration.models.ConnectableModelConfig>
+  <maxLearningVectors>-1</maxLearningVectors>
+  <maxInputsNumber>-1</maxInputsNumber>
+  <name>ConnectableModel(111111111111)|CascadeGenModel[5x ExpModel]|</name>
+  <config class="configuration.models.ensemble.CascadeGenModelConfig">
+    <classRef>game.models.ensemble.ModelCascadeGen</classRef>
+    <maxLearningVectors>-1</maxLearningVectors>
+    <maxInputsNumber>-1</maxInputsNumber>
+    <modelsNumber>5</modelsNumber>
+    <baseModelsDef>RANDOM</baseModelsDef>
+    <baseModelCfgs>
+      <configuration.models.single.ExpModelConfig>
+        <classRef>game.models.single.ExpModel</classRef>
+        <maxLearningVectors>-1</maxLearningVectors>
+        <maxInputsNumber>-1</maxInputsNumber>
+        <trainerClassName>QuasiNewtonTrainer</trainerClassName>
+        <validationPercent>30</validationPercent>
+        <validationEnabled>true</validationEnabled>
+      </configuration.models.single.ExpModelConfig>
+    </baseModelCfgs>
+  </config>
+  <selectedInputs>
+    <boolean>true</boolean>
+    <boolean>true</boolean>
+    <boolean>true</boolean>
+    <boolean>true</boolean>
+    <boolean>true</boolean>
+    <boolean>true</boolean>
+    <boolean>true</boolean>
+    <boolean>true</boolean>
+    <boolean>true</boolean>
+    <boolean>true</boolean>
+    <boolean>true</boolean>
+    <boolean>true</boolean>
+  </selectedInputs>
+  <preprocessingMethods>
+    <elements class="string-array">
+      <string>NormalizationPreprocessing</string>
+    </elements>
+    <elementEnabled>
+      <boolean>true</boolean>
+    </elementEnabled>
+  </preprocessingMethods>
+</configuration.models.ConnectableModelConfig>

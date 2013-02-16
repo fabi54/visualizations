@@ -1,0 +1,65 @@
+<configuration.models.ConnectableModelConfig>
+  <maxLearningVectors>-1</maxLearningVectors>
+  <maxInputsNumber>-1</maxInputsNumber>
+  <name>RegressionModel(110)|CascadeGen[6x LocalPolynomial(deg=2,measure=EuclideanDistance,k=23,closestTest=true)]|</name>
+  <config class="configuration.models.ensemble.CascadeGenModelConfig">
+    <classRef>game.models.ensemble.ModelCascadeGen</classRef>
+    <maxLearningVectors>-1</maxLearningVectors>
+    <maxInputsNumber>-1</maxInputsNumber>
+    <modelsNumber>6</modelsNumber>
+    <baseModelsDef>RANDOM</baseModelsDef>
+    <baseModelCfgs>
+      <configuration.models.single.LocalPolynomialModelConfig>
+        <classRef>game.models.single.LocalPolynomialModel</classRef>
+        <maxLearningVectors>-1</maxLearningVectors>
+        <maxInputsNumber>-1</maxInputsNumber>
+        <maxDegree>2</maxDegree>
+        <measureType>
+          <elements class="string-array">
+            <string>EuclideanDistance</string>
+            <string>CamberraDistance</string>
+            <string>ChebychevDistance</string>
+            <string>CorrelationSimilarity</string>
+            <string>CosineSimilarity</string>
+            <string>DiceSimilarity</string>
+            <string>DynamicTimeWarpingDistance</string>
+            <string>InnerProductSimilarity</string>
+            <string>JaccardSimilarity</string>
+            <string>ManhattanDistance</string>
+            <string>MaxProductSimilarity</string>
+            <string>OverlapSimilarity</string>
+          </elements>
+          <elementEnabled>
+            <boolean>true</boolean>
+            <boolean>false</boolean>
+            <boolean>false</boolean>
+            <boolean>false</boolean>
+            <boolean>false</boolean>
+            <boolean>false</boolean>
+            <boolean>false</boolean>
+            <boolean>false</boolean>
+            <boolean>false</boolean>
+            <boolean>false</boolean>
+            <boolean>false</boolean>
+            <boolean>false</boolean>
+          </elementEnabled>
+        </measureType>
+        <nearestNeighbours>23</nearestNeighbours>
+        <closestUsedAsTest>true</closestUsedAsTest>
+      </configuration.models.single.LocalPolynomialModelConfig>
+    </baseModelCfgs>
+  </config>
+  <selectedInputs>
+    <boolean>true</boolean>
+    <boolean>true</boolean>
+    <boolean>false</boolean>
+  </selectedInputs>
+  <preprocessingMethods>
+    <elements class="string-array">
+      <string>NormalizationPreprocessing</string>
+    </elements>
+    <elementEnabled>
+      <boolean>true</boolean>
+    </elementEnabled>
+  </preprocessingMethods>
+</configuration.models.ConnectableModelConfig>

@@ -1,0 +1,46 @@
+<configuration.classifiers.ConnectableClassifierConfig>
+  <maxLearningVectors>-1</maxLearningVectors>
+  <maxInputsNumber>-1</maxInputsNumber>
+  <name>ConnectableClassifier(1111)|ClassifierModel{&lt;outputs&gt;x PolynomialModel(degree=4),GaussianModel}|</name>
+  <config class="configuration.classifiers.single.ClassifierModelConfig">
+    <classRef>game.classifiers.single.ClassifierModel</classRef>
+    <maxLearningVectors>-1</maxLearningVectors>
+    <maxInputsNumber>-1</maxInputsNumber>
+    <baseModelsDef>RANDOM</baseModelsDef>
+    <baseModelCfgs>
+      <configuration.models.single.PolynomialModelConfig>
+        <classRef>game.models.single.PolynomialModel</classRef>
+        <maxLearningVectors>-1</maxLearningVectors>
+        <maxInputsNumber>-1</maxInputsNumber>
+        <trainerClassName>QuasiNewtonTrainer</trainerClassName>
+        <validationPercent>30</validationPercent>
+        <validationEnabled>true</validationEnabled>
+        <maxDegree>4</maxDegree>
+      </configuration.models.single.PolynomialModelConfig>
+      <configuration.models.single.GaussianModelConfig>
+        <classRef>game.models.single.GaussianModel</classRef>
+        <maxLearningVectors>-1</maxLearningVectors>
+        <maxInputsNumber>-1</maxInputsNumber>
+        <trainerClassName>QuasiNewtonTrainer</trainerClassName>
+        <validationPercent>30</validationPercent>
+        <validationEnabled>true</validationEnabled>
+      </configuration.models.single.GaussianModelConfig>
+    </baseModelCfgs>
+  </config>
+  <selectedInputs>
+    <boolean>true</boolean>
+    <boolean>true</boolean>
+    <boolean>true</boolean>
+    <boolean>true</boolean>
+  </selectedInputs>
+  <preprocessingMethods>
+    <elements class="string-array">
+      <string>NormalizationPreprocessing</string>
+      <string>CloneBalancePreprocessing</string>
+    </elements>
+    <elementEnabled>
+      <boolean>true</boolean>
+      <boolean>false</boolean>
+    </elementEnabled>
+  </preprocessingMethods>
+</configuration.classifiers.ConnectableClassifierConfig>

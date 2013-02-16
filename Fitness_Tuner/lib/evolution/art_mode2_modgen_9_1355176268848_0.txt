@@ -1,0 +1,56 @@
+<configuration.models.ConnectableModelConfig>
+  <maxLearningVectors>-1</maxLearningVectors>
+  <maxInputsNumber>-1</maxInputsNumber>
+  <name>RegressionModel(111)|LocalPolynomial(deg=3,measure=DynamicTimeWarpingDistance,k=6,closestTest=true)|</name>
+  <config class="configuration.models.single.LocalPolynomialModelConfig">
+    <classRef>game.models.single.LocalPolynomialModel</classRef>
+    <maxLearningVectors>-1</maxLearningVectors>
+    <maxInputsNumber>-1</maxInputsNumber>
+    <maxDegree>3</maxDegree>
+    <measureType>
+      <elements class="string-array">
+        <string>EuclideanDistance</string>
+        <string>CamberraDistance</string>
+        <string>ChebychevDistance</string>
+        <string>CorrelationSimilarity</string>
+        <string>CosineSimilarity</string>
+        <string>DiceSimilarity</string>
+        <string>DynamicTimeWarpingDistance</string>
+        <string>InnerProductSimilarity</string>
+        <string>JaccardSimilarity</string>
+        <string>ManhattanDistance</string>
+        <string>MaxProductSimilarity</string>
+        <string>OverlapSimilarity</string>
+      </elements>
+      <elementEnabled>
+        <boolean>false</boolean>
+        <boolean>false</boolean>
+        <boolean>false</boolean>
+        <boolean>false</boolean>
+        <boolean>false</boolean>
+        <boolean>false</boolean>
+        <boolean>true</boolean>
+        <boolean>false</boolean>
+        <boolean>false</boolean>
+        <boolean>false</boolean>
+        <boolean>false</boolean>
+        <boolean>false</boolean>
+      </elementEnabled>
+    </measureType>
+    <nearestNeighbours>6</nearestNeighbours>
+    <closestUsedAsTest>true</closestUsedAsTest>
+  </config>
+  <selectedInputs>
+    <boolean>true</boolean>
+    <boolean>true</boolean>
+    <boolean>true</boolean>
+  </selectedInputs>
+  <preprocessingMethods>
+    <elements class="string-array">
+      <string>NormalizationPreprocessing</string>
+    </elements>
+    <elementEnabled>
+      <boolean>true</boolean>
+    </elementEnabled>
+  </preprocessingMethods>
+</configuration.models.ConnectableModelConfig>

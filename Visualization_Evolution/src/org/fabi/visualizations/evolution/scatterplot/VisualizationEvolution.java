@@ -13,6 +13,8 @@ import org.fabi.visualizations.evolution.GeneticAlgorithm;
 import org.fabi.visualizations.evolution.Population;
 import org.fabi.visualizations.evolution.PopulationBase;
 import org.fabi.visualizations.evolution.SymetricCrossoverEvolutionStrategy;
+import org.fabi.visualizations.evolution.scatterplot.modelling.Modeller;
+import org.fabi.visualizations.evolution.scatterplot.modelling.evolution.EvolutionModeller;
 import org.fabi.visualizations.scatter.ScatterplotVisualization;
 import org.fabi.visualizations.scatter.sources.DataSource;
 import org.fabi.visualizations.scatter.sources.ModelSource;
@@ -37,6 +39,13 @@ public class VisualizationEvolution {
 	
 	protected static int VISUALIZATIONS_NUMBER = 5;
 	
+	protected Modeller modeller = new EvolutionModeller();
+	
+	public ScatterplotVisualization[] evolve(DataSource data) {
+		ModelSource[] models = modeller.getModels(data);
+		return evolve(data, models);
+	}
+	
 	public ScatterplotVisualization[] evolve(DataSource data, ModelSource[] models) {
 		logger.log(Level.INFO, "Initializing evolution.");
 		List<Chromosome> c = null;
@@ -47,12 +56,12 @@ public class VisualizationEvolution {
 			c = evolveClassification(data, fitness);
 		}
 		ScatterplotSource source = new ScatterplotSourceBase(new DataSource[]{data}, models);
-		logger.log(Level.FINE, "Best chromosomes:");
+		logger.log(Level.INFO, "Best chromosomes:");
 		ScatterplotVisualization[] res = new ScatterplotVisualization[c.size()];
 		for (int i = 0; i < c.size(); i++) {
 			res[i] = (ScatterplotVisualization) c.get(i).getPhenotype();
 			res[i].setSource(source);
-			logger.log(Level.FINE, "  {" + c.get(i).getFitness() + "} " + res[i].hashCode());
+			logger.log(Level.INFO, "  {" + c.get(i).getFitness() + "} " + res[i].hashCode());
 		}
 		return res;
 	}
@@ -150,13 +159,16 @@ public class VisualizationEvolution {
 		algorithm.init(population, new SymetricCrossoverEvolutionStrategy(ELITISM,
 				MUTATION_PROBABILITY, SELECTION_PRESSURE));
 		Chromosome b = algorithm.getBest();
-		logger.log(Level.FINE, "0: [" + b.getFitness() + "] " + b);
+		logger.log(Level.INFO, "0: [" + b.getFitness() + "] " + b);
 		for (int i = 0; i < STEPS; i++) {
 			algorithm.optimize();
 			b = algorithm.getBest();
-			logger.log(Level.FINE, (i + 1) + ": [" + b.getFitness() + "] " + b);
+			logger.log(Level.INFO, (i + 1) + ": [" + b.getFitness() + "] " + b);
 		}
 		return algorithm.getPopulation();
     }
-	
+    
+    public void setModeller(Modeller modeller) {
+    	this.modeller = modeller;
+    }
 }

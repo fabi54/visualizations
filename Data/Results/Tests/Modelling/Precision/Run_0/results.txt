@@ -1,0 +1,13 @@
+data	template	mean_square_error
+Linear(inst=100,in1=0.0..1.0,out1=in1)	DecisionTree(min=2,variance=0.001,folds=3,pruning=true)	0.08953529511870871
+Linear(inst=100,in1=0.0..1.0,out1=in1)	Exp	0.04132916150953037
+Linear(inst=100,in1=0.0..1.0,out1=in1)	Gaussian	0.002498346335394544
+Linear(inst=100,in1=0.0..1.0,out1=in1)	KNN(k=1,vote=false,measure=EuclideanDistance)	0.0
+Linear(inst=100,in1=0.0..1.0,out1=in1)	Linear	1.3766837798912992E-8
+Linear(inst=100,in1=0.0..1.0,out1=in1)	LocalPolynomial(deg=2,measure=EuclideanDistance,k=5,closestTest=false)	4.365432837182769E-6
+Linear(inst=100,in1=0.0..1.0,out1=in1)	NeuralNet(net=-1x0,error=0.01,learn=0.3,momentum=0.2,norm=true)	0.20922407608209942
+Linear(inst=100,in1=0.0..1.0,out1=in1)	Polynomial(degree=2)	2.7540781794297683E-8
+Linear(inst=100,in1=0.0..1.0,out1=in1)	RBF(neurons=2,ridge=0.01,scale=2)	0.029775219487813028
+Linear(inst=100,in1=0.0..1.0,out1=in1)	Sigmoid	0.017886307086762837
+Linear(inst=100,in1=0.0..1.0,out1=in1)	Sine	0.21620294144952554
+Linear(inst=100,in1=0.0..1.0,out1=in1)	SVM(svm=C_SVC,C=2^1,gamma=2^0)	0.495

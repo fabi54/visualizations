@@ -122,7 +122,7 @@ public class ScatterplotVisualization extends Visualization<ScatterplotSource> {
 	@Property(name=PROPERTY_X_AXIS_ATTRIBUTE_INDEX)
 	@Range(from=0, to=Integer.MAX_VALUE)            private int xAxisAttributeIndex = 0;
 	@Property(name=PROPERTY_Y_AXIS_ATTRIBUTE_INDEX)
-	@Range(from=-1, to=Integer.MAX_VALUE)           private int yAxisAttributeIndex = 1;
+	@Range(from=-1, to=Integer.MAX_VALUE)           private int yAxisAttributeIndex = OUTPUT_AXIS;
 	@Property(name=PROPERTY_X_AXIS_RANGE_LOWER)		private double xAxisRangeLower = AUTO_BOUND;
 	@Property(name=PROPERTY_X_AXIS_RANGE_UPPER)		private double xAxisRangeUpper = AUTO_BOUND;
 	@Property(name=PROPERTY_Y_AXIS_RANGE_LOWER)		private double yAxisRangeLower = AUTO_BOUND;

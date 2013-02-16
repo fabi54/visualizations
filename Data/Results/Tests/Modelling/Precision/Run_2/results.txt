@@ -1,0 +1,16 @@
+data	template	mean_square_error
+ConstLinConst(inst=300,in1=-1.0..2.0,out1=in1<0.0:0.0,in1>2.0:1.0,in1)	DecisionTree(min=2,variance=0.001,folds=3,pruning=true)	0.05254038153111629
+ConstLinConst(inst=300,in1=-1.0..2.0,out1=in1<0.0:0.0,in1>2.0:1.0,in1)	Exp	0.3061495797364165
+ConstLinConst(inst=300,in1=-1.0..2.0,out1=in1<0.0:0.0,in1>2.0:1.0,in1)	Gaussian	0.1924107724303958
+ConstLinConst(inst=300,in1=-1.0..2.0,out1=in1<0.0:0.0,in1>2.0:1.0,in1)	KNN(k=1,vote=false,measure=EuclideanDistance)	0.0
+ConstLinConst(inst=300,in1=-1.0..2.0,out1=in1<0.0:0.0,in1>2.0:1.0,in1)	Linear	0.302291491549614
+ConstLinConst(inst=300,in1=-1.0..2.0,out1=in1<0.0:0.0,in1>2.0:1.0,in1)	LocalPolynomial(deg=2,measure=EuclideanDistance,k=5,closestTest=false)	2.5331069420496784E-4
+ConstLinConst(inst=300,in1=-1.0..2.0,out1=in1<0.0:0.0,in1>2.0:1.0,in1)	NeuralNet(net=-1x0,error=0.01,learn=0.3,momentum=0.2,norm=true)	0.19963922250269922
+ConstLinConst(inst=300,in1=-1.0..2.0,out1=in1<0.0:0.0,in1>2.0:1.0,in1)	Polynomial(degree=2)	0.3027652457805828
+ConstLinConst(inst=300,in1=-1.0..2.0,out1=in1<0.0:0.0,in1>2.0:1.0,in1)	RBF(neurons=2,ridge=0.01,scale=2)	0.13987388590829503
+ConstLinConst(inst=300,in1=-1.0..2.0,out1=in1<0.0:0.0,in1>2.0:1.0,in1)	Sigmoid	0.10502873511048011
+ConstLinConst(inst=300,in1=-1.0..2.0,out1=in1<0.0:0.0,in1>2.0:1.0,in1)	Sine	0.30364939611165825
+ConstLinConst(inst=300,in1=-1.0..2.0,out1=in1<0.0:0.0,in1>2.0:1.0,in1)	SVM(svm=C_SVC,C=2^1,gamma=2^0)	0.165
+ConstLinConst(inst=300,in1=-1.0..2.0,out1=in1<0.0:0.0,in1>2.0:1.0,in1)	Polynomial(degree=2)	0.3027652457805828
+ConstLinConst(inst=300,in1=-1.0..2.0,out1=in1<0.0:0.0,in1>2.0:1.0,in1)	Polynomial(degree=5)	0.10097493592688815
+ConstLinConst(inst=300,in1=-1.0..2.0,out1=in1<0.0:0.0,in1>2.0:1.0,in1)	Polynomial(degree=7)	0.07835678759984802

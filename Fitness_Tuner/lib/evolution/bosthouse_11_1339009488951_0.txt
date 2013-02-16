@@ -1,0 +1,45 @@
+<configuration.models.ConnectableModelConfig>
+  <maxLearningVectors>-1</maxLearningVectors>
+  <maxInputsNumber>-1</maxInputsNumber>
+  <name>ConnectableModel(111111111111)|BoostingRTModel(tr=0.1)[8x SigmoidModel]|</name>
+  <config class="configuration.models.ensemble.BoostingRTModelConfig">
+    <classRef>game.models.ensemble.ModelBoostingRT</classRef>
+    <maxLearningVectors>-1</maxLearningVectors>
+    <maxInputsNumber>-1</maxInputsNumber>
+    <modelsNumber>8</modelsNumber>
+    <baseModelsDef>RANDOM</baseModelsDef>
+    <baseModelCfgs>
+      <configuration.models.single.SigmoidModelConfig>
+        <classRef>game.models.single.SigmoidModel</classRef>
+        <maxLearningVectors>-1</maxLearningVectors>
+        <maxInputsNumber>-1</maxInputsNumber>
+        <trainerClassName>QuasiNewtonTrainer</trainerClassName>
+        <validationPercent>30</validationPercent>
+        <validationEnabled>true</validationEnabled>
+      </configuration.models.single.SigmoidModelConfig>
+    </baseModelCfgs>
+    <threshold>0.1</threshold>
+  </config>
+  <selectedInputs>
+    <boolean>true</boolean>
+    <boolean>true</boolean>
+    <boolean>true</boolean>
+    <boolean>true</boolean>
+    <boolean>true</boolean>
+    <boolean>true</boolean>
+    <boolean>true</boolean>
+    <boolean>true</boolean>
+    <boolean>true</boolean>
+    <boolean>true</boolean>
+    <boolean>true</boolean>
+    <boolean>true</boolean>
+  </selectedInputs>
+  <preprocessingMethods>
+    <elements class="string-array">
+      <string>NormalizationPreprocessing</string>
+    </elements>
+    <elementEnabled>
+      <boolean>true</boolean>
+    </elementEnabled>
+  </preprocessingMethods>
+</configuration.models.ConnectableModelConfig>

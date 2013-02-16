@@ -1,0 +1,74 @@
+<configuration.classifiers.ConnectableClassifierConfig>
+  <maxLearningVectors>-1</maxLearningVectors>
+  <maxInputsNumber>-1</maxInputsNumber>
+  <name>ConnectableClassifier(11)|ClassifierModel{&lt;outputs&gt;x StackingModel[7x LocalPolynomialModel(deg=3,measure=EuclideanDistance,k=6,closestTest=false)]}|</name>
+  <config class="configuration.classifiers.single.ClassifierModelConfig">
+    <classRef>game.classifiers.single.ClassifierModel</classRef>
+    <maxLearningVectors>-1</maxLearningVectors>
+    <maxInputsNumber>-1</maxInputsNumber>
+    <baseModelsDef>RANDOM</baseModelsDef>
+    <baseModelCfgs>
+      <configuration.models.ensemble.StackingModelConfig>
+        <classRef>game.models.ensemble.ModelStacking</classRef>
+        <maxLearningVectors>-1</maxLearningVectors>
+        <maxInputsNumber>-1</maxInputsNumber>
+        <modelsNumber>7</modelsNumber>
+        <baseModelsDef>RANDOM</baseModelsDef>
+        <baseModelCfgs>
+          <configuration.models.single.rapidMiner.LocalPolynomialModelConfig>
+            <classRef>game.models.single.rapidMiner.RapidLocalPolynomialModel</classRef>
+            <maxLearningVectors>-1</maxLearningVectors>
+            <maxInputsNumber>-1</maxInputsNumber>
+            <maxDegree>3</maxDegree>
+            <measureType>
+              <elements class="string-array">
+                <string>EuclideanDistance</string>
+                <string>CamberraDistance</string>
+                <string>ChebychevDistance</string>
+                <string>CorrelationSimilarity</string>
+                <string>CosineSimilarity</string>
+                <string>DiceSimilarity</string>
+                <string>DynamicTimeWarpingDistance</string>
+                <string>InnerProductSimilarity</string>
+                <string>JaccardSimilarity</string>
+                <string>ManhattanDistance</string>
+                <string>MaxProductSimilarity</string>
+                <string>OverlapSimilarity</string>
+              </elements>
+              <elementEnabled>
+                <boolean>true</boolean>
+                <boolean>false</boolean>
+                <boolean>false</boolean>
+                <boolean>false</boolean>
+                <boolean>false</boolean>
+                <boolean>false</boolean>
+                <boolean>false</boolean>
+                <boolean>false</boolean>
+                <boolean>false</boolean>
+                <boolean>false</boolean>
+                <boolean>false</boolean>
+                <boolean>false</boolean>
+              </elementEnabled>
+            </measureType>
+            <nearestNeighbours>6</nearestNeighbours>
+            <closestUsedAsTest>false</closestUsedAsTest>
+          </configuration.models.single.rapidMiner.LocalPolynomialModelConfig>
+        </baseModelCfgs>
+      </configuration.models.ensemble.StackingModelConfig>
+    </baseModelCfgs>
+  </config>
+  <selectedInputs>
+    <boolean>true</boolean>
+    <boolean>true</boolean>
+  </selectedInputs>
+  <preprocessingMethods>
+    <elements class="string-array">
+      <string>NormalizationPreprocessing</string>
+      <string>CloneBalancePreprocessing</string>
+    </elements>
+    <elementEnabled>
+      <boolean>true</boolean>
+      <boolean>false</boolean>
+    </elementEnabled>
+  </preprocessingMethods>
+</configuration.classifiers.ConnectableClassifierConfig>

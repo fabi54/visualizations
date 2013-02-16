@@ -1,16 +1,6 @@
 package test.artificialdata;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-
-import javax.swing.JFrame;
-
-import org.fabi.visualizations.scatter.ScatterplotVisualization;
-import org.fabi.visualizations.scatter.color.ConstantColorModel;
-import org.fabi.visualizations.scatter.color.RegressionRainbowColorModel;
-import org.fabi.visualizations.scatter.dotsize.MinkowskiDistanceDotSizeModel;
 import org.fabi.visualizations.scatter.sources.DataSource;
-import org.fabi.visualizations.scatter.sources.ScatterplotSourceBase;
 import org.math.array.StatisticSample;
 
 public class Data2 implements DataSource {
@@ -58,24 +48,6 @@ public class Data2 implements DataSource {
 	@Override
 	public String getName() {
 		return "Simple artificial data";
-	}
-
-	public static void main(String[] args) {
-		ScatterplotVisualization visualization = new ScatterplotVisualization(new ScatterplotSourceBase(new DataSource[]{new Data2()}));
-		visualization.setColorModel(new RegressionRainbowColorModel(0.0, 1.0));
-		visualization.setDotSizeModel(new MinkowskiDistanceDotSizeModel());
-		visualization.setBackground(Color.BLACK);
-		visualization.setDotSizeModel(TestEvolution.getDotSizeModel(visualization));
-		ConstantColorModel model = new ConstantColorModel();
-		model.setColor(new Color(1.0f, 1.0f, 1.0f, 0.25f));
-		visualization.setColorModel(model);
-		JFrame f = new JFrame();
-		f.setLayout(new BorderLayout());
-		f.add(visualization.getVisualizationAsComponent(), BorderLayout.CENTER);
-		f.add(visualization.getControls(), BorderLayout.WEST);
-		f.setSize(1024, 768);
-		f.setVisible(true);
-		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
 }

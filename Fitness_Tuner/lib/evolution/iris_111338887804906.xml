@@ -1,0 +1,10 @@
+<game.classifiers.ConnectableClassifier>
+<game.classifiers.single.rapidMiner.RapidNeuralNetClassifier>
+<inputs>4</inputs>
+<outputs>3</outputs>
+<cFunctionName>RapidNeuralNetClassifier_6320814500092</cFunctionName>
+</game.classifiers.single.rapidMiner.RapidNeuralNetClassifier>
+<inputs>3</inputs>
+<outputs>3</outputs>
+<cFunctionName>ConnectableClassifier_6320814440518</cFunctionName>
+</game.classifiers.ConnectableClassifier>
