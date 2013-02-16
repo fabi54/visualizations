@@ -8,7 +8,7 @@ import org.fabi.visualizations.scatter.sources.DataSource;
 import org.fabi.visualizations.scatter.sources.DefaultMetadata;
 import org.fabi.visualizations.scatter.sources.Metadata;
 import org.fabi.visualizations.scatter.sources.ModelSource;
-import org.fabi.visualizations.scatter.sources.MultiModelSource;
+import org.fabi.visualizations.scatter_old.sources.MultiModelSource;
 import org.fabi.visualizations.tools.math.JitterGenerator;
 import org.fabi.visualizations.tools.math.Metrics;
 import org.fabi.visualizations.tools.transformation.ReversibleTransformation;
@@ -17,7 +17,7 @@ import org.jfree.data.xy.DefaultXYDataset;
 import org.jfree.data.xy.DefaultXYZDataset;
 import org.jfree.data.xy.XYDataset;
 
-
+@Deprecated
 public class DatasetGenerator {
 	DataSource dataSource;
 	ModelSource modelSource;

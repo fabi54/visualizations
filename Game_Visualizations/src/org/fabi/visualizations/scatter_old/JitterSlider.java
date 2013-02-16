@@ -5,6 +5,7 @@ import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+@Deprecated
 public class JitterSlider extends JSlider {
 	
 	private static final long serialVersionUID = 8984711053719387815L;

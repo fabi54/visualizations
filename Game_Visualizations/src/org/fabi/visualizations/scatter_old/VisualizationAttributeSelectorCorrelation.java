@@ -2,6 +2,7 @@ package org.fabi.visualizations.scatter_old;
 
 import org.fabi.visualizations.tools.math.Statistics;
 
+@Deprecated
 public class VisualizationAttributeSelectorCorrelation implements VisualizationAttributeSelector {
 
 	protected double OUTPUT_CORRELATION_WEIGHT = 1.0;

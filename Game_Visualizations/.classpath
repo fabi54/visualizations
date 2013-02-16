@@ -12,7 +12,6 @@
 	<classpathentry kind="lib" path="lib/jung-api.jar"/>
 	<classpathentry kind="lib" path="lib/jung-graph-impl.jar"/>
 	<classpathentry kind="lib" path="lib/jung-visualization.jar"/>
-	<classpathentry kind="lib" path="C:/Users/janf/.m2/repository/javax/validation/validation-api/1.0.0.GA/validation-api-1.0.0.GA.jar"/>
 	<classpathentry kind="lib" path="lib/configurations.jar" sourcepath="D:/Data/Dokumenty/Skola/B102/Y36BP/fakegame-old/configurations/trunk/src/main/java"/>
 	<classpathentry kind="lib" path="lib/jmathplot.jar"/>
 	<classpathentry kind="lib" path="lib/groovy-all-1.7.7.jar"/>

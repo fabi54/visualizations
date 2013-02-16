@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JCheckBox;
 
+@Deprecated
 public class DisplayMultipleCheckBox extends JCheckBox implements Refreshable {
 
 	private static final long serialVersionUID = -5244899146949363145L;

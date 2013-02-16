@@ -3,6 +3,7 @@ package org.fabi.visualizations.scatter_old;
 import org.fabi.visualizations.config.VisualizationConfig;
 import org.fabi.visualizations.scatter.sources.DataSource;
 
+@Deprecated
 public class ScatterplotVisualizationInitializerAttributeSelector extends ScatterplotVisualizationInitializer {
 
 	protected VisualizationAttributeSelector attributeSelector;

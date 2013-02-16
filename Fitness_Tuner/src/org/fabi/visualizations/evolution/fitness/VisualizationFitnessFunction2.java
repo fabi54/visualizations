@@ -10,10 +10,10 @@ import org.fabi.visualizations.config.VisualizationConfig;
 import org.fabi.visualizations.evolution.Chromosome;
 import org.fabi.visualizations.evolution.FitnessFunction;
 import org.fabi.visualizations.evolution.fitness.mockchromosomes.MockVisualizationChromosome;
-import org.fabi.visualizations.scatter.sources.MultiModelSource;
 import org.fabi.visualizations.scatter_old.DatasetGenerator;
 import org.fabi.visualizations.scatter_old.ModelInputGenerator;
 import org.fabi.visualizations.scatter_old.ScatterplotVisualization;
+import org.fabi.visualizations.scatter_old.sources.MultiModelSource;
 
 public class VisualizationFitnessFunction2 implements FitnessFunction {
 	

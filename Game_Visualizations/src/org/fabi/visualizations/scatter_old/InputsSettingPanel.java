@@ -18,6 +18,7 @@ import org.fabi.visualizations.scatter.sources.AttributeInfo;
 import org.fabi.visualizations.tools.math.Arrays;
 import org.jfree.data.Range;
 
+@Deprecated
 public class InputsSettingPanel extends JPanel implements Refreshable {
 
 	private static final long serialVersionUID = -6033226003009052198L;

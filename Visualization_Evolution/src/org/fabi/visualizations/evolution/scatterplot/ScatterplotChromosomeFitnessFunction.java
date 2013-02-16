@@ -2,7 +2,7 @@ package org.fabi.visualizations.evolution.scatterplot;
 
 import org.fabi.visualizations.evolution.Chromosome;
 import org.fabi.visualizations.evolution.FitnessFunction;
-import org.fabi.visualizations.scatter2.ScatterplotVisualization;
+import org.fabi.visualizations.scatter.ScatterplotVisualization;
 import org.fabi.visualizations.scatter.sources.DataSource;
 import org.fabi.visualizations.scatter.sources.ModelSource;
 import org.fabi.visualizations.tools.math.Arrays;

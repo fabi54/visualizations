@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.jfree.data.Range;
 
-
+@Deprecated
 public abstract class ModelInputGenerator {
 	
 	public static double[][] generateData(ScatterplotVisualization visualization) {

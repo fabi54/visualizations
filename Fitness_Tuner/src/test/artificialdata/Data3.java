@@ -5,12 +5,12 @@ import java.awt.Color;
 
 import javax.swing.JFrame;
 
+import org.fabi.visualizations.scatter.ScatterplotVisualization;
+import org.fabi.visualizations.scatter.color.ConstantColorModel;
+import org.fabi.visualizations.scatter.color.RegressionRainbowColorModel;
+import org.fabi.visualizations.scatter.dotsize.MinkowskiDistanceDotSizeModel;
 import org.fabi.visualizations.scatter.sources.DataSource;
-import org.fabi.visualizations.scatter2.ScatterplotVisualization;
-import org.fabi.visualizations.scatter2.color.ConstantColorModel;
-import org.fabi.visualizations.scatter2.color.RegressionRainbowColorModel;
-import org.fabi.visualizations.scatter2.dotsize.MinkowskiDistanceDotSizeModel;
-import org.fabi.visualizations.scatter2.sources.ScatterplotSourceBase;
+import org.fabi.visualizations.scatter.sources.ScatterplotSourceBase;
 import org.math.array.StatisticSample;
 
 public class Data3 implements DataSource {
@@ -78,7 +78,7 @@ public class Data3 implements DataSource {
 		visualization.setColorModel(new RegressionRainbowColorModel(0.0, 1.0));
 		visualization.setDotSizeModel(new MinkowskiDistanceDotSizeModel());
 		visualization.setBackground(Color.BLACK);
-		visualization.setDotSizeModel(TestEvolution2.getDotSizeModel(visualization));
+		visualization.setDotSizeModel(TestEvolution.getDotSizeModel(visualization));
 		ConstantColorModel model = new ConstantColorModel();
 		model.setColor(new Color(1.0f, 1.0f, 1.0f, 0.25f));
 		visualization.setColorModel(model);

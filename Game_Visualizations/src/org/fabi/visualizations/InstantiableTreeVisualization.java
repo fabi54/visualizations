@@ -8,6 +8,7 @@ import org.fabi.visualizations.tree.TreeDFS;
 import org.fabi.visualizations.tree.TreeVisualizationGraphicStyleProvider;
 
 /* For Global.init() only */
+@Deprecated
 class InstantiableTreeVisualization extends AbstractTreeVisualization<Object> {
 
 	public InstantiableTreeVisualization(Object source) {

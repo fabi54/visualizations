@@ -18,7 +18,7 @@ import javax.swing.JPanel;
 import org.fabi.visualizations.Visualization;
 import org.fabi.visualizations.config.VisualizationConfig;
 import org.fabi.visualizations.scatter.sources.AttributeInfo;
-import org.fabi.visualizations.scatter.sources.MultiModelSource;
+import org.fabi.visualizations.scatter_old.sources.MultiModelSource;
 import org.fabi.visualizations.tools.jfree.Classifier2DRenderer;
 import org.fabi.visualizations.tools.jfree.CustomBubbleRenderer;
 import org.fabi.visualizations.tools.jfree.CustomBubbleRendererConfiguration;
@@ -38,6 +38,7 @@ import org.ytoh.configurations.annotations.Property;
 
 // TODO implement org.ytoh.configurations
 @Component(name="Scatterplot")
+@Deprecated
 public class ScatterplotVisualization extends Visualization<DatasetGenerator> {
 
 	public ScatterplotVisualization(DatasetGenerator generator) {

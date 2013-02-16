@@ -4,12 +4,12 @@ import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
 
+import org.fabi.visualizations.scatter.ScatterplotVisualization;
+import org.fabi.visualizations.scatter.color.RegressionRainbowColorModel;
+import org.fabi.visualizations.scatter.dotsize.MinkowskiDistanceDotSizeModel;
 import org.fabi.visualizations.scatter.sources.DataSource;
 import org.fabi.visualizations.scatter.sources.ModelSource;
-import org.fabi.visualizations.scatter2.ScatterplotVisualization;
-import org.fabi.visualizations.scatter2.color.RegressionRainbowColorModel;
-import org.fabi.visualizations.scatter2.dotsize.MinkowskiDistanceDotSizeModel;
-import org.fabi.visualizations.scatter2.sources.ScatterplotSourceBase;
+import org.fabi.visualizations.scatter.sources.ScatterplotSourceBase;
 
 import configuration.CfgTemplate;
 import configuration.models.single.ExpModelConfig;
@@ -84,11 +84,7 @@ public class Tester {
 	
 	public static void main(String[] args) {
 		DataSource data = new Data1();
-		ModelGroup group = new ModelGroup(COMBINATION_1_TEN, data);
-		ModelSource[] source = new ModelSource[group.getModelCount()];
-		for (int i = 0; i < group.getModelCount(); i++) {
-			source[i] = group.getModel(i);
-		}
+		ModelSource[] source = new ModelGroup(COMBINATION_1_TEN, data).getModels();
 		ScatterplotVisualization visualization = new ScatterplotVisualization(new ScatterplotSourceBase(new DataSource[]{data}, source));
 		visualization.setOutputPrecision(50);
 		visualization.setColorModel(new RegressionRainbowColorModel(0.0, 1.0));

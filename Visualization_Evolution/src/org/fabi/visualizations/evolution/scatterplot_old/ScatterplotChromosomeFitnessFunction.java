@@ -4,10 +4,10 @@ import org.fabi.visualizations.config.VisualizationConfig;
 import org.fabi.visualizations.evolution.Chromosome;
 import org.fabi.visualizations.evolution.FitnessFunction;
 import org.fabi.visualizations.scatter.sources.DataSource;
-import org.fabi.visualizations.scatter.sources.MultiModelSource;
 import org.fabi.visualizations.scatter_old.DatasetGenerator;
 import org.fabi.visualizations.scatter_old.ModelInputGenerator;
 import org.fabi.visualizations.scatter_old.ScatterplotVisualization;
+import org.fabi.visualizations.scatter_old.sources.MultiModelSource;
 import org.fabi.visualizations.tools.math.Arrays;
 import org.jfree.data.Range;
 

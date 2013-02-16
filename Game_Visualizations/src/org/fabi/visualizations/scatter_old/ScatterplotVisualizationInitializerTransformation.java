@@ -10,6 +10,7 @@ import org.fabi.visualizations.scatter.sources.DataSource;
 import org.fabi.visualizations.tools.transformation.ReversibleTransformation;
 import org.fabi.visualizations.tools.transformation.TransformationProvider;
 
+@Deprecated
 public class ScatterplotVisualizationInitializerTransformation extends ScatterplotVisualizationInitializer {
 
 	//protected LinearTransformation transformation;

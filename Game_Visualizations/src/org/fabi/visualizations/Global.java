@@ -3,6 +3,7 @@ package org.fabi.visualizations;
 import org.fabi.visualizations.config.VisualizationConfig;
 import org.fabi.visualizations.scatter_old.ScatterplotVisualization;
 
+@Deprecated
 public class Global {
 	protected static Global instance = null;
 	

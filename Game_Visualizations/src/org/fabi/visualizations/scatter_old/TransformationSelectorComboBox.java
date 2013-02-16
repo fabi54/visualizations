@@ -7,6 +7,7 @@ import javax.swing.JComboBox;
 
 import org.fabi.visualizations.tools.transformation.TransformationProvider;
 
+@Deprecated
 public class TransformationSelectorComboBox extends JComboBox implements Refreshable {
 	
 	private static final long serialVersionUID = 6698585946172004672L;

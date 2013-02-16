@@ -7,39 +7,17 @@ import game.models.ConnectableModel;
 
 import org.fabi.visualizations.scatter.sources.DataSource;
 import org.fabi.visualizations.scatter.sources.ModelSource;
-import org.fabi.visualizations.scatter.sources.MultiModelSourceBase;
-import org.fabi.visualizations.tools.math.ArithmeticAverage;
 
 import configuration.CfgTemplate;
 //import configuration.classifiers.ClassifierConfig;
 import configuration.models.ConnectableModelConfig;
 import configuration.models.ModelConfig;
 
-public class ModelGroup extends MultiModelSourceBase {
+public class ModelGroup {
+	
+	protected ModelSource[] sources;
 	
 	public ModelGroup(CfgTemplate[] cfg, DataSource trainingData) {
-		super(new ModelSource[]{new ModelSource() {
-			
-			@Override
-			public int outputsNumber() {
-				return 0;
-			}
-			
-			@Override
-			public int inputsNumber() {
-				return 0;
-			}
-			
-			@Override
-			public String getName() {
-				return null;
-			}
-			
-			@Override
-			public double[][] getModelResponses(double[][] inputs) {
-				return null;
-			}
-		}}, new ArithmeticAverage());
 		sources = new ModelSource[cfg.length];
 		GameData data = new ArrayGameData(trainingData.getInputDataVectors(), trainingData.getOutputDataVectors());
 		for (int i = 0; i < cfg.length; i++) {
@@ -72,6 +50,10 @@ public class ModelGroup extends MultiModelSourceBase {
 		        sources[i] = new GameClassifierModelSource(cls);
 			}*/
 		}
+	}
+	
+	public ModelSource[] getModels() {
+		return sources;
 	}
 	
 	protected class ExtConnectableModelConfig extends ConnectableModelConfig {

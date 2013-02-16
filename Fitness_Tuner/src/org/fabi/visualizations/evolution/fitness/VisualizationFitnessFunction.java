@@ -13,10 +13,10 @@ import org.fabi.visualizations.evolution.fitness.mockchromosomes.MockVisualizati
 import org.fabi.visualizations.evolution.scatterplot_old.ScatterplotChromosomeFitnessFunction;
 import org.fabi.visualizations.scatter.sources.DataSource;
 import org.fabi.visualizations.scatter.sources.ModelSource;
-import org.fabi.visualizations.scatter.sources.MultiModelSource;
 import org.fabi.visualizations.scatter_old.DatasetGenerator;
 import org.fabi.visualizations.scatter_old.ModelInputGenerator;
 import org.fabi.visualizations.scatter_old.ScatterplotVisualization;
+import org.fabi.visualizations.scatter_old.sources.MultiModelSource;
 import org.fabi.visualizations.tools.math.ManyToOne;
 
 /**

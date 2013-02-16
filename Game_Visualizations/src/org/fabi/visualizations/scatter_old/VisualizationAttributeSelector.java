@@ -1,6 +1,6 @@
 package org.fabi.visualizations.scatter_old;
 
-
+@Deprecated
 public interface VisualizationAttributeSelector {
 	/**
 	 * The resulting array may contain only a subset of attributes, but contains at least one item.

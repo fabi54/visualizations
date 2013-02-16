@@ -6,9 +6,8 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/Visualization_Evolution"/>
 	<classpathentry kind="lib" path="/Game_Visualizations/lib/jmatharray.jar"/>
 	<classpathentry kind="lib" path="/Game_Visualizations/lib/jmathplot.jar"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/game-rep"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Visualizations_RapidMiner_Plugin"/>
-	<classpathentry kind="lib" path="D:/Data/Dokumenty/Skola/FIT-MI/misc/fakegame/Modgen_0.13.jar"/>
-	<classpathentry kind="lib" path="/Visualizations_RapidMiner_Plugin/lib/configurations-0.6.3-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="lib/configurations-0.6.3-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="lib/Modgen_0.13.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/game-report"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

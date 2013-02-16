@@ -7,6 +7,7 @@ import javax.swing.JComboBox;
 
 import org.fabi.visualizations.scatter.sources.AttributeInfo;
 
+@Deprecated
 public class XAxisAttributeSelectorComboBox extends JComboBox implements Refreshable {
 
 	private static final long serialVersionUID = 4297687576611663785L;

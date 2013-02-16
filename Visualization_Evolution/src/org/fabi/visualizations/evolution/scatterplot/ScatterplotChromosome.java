@@ -8,7 +8,7 @@ import org.fabi.visualizations.evolution.Chromosome;
 import org.fabi.visualizations.evolution.ChromosomeBase;
 import org.fabi.visualizations.evolution.FitnessFunction;
 import org.fabi.visualizations.evolution.Random;
-import org.fabi.visualizations.scatter2.ScatterplotVisualization;
+import org.fabi.visualizations.scatter.ScatterplotVisualization;
 
 public class ScatterplotChromosome extends ChromosomeBase {
 	

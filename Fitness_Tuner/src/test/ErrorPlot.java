@@ -18,15 +18,15 @@ import org.fabi.visualizations.evolution.fitness.mockchromosomes.AbstractFunctio
 import org.fabi.visualizations.evolution.fitness.mockchromosomes.ConstantFunction;
 import org.fabi.visualizations.evolution.fitness.mockchromosomes.LinearFunction;
 import org.fabi.visualizations.evolution.fitness.mockchromosomes.MockVisualizationChromosome;
+import org.fabi.visualizations.scatter.ScatterplotVisualization;
+import org.fabi.visualizations.scatter.color.GradientColorModel;
 import org.fabi.visualizations.scatter.sources.AttributeInfo;
 import org.fabi.visualizations.scatter.sources.AttributeInfoBase;
 import org.fabi.visualizations.scatter.sources.DataSource;
 import org.fabi.visualizations.scatter.sources.Metadata;
 import org.fabi.visualizations.scatter.sources.MetadataBase;
 import org.fabi.visualizations.scatter.sources.ModelSource;
-import org.fabi.visualizations.scatter2.ScatterplotVisualization;
-import org.fabi.visualizations.scatter2.color.GradientColorModel;
-import org.fabi.visualizations.scatter2.sources.ScatterplotSource;
+import org.fabi.visualizations.scatter.sources.ScatterplotSource;
 import org.fabi.visualizations.tools.transformation.ReversibleTransformation;
 
 public class ErrorPlot {

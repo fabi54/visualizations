@@ -8,6 +8,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+@Deprecated
 public class VisibleOutputsList extends JList implements Refreshable {
 
 	private static final long serialVersionUID = -5244899146949363145L;

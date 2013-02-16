@@ -10,6 +10,7 @@ import org.fabi.visualizations.tools.math.Arrays;
 import org.fabi.visualizations.tools.math.Metrics;
 //import org.jfree.data.Range;
 
+@Deprecated
 public class ScatterplotVisualizationInitializer implements VisualizationInitializer<DatasetGenerator, ScatterplotVisualization> {
 	
 	protected VisualizationConfig defaultConfig;
