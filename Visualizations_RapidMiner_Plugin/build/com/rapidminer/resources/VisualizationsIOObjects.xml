@@ -1,0 +1,33 @@
+<ioobjects>
+	
+    <ioobject name="ModGEN Classifier"
+    		  class="org.modgen.rapidminer.modelling.ModgenClassifierContainer" reportable="true">
+    		  <renderer>org.fabi.visualizations.rapidminer.renderers.TreeVisualizationRenderer</renderer>
+	</ioobject>
+    
+    <ioobject name="ModGEN Regression Model"
+    		  class="org.modgen.rapidminer.modelling.ModgenModelContainer" reportable="true">
+    		  <renderer>org.fabi.visualizations.rapidminer.renderers.TreeVisualizationRenderer</renderer>
+	</ioobject>
+    
+    <ioobject name="ModGEN Template"
+    		  class="org.modgen.rapidminer.modelling.template.ModgenTemplateContainer" reportable="true">
+    		  <renderer>org.fabi.visualizations.rapidminer.renderers.TreeVisualizationRenderer</renderer>
+	</ioobject>
+    
+    <ioobject name="Visual Model Analysis Container"
+    		  class="org.fabi.visualizations.rapidminer.scatter.RapidMinerDatasetGeneratorObjectAdapter" reportable="true">
+    	<renderer>org.fabi.visualizations.rapidminer.renderers.ScatterplotVisualizationRenderer</renderer>
+    	<renderer>org.fabi.visualizations.rapidminer.renderers.ReportableContainerRenderer</renderer>
+	</ioobject>
+    
+    <ioobject name="Visualization Container"
+    		  class="org.fabi.visualizations.rapidminer.VisualizationContainer" reportable="true">
+    		  <renderer>org.fabi.visualizations.rapidminer.renderers.VisualizationContainerRenderer</renderer>
+	</ioobject>
+    
+    <ioobject name="Multiple Visualization Container"
+    		  class="org.fabi.visualizations.rapidminer.MultipleVisualizationContainer" reportable="true">
+    		  <renderer>org.fabi.visualizations.rapidminer.renderers.MultipleVisualizationRenderer</renderer>
+	</ioobject>
+</ioobjects>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/Program Files/Rapid-I/RapidMiner5/lib/rapidminer.jar"/>
+	<classpathentry kind="lib" path="lib/configurations-0.6.3-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="lib/binding-2.0.5.jar"/>
+	<classpathentry kind="lib" path="lib/weka.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Game_Visualizations"/>
+	<classpathentry kind="lib" path="lib/ModGen_0.12.1.jar" sourcepath="/game-rep/game-data/src/main/java"/>
+	<classpathentry kind="lib" path="lib/visualizations_evolution.jar" sourcepath="/Visualization_Evolution/src"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/game-rep"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

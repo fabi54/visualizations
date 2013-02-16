@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<operatorHelp lang="en_EN">
+
+    <group>
+   		<key>modgen</key>
+   		<name>ModGEN</name>
+   	</group>
+
+    <group>
+   		<key>visualizations</key>
+   		<name>Visualizations</name>
+   	</group>
+
+    <operator>
+	   	<key>model_analysis_operator</key>
+	   	<name>Visual Model Analysis</name>
+    </operator>
+   
+	<operator>
+		<key>create_model_from_template_operator</key>
+   		<name>Create Model From Template</name>
+	</operator>
+   
+	<operator>
+		<key>confidence_model_from_template_operator</key>
+   		<name>Create Confidence Model From Template</name>
+	</operator>
+	
+	<operator>
+		<key>load_template_from_file_operator</key>
+   		<name>Load Template From File</name>
+	</operator>
+		
+	<operator>
+		<key>scatterplot_evolution_operator</key>
+		<name>Evolve Scatterplot</name>
+	</operator>
+		
+	<operator>
+		<key>export_visualization_operator</key>
+		<name>Export Visualization</name>
+	</operator>
+	
+	<operator>
+		<key>split_multiple_visualization_operator</key>
+		<name>Split Visualization Collection</name>
+	</operator>
+
+</operatorHelp>

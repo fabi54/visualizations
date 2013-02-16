@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<operators name="template" version="5.0" docbundle="com/rapidminer/resources/i18n/VisualizationsOperatorsDoc">
+
+	<group key="modgen">
+		<operator>
+			<key>create_model_from_template_operator</key>
+			<class>org.modgen.rapidminer.modelling.template.CreateModelFromTemplateOperator</class>
+			<icon>modeling.png</icon>
+		</operator>
+		
+		<operator>
+			<key>load_template_from_file_operator</key>
+			<class>org.modgen.rapidminer.modelling.template.LoadTemplateFromFileOperator</class>
+			<icon>io_retriever.png</icon>
+		</operator>
+		
+		<operator>
+			<key>confidence_model_from_template_operator</key>
+			<class>org.modgen.rapidminer.modelling.template.CreateConfidenceModelFromTemplateOperator</class>
+		</operator>
+	</group>
+	
+	<group key="visualizations">
+		<operator>
+			<key>model_analysis_operator</key>
+			<class>org.fabi.visualizations.rapidminer.operators.ModelAnalysisOperator</class>
+			<icon>series.png</icon>
+		</operator>
+		
+		<operator>
+			<key>scatterplot_evolution_operator</key>
+			<class>org.fabi.visualizations.rapidminer.evolution.EvolveScatterplotOperator</class>
+		</operator>
+		
+		<operator>
+			<key>export_visualization_operator</key>
+			<class>org.fabi.visualizations.rapidminer.operators.ExportVisualizationOperator</class>
+		</operator>
+		
+		<operator>
+			<key>split_multiple_visualization_operator</key>
+			<class>org.fabi.visualizations.rapidminer.operators.SplitMultipleVisualizationOperator</class>
+		</operator>
+		
+	</group>
+</operators>
