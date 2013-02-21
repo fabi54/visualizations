@@ -1,0 +1,68 @@
+<configuration.models.ConnectableModelConfig>
+  <maxLearningVectors>-1</maxLearningVectors>
+  <maxInputsNumber>-1</maxInputsNumber>
+  <name>RegressionModel(1)|CascadeGen[5x KNN(k=1,vote=false,measure=EuclideanDistance)]|</name>
+  <config class="configuration.models.ensemble.CascadeGenModelConfig">
+    <classRef>game.models.ensemble.ModelCascadeGen</classRef>
+    <maxLearningVectors>-1</maxLearningVectors>
+    <maxInputsNumber>-1</maxInputsNumber>
+    <modelsNumber>5</modelsNumber>
+    <baseModelsDef>RANDOM</baseModelsDef>
+    <baseModelCfgs>
+      <configuration.models.single.KNNModelConfig>
+        <classRef>game.models.single.KNNModel</classRef>
+        <maxLearningVectors>-1</maxLearningVectors>
+        <maxInputsNumber>-1</maxInputsNumber>
+        <nearestNeighbours>1</nearestNeighbours>
+        <weightedVote>false</weightedVote>
+        <measureType>
+          <elements class="string-array">
+            <string>EuclideanDistance</string>
+            <string>CamberraDistance</string>
+            <string>ChebychevDistance</string>
+            <string>CorrelationSimilarity</string>
+            <string>CosineSimilarity</string>
+            <string>DiceSimilarity</string>
+            <string>DynamicTimeWarpingDistance</string>
+            <string>InnerProductSimilarity</string>
+            <string>JaccardSimilarity</string>
+            <string>ManhattanDistance</string>
+            <string>MaxProductSimilarity</string>
+            <string>OverlapSimilarity</string>
+          </elements>
+          <elementEnabled>
+            <boolean>true</boolean>
+            <boolean>false</boolean>
+            <boolean>false</boolean>
+            <boolean>false</boolean>
+            <boolean>false</boolean>
+            <boolean>false</boolean>
+            <boolean>false</boolean>
+            <boolean>false</boolean>
+            <boolean>false</boolean>
+            <boolean>false</boolean>
+            <boolean>false</boolean>
+            <boolean>false</boolean>
+          </elementEnabled>
+        </measureType>
+      </configuration.models.single.KNNModelConfig>
+    </baseModelCfgs>
+  </config>
+  <selectedInputs>
+    <boolean>true</boolean>
+  </selectedInputs>
+  <preprocessingMethods>
+    <elements class="configuration.preprocessing.PreprocessingConfig-array">
+      <configuration.preprocessing.NormalizationConfig>
+        <classRef>game.preprocessing.NormalizationPreprocessing</classRef>
+      </configuration.preprocessing.NormalizationConfig>
+    </elements>
+    <elementEnabled>
+      <boolean>false</boolean>
+    </elementEnabled>
+    <unchangeable>
+      <boolean>false</boolean>
+    </unchangeable>
+    <type>configuration.preprocessing.PreprocessingConfig</type>
+  </preprocessingMethods>
+</configuration.models.ConnectableModelConfig>

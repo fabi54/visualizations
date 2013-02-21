@@ -7,6 +7,6 @@
 	<classpathentry kind="lib" path="/Game_Visualizations/lib/jmatharray.jar"/>
 	<classpathentry kind="lib" path="/Game_Visualizations/lib/jmathplot.jar"/>
 	<classpathentry kind="lib" path="lib/configurations-0.6.3-SNAPSHOT.jar"/>
-	<classpathentry kind="lib" path="/Visualization_Evolution/lib/Modgen_0.13.jar"/>
+	<classpathentry kind="lib" path="/Visualizations_RapidMiner_Plugin/lib/Modgen_0.14.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

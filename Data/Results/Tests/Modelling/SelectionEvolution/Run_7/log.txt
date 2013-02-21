@@ -1,0 +1,90 @@
+17.2.2013 19:57:42 test.modelling.TestModelSelectionEvolution main
+INFO: Initializing evolution
+17.2.2013 19:57:42 test.modelling.TestModelSelectionEvolution main
+INFO: For data: GausPeakRnd(inst=1000,in1=0.0..1.0,out1=fn:30x gauss noise 0.0)
+17.2.2013 19:58:11 test.modelling.TestModelSelectionEvolution main
+INFO: 0: 1.7233276906786603 [1, 12, 12, 8, 7, 7, 14, 14, 5, 2]
+17.2.2013 19:58:15 test.modelling.TestModelSelectionEvolution createVisualization
+INFO:   (... saving visualization)
+17.2.2013 19:58:39 test.modelling.TestModelSelectionEvolution main
+INFO: 1: 1.7233305189740085 [3, 6, 2, 14, 7, 14, 13, 3, 6, 4]
+17.2.2013 19:58:39 test.modelling.TestModelSelectionEvolution createVisualization
+INFO:   (... saving visualization)
+17.2.2013 19:58:57 test.modelling.TestModelSelectionEvolution main
+INFO: 2: 1.7233713219986184 [3, 6, 13, 14, 7, 14, 13, 6, 6, 4]
+17.2.2013 19:58:57 test.modelling.TestModelSelectionEvolution createVisualization
+INFO:   (... saving visualization)
+17.2.2013 19:59:12 test.modelling.TestModelSelectionEvolution main
+INFO: 3: 1.723379641162148 [3, 6, 2, 14, 13, 14, 13, 3, 6, 13]
+17.2.2013 19:59:13 test.modelling.TestModelSelectionEvolution createVisualization
+INFO:   (... saving visualization)
+17.2.2013 19:59:25 test.modelling.TestModelSelectionEvolution main
+INFO: 4: 1.723383697468083 [3, 6, 13, 14, 13, 14, 13, 6, 6, 4]
+17.2.2013 19:59:26 test.modelling.TestModelSelectionEvolution createVisualization
+INFO:   (... saving visualization)
+17.2.2013 19:59:36 test.modelling.TestModelSelectionEvolution main
+INFO: 5: 1.723384041945898 [3, 6, 13, 14, 13, 14, 13, 6, 6, 4]
+17.2.2013 19:59:36 test.modelling.TestModelSelectionEvolution createVisualization
+INFO:   (... saving visualization)
+17.2.2013 19:59:45 test.modelling.TestModelSelectionEvolution main
+INFO: 6: 1.7233854410039546 [3, 1, 13, 14, 13, 14, 13, 6, 6, 4]
+17.2.2013 19:59:45 test.modelling.TestModelSelectionEvolution createVisualization
+INFO:   (... saving visualization)
+17.2.2013 19:59:54 test.modelling.TestModelSelectionEvolution main
+INFO: 7: 1.723386161366498 [3, 1, 13, 14, 13, 14, 13, 6, 6, 4]
+17.2.2013 19:59:54 test.modelling.TestModelSelectionEvolution createVisualization
+INFO:   (... saving visualization)
+17.2.2013 20:00:04 test.modelling.TestModelSelectionEvolution main
+INFO: 8: 1.7233860509176315 [3, 1, 13, 14, 13, 14, 13, 6, 6, 4]
+17.2.2013 20:00:05 test.modelling.TestModelSelectionEvolution createVisualization
+INFO:   (... saving visualization)
+17.2.2013 20:00:16 test.modelling.TestModelSelectionEvolution main
+INFO: 9: 1.7233872400390764 [3, 1, 13, 14, 13, 14, 13, 4, 6, 4]
+17.2.2013 20:00:16 test.modelling.TestModelSelectionEvolution createVisualization
+INFO:   (... saving visualization)
+17.2.2013 20:00:26 test.modelling.TestModelSelectionEvolution main
+INFO: 10: 1.7233872471762024 [3, 1, 13, 14, 13, 14, 13, 4, 6, 4]
+17.2.2013 20:00:27 test.modelling.TestModelSelectionEvolution createVisualization
+INFO:   (... saving visualization)
+17.2.2013 20:00:36 test.modelling.TestModelSelectionEvolution main
+INFO: 11: 1.723387543844191 [4, 1, 13, 14, 13, 14, 13, 4, 6, 4]
+17.2.2013 20:00:37 test.modelling.TestModelSelectionEvolution createVisualization
+INFO:   (... saving visualization)
+17.2.2013 20:00:46 test.modelling.TestModelSelectionEvolution main
+INFO: 12: 1.7233876309691585 [4, 1, 13, 14, 13, 14, 13, 4, 6, 4]
+17.2.2013 20:00:46 test.modelling.TestModelSelectionEvolution createVisualization
+INFO:   (... saving visualization)
+17.2.2013 20:00:54 test.modelling.TestModelSelectionEvolution main
+INFO: 13: 1.7233876862657553 [4, 1, 13, 14, 13, 14, 13, 4, 6, 4]
+17.2.2013 20:00:54 test.modelling.TestModelSelectionEvolution createVisualization
+INFO:   (... saving visualization)
+17.2.2013 20:01:01 test.modelling.TestModelSelectionEvolution main
+INFO: 14: 1.7233876710395408 [4, 1, 13, 14, 13, 14, 13, 4, 6, 4]
+17.2.2013 20:01:02 test.modelling.TestModelSelectionEvolution createVisualization
+INFO:   (... saving visualization)
+17.2.2013 20:01:09 test.modelling.TestModelSelectionEvolution main
+INFO: 15: 1.7233877797945698 [4, 1, 13, 14, 13, 14, 13, 4, 6, 4]
+17.2.2013 20:01:09 test.modelling.TestModelSelectionEvolution createVisualization
+INFO:   (... saving visualization)
+17.2.2013 20:01:15 test.modelling.TestModelSelectionEvolution main
+INFO: 16: 1.723387711596428 [4, 1, 13, 14, 13, 14, 13, 4, 6, 4]
+17.2.2013 20:01:16 test.modelling.TestModelSelectionEvolution createVisualization
+INFO:   (... saving visualization)
+17.2.2013 20:01:23 test.modelling.TestModelSelectionEvolution main
+INFO: 17: 1.7233876776527643 [4, 1, 13, 14, 13, 14, 13, 4, 6, 4]
+17.2.2013 20:01:24 test.modelling.TestModelSelectionEvolution createVisualization
+INFO:   (... saving visualization)
+17.2.2013 20:01:31 test.modelling.TestModelSelectionEvolution main
+INFO: 18: 1.7233877081991353 [4, 1, 13, 14, 13, 14, 13, 4, 6, 4]
+17.2.2013 20:01:31 test.modelling.TestModelSelectionEvolution createVisualization
+INFO:   (... saving visualization)
+17.2.2013 20:01:38 test.modelling.TestModelSelectionEvolution main
+INFO: 19: 1.7233876853916736 [4, 1, 13, 14, 13, 14, 13, 4, 6, 4]
+17.2.2013 20:01:39 test.modelling.TestModelSelectionEvolution createVisualization
+INFO:   (... saving visualization)
+17.2.2013 20:01:46 test.modelling.TestModelSelectionEvolution main
+INFO: 20: 1.7233876794598497 [4, 1, 13, 14, 13, 14, 13, 4, 6, 4]
+17.2.2013 20:01:47 test.modelling.TestModelSelectionEvolution createVisualization
+INFO:   (... saving visualization)
+17.2.2013 20:01:47 test.modelling.TestModelSelectionEvolution main
+INFO: Terminated.

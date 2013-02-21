@@ -35,7 +35,7 @@ import test.evolution.TestEvolution;
 
 public class TestModelSelectionEvolution {
 
-	public static final DataSource data = new ConstantLinearConstantData();
+	public static final DataSource data = new RandomArtificialData();
 	
 	public static final String PATH = "C:\\Users\\janf\\Documents\\Skola\\Dip\\Project\\Data\\Results\\Tests\\Modelling\\SelectionEvolution\\";
 	

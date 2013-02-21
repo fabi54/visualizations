@@ -1,7 +1,7 @@
 <project name="RapidMiner_Plugin_Template_Vega">
 	<description>Build file for the RapidMiner Template extension</description>
 
-	<property name="rm.dir" location="D:\Data\Dokumenty\Skola\B102\Y36BP\rapidminer\rapidminer\Vega" />
+	<property name="rm.dir" location="C:/Users/janf/Documents/Skola/Dip/rapidminer/rapidminer/Vega" />
 
 	<property name="build.build" location="build" />
 	<property name="build.resources" location="resources" />

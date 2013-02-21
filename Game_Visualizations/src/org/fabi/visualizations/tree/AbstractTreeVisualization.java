@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -15,6 +16,7 @@ import javax.swing.JPanel;
 import org.fabi.visualizations.Visualization;
 import org.fabi.visualizations.config.VisualizationConfig;
 import org.fabi.visualizations.tree.gui.NodeContentsComboBox;
+import org.ytoh.configurations.DefaultArrayProperty;
 import org.ytoh.configurations.annotations.Component;
 import org.ytoh.configurations.annotations.Property;
 
@@ -83,6 +85,15 @@ public abstract class AbstractTreeVisualization<T> extends Visualization<T> {
 		} else {
 			return renderers.get(index - 1);
 		}
+	}
+	
+	@Override
+	public void setProperty(String key, Object value) {
+		VisualizationConfig cfg = getConfig();
+		cfg.setTypedProperty(key, value);
+		List<String> changedList = new ArrayList<String>(1);
+		changedList.add(key);
+		setConfiguration(cfg, changedList);
 	}
 	
 	public final List<String> getNodeContentsLabels() {

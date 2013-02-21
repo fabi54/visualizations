@@ -1,0 +1,90 @@
+16.2.2013 22:09:10 test.modelling.TestModelSelectionEvolution main
+INFO: Initializing evolution
+16.2.2013 22:09:10 test.modelling.TestModelSelectionEvolution main
+INFO: For data: Linear(inst=100,in1=0.0..1.0,out1=in1)
+16.2.2013 22:09:14 test.modelling.TestModelSelectionEvolution main
+INFO: 0: 1.7151226155849588 [6, 2, 6, 6, 12, 9, 11, 7, 6, 11]
+16.2.2013 22:09:16 test.modelling.TestModelSelectionEvolution createVisualization
+INFO:   (... saving visualization)
+16.2.2013 22:09:19 test.modelling.TestModelSelectionEvolution main
+INFO: 1: 1.715119945860478 [6, 2, 6, 3, 3, 13, 11, 7, 6, 13]
+16.2.2013 22:09:19 test.modelling.TestModelSelectionEvolution createVisualization
+INFO:   (... saving visualization)
+16.2.2013 22:09:22 test.modelling.TestModelSelectionEvolution main
+INFO: 2: 1.7154621996825195 [5, 1, 10, 13, 12, 10, 11, 6, 6, 11]
+16.2.2013 22:09:22 test.modelling.TestModelSelectionEvolution createVisualization
+INFO:   (... saving visualization)
+16.2.2013 22:09:24 test.modelling.TestModelSelectionEvolution main
+INFO: 3: 1.7154935479478604 [5, 1, 10, 13, 12, 10, 11, 6, 6, 11]
+16.2.2013 22:09:24 test.modelling.TestModelSelectionEvolution createVisualization
+INFO:   (... saving visualization)
+16.2.2013 22:09:26 test.modelling.TestModelSelectionEvolution main
+INFO: 4: 1.7156770637557393 [5, 2, 10, 13, 12, 10, 3, 6, 6, 11]
+16.2.2013 22:09:26 test.modelling.TestModelSelectionEvolution createVisualization
+INFO:   (... saving visualization)
+16.2.2013 22:09:29 test.modelling.TestModelSelectionEvolution main
+INFO: 5: 1.7155709688996699 [5, 2, 10, 6, 12, 10, 11, 6, 10, 11]
+16.2.2013 22:09:29 test.modelling.TestModelSelectionEvolution createVisualization
+INFO:   (... saving visualization)
+16.2.2013 22:09:31 test.modelling.TestModelSelectionEvolution main
+INFO: 6: 1.7164000653535123 [6, 2, 10, 13, 12, 10, 11, 6, 10, 13]
+16.2.2013 22:09:31 test.modelling.TestModelSelectionEvolution createVisualization
+INFO:   (... saving visualization)
+16.2.2013 22:09:34 test.modelling.TestModelSelectionEvolution main
+INFO: 7: 1.7163887533870243 [6, 2, 10, 13, 12, 10, 6, 6, 6, 6]
+16.2.2013 22:09:34 test.modelling.TestModelSelectionEvolution createVisualization
+INFO:   (... saving visualization)
+16.2.2013 22:09:36 test.modelling.TestModelSelectionEvolution main
+INFO: 8: 1.7163445126283234 [6, 2, 6, 13, 12, 10, 11, 6, 10, 13]
+16.2.2013 22:09:36 test.modelling.TestModelSelectionEvolution createVisualization
+INFO:   (... saving visualization)
+16.2.2013 22:09:38 test.modelling.TestModelSelectionEvolution main
+INFO: 9: 1.716191152226199 [6, 2, 10, 13, 12, 10, 6, 6, 10, 13]
+16.2.2013 22:09:39 test.modelling.TestModelSelectionEvolution createVisualization
+INFO:   (... saving visualization)
+16.2.2013 22:09:40 test.modelling.TestModelSelectionEvolution main
+INFO: 10: 1.71655519168247 [6, 2, 10, 13, 12, 10, 6, 6, 10, 6]
+16.2.2013 22:09:41 test.modelling.TestModelSelectionEvolution createVisualization
+INFO:   (... saving visualization)
+16.2.2013 22:09:43 test.modelling.TestModelSelectionEvolution main
+INFO: 11: 1.7168586520942777 [6, 2, 10, 13, 12, 10, 6, 6, 10, 6]
+16.2.2013 22:09:43 test.modelling.TestModelSelectionEvolution createVisualization
+INFO:   (... saving visualization)
+16.2.2013 22:09:45 test.modelling.TestModelSelectionEvolution main
+INFO: 12: 1.716715523286223 [6, 2, 10, 13, 12, 10, 6, 6, 10, 6]
+16.2.2013 22:09:45 test.modelling.TestModelSelectionEvolution createVisualization
+INFO:   (... saving visualization)
+16.2.2013 22:09:47 test.modelling.TestModelSelectionEvolution main
+INFO: 13: 1.7167586973640512 [6, 2, 10, 13, 12, 10, 6, 6, 10, 6]
+16.2.2013 22:09:47 test.modelling.TestModelSelectionEvolution createVisualization
+INFO:   (... saving visualization)
+16.2.2013 22:09:49 test.modelling.TestModelSelectionEvolution main
+INFO: 14: 1.7165141463293314 [6, 2, 10, 13, 12, 10, 6, 6, 10, 6]
+16.2.2013 22:09:49 test.modelling.TestModelSelectionEvolution createVisualization
+INFO:   (... saving visualization)
+16.2.2013 22:09:52 test.modelling.TestModelSelectionEvolution main
+INFO: 15: 1.7167676628617923 [6, 2, 10, 13, 12, 10, 6, 6, 10, 6]
+16.2.2013 22:09:52 test.modelling.TestModelSelectionEvolution createVisualization
+INFO:   (... saving visualization)
+16.2.2013 22:09:54 test.modelling.TestModelSelectionEvolution main
+INFO: 16: 1.71664803760309 [6, 2, 10, 13, 12, 10, 6, 6, 10, 6]
+16.2.2013 22:09:54 test.modelling.TestModelSelectionEvolution createVisualization
+INFO:   (... saving visualization)
+16.2.2013 22:09:56 test.modelling.TestModelSelectionEvolution main
+INFO: 17: 1.7165470541982195 [6, 2, 10, 13, 12, 10, 6, 6, 10, 6]
+16.2.2013 22:09:56 test.modelling.TestModelSelectionEvolution createVisualization
+INFO:   (... saving visualization)
+16.2.2013 22:09:58 test.modelling.TestModelSelectionEvolution main
+INFO: 18: 1.7166936074898678 [6, 2, 10, 13, 12, 10, 6, 6, 10, 6]
+16.2.2013 22:09:59 test.modelling.TestModelSelectionEvolution createVisualization
+INFO:   (... saving visualization)
+16.2.2013 22:10:01 test.modelling.TestModelSelectionEvolution main
+INFO: 19: 1.7165354032983162 [6, 2, 10, 13, 12, 10, 6, 6, 10, 6]
+16.2.2013 22:10:01 test.modelling.TestModelSelectionEvolution createVisualization
+INFO:   (... saving visualization)
+16.2.2013 22:10:04 test.modelling.TestModelSelectionEvolution main
+INFO: 20: 1.7163236288096868 [6, 2, 10, 13, 12, 4, 6, 6, 10, 6]
+16.2.2013 22:10:04 test.modelling.TestModelSelectionEvolution createVisualization
+INFO:   (... saving visualization)
+16.2.2013 22:10:05 test.modelling.TestModelSelectionEvolution main
+INFO: Terminated.

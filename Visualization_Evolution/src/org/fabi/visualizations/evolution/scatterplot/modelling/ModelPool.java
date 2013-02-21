@@ -7,6 +7,7 @@ import configuration.CfgTemplate;
 import configuration.models.single.DecisionTreeModelConfig;
 import configuration.models.single.ExpModelConfig;
 import configuration.models.single.GaussianModelConfig;
+import configuration.models.single.GaussianMultiModelConfig;
 import configuration.models.single.KNNModelConfig;
 import configuration.models.single.LinearModelConfig;
 import configuration.models.single.LocalPolynomialModelConfig;
@@ -16,6 +17,10 @@ import configuration.models.single.RBFModelConfig;
 import configuration.models.single.SVMModelConfig;
 import configuration.models.single.SigmoidModelConfig;
 import configuration.models.single.SineModelConfig;
+
+// 2013-02-17 20:10 removed LinearModel and PolynomialModel (without maxDegree set)
+// 2013-02-17 20:21 re-added LinearModel and PolynomialModel (without maxDegree set)
+//2013-02-17 20:42 removed GaussianModel, LinearModel and PolynomialModel (without maxDegree set), added GaussianMultiModel
 
 public class ModelPool {
 	
@@ -43,14 +48,14 @@ public class ModelPool {
 	static Class<CfgTemplate>[] templates = new Class[] {
 		DecisionTreeModelConfig.class,
 		ExpModelConfig.class,
-		GaussianModelConfig.class,
-//		GaussianMultiModelConfig.class,
+//		GaussianModelConfig.class,
+		GaussianMultiModelConfig.class,
 //		GaussianNormModelConfig.Class,
 		KNNModelConfig.class,
-		LinearModelConfig.class,
+//		LinearModelConfig.class,
 		LocalPolynomialModelConfig.class,
 		NeuralNetModelConfig.class,
-		PolynomialModelConfig.class,
+//		PolynomialModelConfig.class,
 		RBFModelConfig.class,
 		SigmoidModelConfig.class,
 //		SigmoidNormModelConfig.class,

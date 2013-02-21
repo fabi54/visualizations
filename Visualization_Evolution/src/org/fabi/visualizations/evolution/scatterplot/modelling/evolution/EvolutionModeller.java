@@ -1,5 +1,7 @@
 package org.fabi.visualizations.evolution.scatterplot.modelling.evolution;
 
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -14,6 +16,10 @@ import org.fabi.visualizations.scatter.sources.ModelSource;
 
 import configuration.CfgTemplate;
 
+/*
+ *  2013-02-17 14:16 added feature: two times more models evolved than needed, imprecise omitted after evolution
+ */
+
 public class EvolutionModeller implements Modeller {
 
 	public static final Logger logger = Logger.getLogger("Model Selection Evolution");
@@ -22,10 +28,10 @@ public class EvolutionModeller implements Modeller {
 	protected static final int MODEL_COUNT = 10;
 	
 	@Override
-	public ModelSource[] getModels(DataSource data) {
+	public ModelSource[] getModels(final DataSource data) {
 		logger.log(Level.INFO, "Initializing model selection evolution");
 		logger.log(Level.INFO, "For data: " + data.getName());
-		Population p = new PopulationBase(new ModelGroupChromosomeGenerator(10, new ModelGroupFitnessFunction(data)), POPULATION_SIZE);
+		Population p = new PopulationBase(new ModelGroupChromosomeGenerator(MODEL_COUNT /** 2*/, new ModelGroupFitnessFunction(data)), POPULATION_SIZE);
 		GeneticAlgorithm algorithm = new GeneticAlgorithm();
 		algorithm.init(p, new AsymetricCrossoverEvolutionStrategy());
 		Chromosome c = algorithm.getBest();
@@ -42,6 +48,20 @@ public class EvolutionModeller implements Modeller {
 			models[i] = ModGenTools.learnRegressionModel(cfg[i], data);
 		}
 		return models;
+//		Arrays.sort(models, new Comparator<ModelSource>() {
+//
+//			@Override
+//			public int compare(ModelSource o1, ModelSource o2) {
+//				return Double.compare(ModelGroupFitnessFunction.meanSquareError(o1, data),
+//						ModelGroupFitnessFunction.meanSquareError(o2, data));
+//			}
+//			
+//		});
+//		ModelSource[] result = new ModelSource[MODEL_COUNT];
+//		for (int i = 0; i < result.length; i++) {
+//			result[i] = models[i];
+//		}
+//		return result;
 	}
 
 }

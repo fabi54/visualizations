@@ -2,8 +2,12 @@ package test.evolution;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Date;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
@@ -16,15 +20,24 @@ import org.fabi.visualizations.scatter.color.ColorModel;
 import org.fabi.visualizations.scatter.sources.DataSource;
 import org.fabi.visualizations.scatter.sources.ScatterplotSource;
 
-import test.artificialdata.onedimensional.SimpleLinearData;
+import test.artificialdata.onedimensional.*;
 import test.evolution.TestEvolution.AreaAdditionalDrawer;
+
+/*
+ * 2013-02-16 22:35 VisualizationEvolution: added line "ScatterplotChromosomeFitnessFunction.SIMILARITY_SIGNIFICANCE = 0.5;"
+ * 2013-02-16 22:38 VisualizationEvolution: added line "ScatterplotChromosomeFitnessFunction.VARIANCE_SIGNIFICANCE = 2.0;"
+ * 2013-02-16 22:41 VisualizationEvolution: changes:
+ * 		"ScatterplotChromosomeFitnessFunction.SIMILARITY_SIGNIFICANCE = 0.5
+ *		 ScatterplotChromosomeFitnessFunction.SIMILARITY_SIGNIFICANCE2 = 0.5;
+ *		 ScatterplotChromosomeFitnessFunction.VARIANCE_SIGNIFICANCE = 5.0;"
+ */
 
 public class TestVisualizationEvolution {
 	
 
 	protected static String PATH = "C:\\Users\\janf\\Documents\\Skola\\Dip\\Project\\Data\\Results\\Tests\\Evolution_Selected_Models\\";
 	
-	protected static DataSource data = new SimpleLinearData();
+	protected static DataSource data = new LongHeavisideData();
 	
 	public static final Logger logger = Logger.getLogger("Test Visualization Evolution");
 	
@@ -80,6 +93,10 @@ public class TestVisualizationEvolution {
 			String n = (j < 10) ? ("0" + Integer.toString(j)) : Integer.toString(j);
 			ImageIO.write(img, "png",new File(path + n + ".png"));
 		}
+		BufferedWriter bw = new BufferedWriter(new FileWriter(path + "date.txt"));
+		bw.write(new Date().toString());
+		bw.newLine();
+		bw.close();
 		logger.log(Level.INFO, "Terminated.");
 	}
 }

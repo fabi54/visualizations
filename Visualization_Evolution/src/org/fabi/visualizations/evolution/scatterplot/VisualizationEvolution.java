@@ -49,7 +49,10 @@ public class VisualizationEvolution {
 	public ScatterplotVisualization[] evolve(DataSource data, ModelSource[] models) {
 		logger.log(Level.INFO, "Initializing evolution.");
 		List<Chromosome> c = null;
-		FitnessFunction fitness = new ScatterplotChromosomeFitnessFunction(models, data);
+		ScatterplotChromosomeFitnessFunction fitness = new ScatterplotChromosomeFitnessFunction(models, data);
+		ScatterplotChromosomeFitnessFunction.SIMILARITY_SIGNIFICANCE = 0.5;
+		ScatterplotChromosomeFitnessFunction.SIMILARITY_SIGNIFICANCE2 = 0.5;
+		ScatterplotChromosomeFitnessFunction.VARIANCE_SIGNIFICANCE = 5.0;
 		if (data.outputsNumber() == 1) {
 			c = evolveRegression(data, fitness);
 		} else {

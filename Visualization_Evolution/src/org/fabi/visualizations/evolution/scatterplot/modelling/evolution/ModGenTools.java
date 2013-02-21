@@ -13,13 +13,17 @@ import configuration.models.ModelConfig;
 public class ModGenTools {
 	
 	public static ModelSource learnRegressionModel(CfgTemplate cfg, DataSource trainingData) {
-		if (!(cfg instanceof ModelConfig)) {
-			throw new IllegalArgumentException();
+		ConnectableModelConfig connectableConfig;
+		GameData data = new ArrayGameData(trainingData.getInputDataVectors(), trainingData.getOutputDataVectors());
+		if (cfg instanceof ModelConfig) {
+			// preprocessings?
+			connectableConfig = new ExtConnectableModelConfig(data.getINumber(), (ModelConfig) cfg);
+		} else if (cfg instanceof ConnectableModelConfig) {
+			connectableConfig = (ConnectableModelConfig) cfg;
+		} else {
+			throw new IllegalArgumentException(cfg.getClass().getSimpleName() + " not allowed.");
 		}
 		ConnectableModel mod = new ConnectableModel();
-		// preprocessings?
-		GameData data = new ArrayGameData(trainingData.getInputDataVectors(), trainingData.getOutputDataVectors());
-		ConnectableModelConfig connectableConfig = new ExtConnectableModelConfig(data.getINumber(), (ModelConfig) cfg);
 		mod.init(connectableConfig);
 		mod.setMaxLearningVectors(data.getInstanceNumber());
 		double[][] inputs = data.getInputVectors();

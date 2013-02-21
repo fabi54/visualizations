@@ -72,9 +72,13 @@ public class ModelGroupChromosome extends ChromosomeBase {
 	public Object getPhenotype() {
 		CfgTemplate[] res = new CfgTemplate[indices.length];
 		for (int i = 0; i < res.length; i++) {
-			res[i] = templates[indices[i]];
+			res[i] = getTemplates()[indices[i]];
 		}
 		return res;
+	}
+	
+	protected CfgTemplate[] getTemplates() {
+		return templates;
 	}
 
 	@Override

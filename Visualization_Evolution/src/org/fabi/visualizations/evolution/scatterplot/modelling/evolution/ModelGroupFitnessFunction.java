@@ -8,6 +8,10 @@ import org.fabi.visualizations.scatter.sources.ModelSource;
 
 import configuration.CfgTemplate;
 
+/*
+ * 2013-02-17 19:56 changed line: "res = Math.tanh(res + 1.0);" -> "res = Math.tanh(2 * res + 1.0);"
+ */
+
 public class ModelGroupFitnessFunction implements FitnessFunction {
 
 	int PRECISION_OUTSIDE_DATA = 20;
@@ -34,7 +38,7 @@ public class ModelGroupFitnessFunction implements FitnessFunction {
 		for (int i = 0; i < models.length; i++) {
 			res *= meanSquareError(models[i], data);
 		}
-		res = 1 / res;
+		res = Math.tanh(2 * res + 1.0);
 		
 		// difference outside data:
 		// TODO improve "area outside data" detection
@@ -56,7 +60,8 @@ public class ModelGroupFitnessFunction implements FitnessFunction {
 		for (int j = 0; j < responses.length; j++) {
 			responses[j] = models[j].getModelResponses(inputs);
 		}
-		res *= 1 / FitnessTools.evaluateSimilarity(responses);
+		res *= Math.tanh(FitnessTools.evaluateSimilarity(responses) + 1.0);
+		res = 1 / res;
 		
 		return res;
 	}

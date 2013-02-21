@@ -1,0 +1,54 @@
+17.2.2013 11:27:51 test.modelling.TestModelEvolutionVsPolynomial main
+INFO: Initializing evolution
+17.2.2013 11:27:52 test.modelling.TestModelEvolutionVsPolynomial main
+INFO: For data: ConstLinConst(inst=300,in1=-1.0..2.0,out1=in1<0.0:0.0,in1>2.0:1.0,in1)
+17.2.2013 11:28:01 test.modelling.TestModelEvolutionVsPolynomial main
+INFO: 0: 1.7240502187795663 [0, 12, 2, 11, 8, 11, 14, 2, 14, 14]
+17.2.2013 11:28:09 test.modelling.TestModelEvolutionVsPolynomial main
+INFO: 1: 1.7240507262686178 [2, 6, 4, 11, 10, 14, 14, 12, 14, 10]
+17.2.2013 11:28:14 test.modelling.TestModelEvolutionVsPolynomial main
+INFO: 2: 1.7240507759216785 [2, 7, 2, 11, 14, 7, 14, 3, 14, 10]
+17.2.2013 11:28:17 test.modelling.TestModelEvolutionVsPolynomial main
+INFO: 3: 1.724050777719271 [2, 6, 4, 14, 10, 7, 14, 3, 14, 10]
+17.2.2013 11:28:21 test.modelling.TestModelEvolutionVsPolynomial main
+INFO: 4: 1.7240507799655964 [0, 7, 4, 4, 10, 14, 14, 5, 14, 10]
+17.2.2013 11:28:25 test.modelling.TestModelEvolutionVsPolynomial main
+INFO: 5: 1.724050778156566 [5, 7, 4, 14, 10, 14, 14, 5, 14, 10]
+17.2.2013 11:28:29 test.modelling.TestModelEvolutionVsPolynomial main
+INFO: 6: 1.7240507785220158 [5, 12, 2, 14, 10, 7, 14, 3, 14, 10]
+17.2.2013 11:28:32 test.modelling.TestModelEvolutionVsPolynomial main
+INFO: 7: 1.7240507784830341 [2, 12, 11, 14, 10, 7, 14, 3, 14, 10]
+17.2.2013 11:28:36 test.modelling.TestModelEvolutionVsPolynomial main
+INFO: 8: 1.724050778414763 [2, 12, 11, 14, 10, 7, 14, 3, 14, 10]
+17.2.2013 11:28:39 test.modelling.TestModelEvolutionVsPolynomial main
+INFO: 9: 1.7240507786254178 [2, 12, 11, 14, 10, 7, 14, 3, 14, 10]
+17.2.2013 11:28:42 test.modelling.TestModelEvolutionVsPolynomial main
+INFO: 10: 1.7240507784643349 [2, 12, 11, 14, 10, 7, 14, 3, 14, 10]
+17.2.2013 11:28:46 test.modelling.TestModelEvolutionVsPolynomial main
+INFO: 11: 1.7240507785737584 [2, 12, 11, 14, 10, 7, 14, 3, 14, 10]
+17.2.2013 11:28:49 test.modelling.TestModelEvolutionVsPolynomial main
+INFO: 12: 1.7240507787445782 [2, 12, 10, 14, 10, 7, 14, 3, 14, 10]
+17.2.2013 11:28:52 test.modelling.TestModelEvolutionVsPolynomial main
+INFO: 13: 1.7240507788642072 [2, 12, 10, 14, 10, 7, 14, 3, 14, 10]
+17.2.2013 11:28:56 test.modelling.TestModelEvolutionVsPolynomial main
+INFO: 14: 1.7240507790380029 [2, 12, 10, 14, 10, 7, 14, 3, 14, 10]
+17.2.2013 11:28:59 test.modelling.TestModelEvolutionVsPolynomial main
+INFO: 15: 1.7240507790480268 [2, 12, 10, 14, 10, 7, 14, 3, 14, 10]
+17.2.2013 11:29:02 test.modelling.TestModelEvolutionVsPolynomial main
+INFO: 16: 1.7240507790141235 [2, 12, 10, 14, 10, 7, 14, 3, 14, 10]
+17.2.2013 11:29:05 test.modelling.TestModelEvolutionVsPolynomial main
+INFO: 17: 1.7240507790380049 [2, 12, 10, 14, 10, 7, 14, 3, 14, 10]
+17.2.2013 11:29:08 test.modelling.TestModelEvolutionVsPolynomial main
+INFO: 18: 1.7240507795701467 [1, 12, 10, 14, 10, 7, 14, 3, 14, 10]
+17.2.2013 11:29:11 test.modelling.TestModelEvolutionVsPolynomial main
+INFO: 19: 1.724050779712992 [1, 12, 10, 14, 10, 7, 14, 3, 14, 10]
+17.2.2013 11:29:14 test.modelling.TestModelEvolutionVsPolynomial main
+INFO: 20: 1.7240507798036668 [1, 12, 10, 14, 10, 7, 14, 3, 14, 10]
+17.2.2013 11:29:17 test.modelling.TestModelEvolutionVsPolynomial createVisualization
+INFO:   (... saving visualization)
+17.2.2013 11:29:18 test.modelling.TestModelEvolutionVsPolynomial main
+INFO: 10 polynomial: 1.3130352854930136 [14, 14, 14, 14, 14, 14, 14, 14, 14, 14]
+17.2.2013 11:29:18 test.modelling.TestModelEvolutionVsPolynomial createVisualization
+INFO:   (... saving visualization)
+17.2.2013 11:29:19 test.modelling.TestModelEvolutionVsPolynomial main
+INFO: Terminated.

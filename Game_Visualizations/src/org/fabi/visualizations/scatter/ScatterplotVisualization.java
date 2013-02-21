@@ -265,9 +265,13 @@ public class ScatterplotVisualization extends Visualization<ScatterplotSource> {
 			Metadata metadata = source.getMetadata();
 			if (metadata != null) {
 				List<AttributeInfo> inputs = metadata.getInputAttributeInfo();
-				c.setAxisLabel(X_AXIS, inputs.get(xAxisAttributeIndex).getName());
+				// depends on jmathplot version:
+				//c.setAxisLabel(X_AXIS, inputs.get(xAxisAttributeIndex).getName());
+				c.setAxeLabel(X_AXIS, inputs.get(xAxisAttributeIndex).getName());
 			} else {
-				c.setAxisLabel(X_AXIS, "attr" + xAxisAttributeIndex);
+				// depends on jmathplot version:
+				// c.setAxisLabel(X_AXIS, "attr" + xAxisAttributeIndex);
+				c.setAxeLabel(X_AXIS, "attr" + xAxisAttributeIndex);
 			}
 		}
 		
@@ -277,15 +281,23 @@ public class ScatterplotVisualization extends Visualization<ScatterplotSource> {
 			if (metadata != null) {
 				List<AttributeInfo> inputs = metadata.getInputAttributeInfo();
 				if (yAxisAttributeIndex == OUTPUT_AXIS) {
-					c.setAxisLabel(Y_AXIS, "output");
+					// depends on jmathplot version:
+					// c.setAxisLabel(Y_AXIS, "output");
+					c.setAxeLabel(Y_AXIS, "output");
 				} else {
-					c.setAxisLabel(Y_AXIS, inputs.get(yAxisAttributeIndex).getName());
+					// depends on jmathplot version:
+					// c.setAxisLabel(Y_AXIS, inputs.get(yAxisAttributeIndex).getName());
+					c.setAxeLabel(Y_AXIS, inputs.get(yAxisAttributeIndex).getName());
 				}
 			} else {
 				if (yAxisAttributeIndex == OUTPUT_AXIS) {
-					c.setAxisLabel(Y_AXIS, "output");
+					// depends on jmathplot version:
+					// c.setAxisLabel(Y_AXIS, "output");
+					c.setAxeLabel(Y_AXIS, "output");
 				} else {
-					c.setAxisLabel(Y_AXIS, "attr" + yAxisAttributeIndex);
+					// depends on jmathplot version:
+					// c.setAxisLabel(Y_AXIS, "attr" + yAxisAttributeIndex);
+					c.setAxeLabel(Y_AXIS, "attr" + yAxisAttributeIndex);
 				}
 			}
 		}

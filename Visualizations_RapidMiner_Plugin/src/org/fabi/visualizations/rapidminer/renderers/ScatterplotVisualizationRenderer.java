@@ -2,7 +2,7 @@ package org.fabi.visualizations.rapidminer.renderers;
 
 import org.fabi.visualizations.Visualization;
 import org.fabi.visualizations.rapidminer.scatter.RapidMinerDatasetGeneratorObjectAdapter;
-import org.fabi.visualizations.scatter_old.ScatterplotVisualizationInitializer;
+import org.fabi.visualizations.scatter.ScatterplotVisualization;
 
 public class ScatterplotVisualizationRenderer extends VisualizationRenderer {
 
@@ -14,7 +14,7 @@ public class ScatterplotVisualizationRenderer extends VisualizationRenderer {
 	@Override
 	protected Visualization<?> getVisualization(Object renderable) {
 		if (renderable instanceof RapidMinerDatasetGeneratorObjectAdapter) {
-			return new ScatterplotVisualizationInitializer().getVisualization(((RapidMinerDatasetGeneratorObjectAdapter) renderable).getDatasetGenerator());
+			return new ScatterplotVisualization(((RapidMinerDatasetGeneratorObjectAdapter) renderable).getScatterplotSource());
 		} else {
 			return null;
 		}

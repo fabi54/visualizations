@@ -1,0 +1,41 @@
+<configuration.models.ConnectableModelConfig>
+  <maxLearningVectors>-1</maxLearningVectors>
+  <maxInputsNumber>-1</maxInputsNumber>
+  <name>RegressionModel(1-Normalization)|Divide(mult=1)[5x DecisionTree(min=2,variance=1,folds=4,pruning=false)]|</name>
+  <config class="configuration.models.ensemble.DivideModelConfig">
+    <classRef>game.models.ensemble.ModelDivide</classRef>
+    <maxLearningVectors>-1</maxLearningVectors>
+    <maxInputsNumber>-1</maxInputsNumber>
+    <modelsNumber>5</modelsNumber>
+    <baseModelsDef>RANDOM</baseModelsDef>
+    <baseModelCfgs>
+      <configuration.models.single.DecisionTreeModelConfig>
+        <classRef>game.models.single.dt.DecisionTreeModel</classRef>
+        <maxLearningVectors>-1</maxLearningVectors>
+        <maxInputsNumber>-1</maxInputsNumber>
+        <pruning>false</pruning>
+        <minNum>2</minNum>
+        <variance>1.0</variance>
+        <numFolds>4</numFolds>
+      </configuration.models.single.DecisionTreeModelConfig>
+    </baseModelCfgs>
+    <clusterSizeMultiplier>1.0</clusterSizeMultiplier>
+  </config>
+  <selectedInputs>
+    <boolean>true</boolean>
+  </selectedInputs>
+  <preprocessingMethods>
+    <elements class="configuration.preprocessing.PreprocessingConfig-array">
+      <configuration.preprocessing.NormalizationConfig>
+        <classRef>game.preprocessing.NormalizationPreprocessing</classRef>
+      </configuration.preprocessing.NormalizationConfig>
+    </elements>
+    <elementEnabled>
+      <boolean>true</boolean>
+    </elementEnabled>
+    <unchangeable>
+      <boolean>false</boolean>
+    </unchangeable>
+    <type>configuration.preprocessing.PreprocessingConfig</type>
+  </preprocessingMethods>
+</configuration.models.ConnectableModelConfig>
