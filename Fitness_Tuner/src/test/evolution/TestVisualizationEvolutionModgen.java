@@ -14,29 +14,15 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 
-import org.fabi.visualizations.evolution.AsymetricCrossoverEvolutionStrategy;
-import org.fabi.visualizations.evolution.Chromosome;
-import org.fabi.visualizations.evolution.FitnessFunction;
-import org.fabi.visualizations.evolution.GeneticAlgorithm;
-import org.fabi.visualizations.evolution.Population;
-import org.fabi.visualizations.evolution.PopulationBase;
-import org.fabi.visualizations.evolution.scatterplot.FitnessTools;
 import org.fabi.visualizations.evolution.scatterplot.VisualizationEvolution;
-import org.fabi.visualizations.evolution.scatterplot.modelling.ModelSourceIterator;
 import org.fabi.visualizations.evolution.scatterplot.modelling.Modeller;
-import org.fabi.visualizations.evolution.scatterplot.modelling.ModellerBase;
 import org.fabi.visualizations.evolution.scatterplot.modelling.evolution.ModGenTools;
-import org.fabi.visualizations.evolution.scatterplot.modelling.evolution.ModelGroupChromosome;
-import org.fabi.visualizations.evolution.scatterplot.modelling.evolution.ModelGroupChromosomeGenerator;
-import org.fabi.visualizations.evolution.scatterplot.modelling.evolution.ModelGroupFitnessFunction;
 import org.fabi.visualizations.scatter.AdditionalDrawer;
 import org.fabi.visualizations.scatter.ScatterplotVisualization;
 import org.fabi.visualizations.scatter.color.ColorModel;
 import org.fabi.visualizations.scatter.sources.DataSource;
 import org.fabi.visualizations.scatter.sources.ModelSource;
 import org.fabi.visualizations.scatter.sources.ScatterplotSource;
-import org.fabi.visualizations.evolution.ChromosomeGeneratorBase;
-import org.math.array.util.Random;
 
 import configuration.CfgTemplate;
 import configuration.ConfigurationFactory;
@@ -119,9 +105,9 @@ public class TestVisualizationEvolutionModgen {
 			logger.log(Level.INFO, r + ": Running ModGen: \"java -jar C:\\Users\\janf\\Documents\\Skola\\Dip\\Project\\External\\ModGen_0.14.jar -file " + rnd + ".txt -time 60 -sc\"");
 			Process p = Runtime.getRuntime().exec("java -jar C:\\Users\\janf\\Documents\\Skola\\Dip\\Project\\External\\ModGen_0.14.jar -file " + rnd + ".txt -time 60 -sc");
 			java.io.InputStream ins = p.getInputStream();
-	        int n;
+	        //int n;
 	        byte[] buffer = new byte[4096];
-	        while ((n = ins.read(buffer)) != -1) {
+	        while ((/*n =*/ ins.read(buffer)) != -1) {
 //	            System.out.write(buffer, 0, n);
 //	            System.out.flush();
 	        }

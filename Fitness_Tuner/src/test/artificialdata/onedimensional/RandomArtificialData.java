@@ -6,7 +6,7 @@ public class RandomArtificialData extends DataSource1D {
 
 	protected int elementsNr = 30;
 	protected int instNr = 1000;
-	protected double noise = 0.0;
+	protected double noise = 0.01;
 	
 	public RandomArtificialData() { }
 	

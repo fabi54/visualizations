@@ -65,12 +65,6 @@ public class TestModelEvolutionVsPolynomial {
 			logger.log(Level.INFO, (i + 1) + ": " + algorithm.getBest().getFitness() + " " + algorithm.getBest());
 		}
 		createVisualization(new File(path + "evolution.png"), (CfgTemplate[]) algorithm.getBest().getPhenotype());
-		CfgTemplate[] templates = new CfgTemplate[10];
-		PolynomialModelConfig cfg = new PolynomialModelConfig();
-		cfg.setMaxDegree(10);
-		for (int i = 0; i < templates.length; i++) {
-			templates[i] = cfg;
-		}
 		ModelGroupChromosome c = new PolynomialChromosome(10, fitness);
 		logger.log(Level.INFO, "10 polynomial: " + c.getFitness() + " " + c);
 		createVisualization(new File(path + "polynomial.png"), (CfgTemplate[]) c.getPhenotype());
@@ -81,11 +75,20 @@ public class TestModelEvolutionVsPolynomial {
 		
 		public PolynomialChromosome(int size, FitnessFunction fitness) {
 			super(size, fitness);
-			for (int i = 0; i < indices.length; i++) {
-				indices[i] = templates.length - 1;
+		}
+
+		@Override
+		public Object getPhenotype() {
+			CfgTemplate[] templates = new CfgTemplate[10];
+			for (int i = 0; i < templates.length; i++) {
+				PolynomialModelConfig cfg = new PolynomialModelConfig();
+				cfg.setMaxDegree(i + 3);
+				templates[i] = cfg;
 			}
+			return templates;
 		}
 	}
+	
 	
 	protected static void createVisualization(File file, CfgTemplate[] cfg) throws IOException {
 		ModelSource[] models = new ModelSource[cfg.length];
