@@ -9,7 +9,8 @@ import javax.swing.JComboBox;
 import org.fabi.visualizations.scatter.ScatterplotVisualization;
 import org.fabi.visualizations.scatter.color.ColorModel;
 import org.fabi.visualizations.scatter.color.ConstantColorModel;
-import org.fabi.visualizations.scatter.color.CustomGroovyColorModel;
+//import org.fabi.visualizations.scatter.color.CustomGroovyColorModel;
+import org.fabi.visualizations.scatter.color.GradientColorModel;
 import org.fabi.visualizations.scatter.color.RegressionMonochromaticGradientColorModel;
 import org.fabi.visualizations.scatter.color.RegressionRainbowColorModel;
 import org.fabi.visualizations.scatter.color.SeriesDependentColorModel;
@@ -21,10 +22,11 @@ public class ColorModelComboBox extends JComboBox implements Observer {
 	
 	protected static Class<?>[] modelList = new Class<?>[] {
 			ConstantColorModel.class,
+			GradientColorModel.class,
 			RegressionRainbowColorModel.class,
 			RegressionMonochromaticGradientColorModel.class,
-			SeriesDependentColorModel.class,
-			CustomGroovyColorModel.class
+			SeriesDependentColorModel.class//,
+			//CustomGroovyColorModel.class
 	};
 	
 	public ColorModelComboBox() {

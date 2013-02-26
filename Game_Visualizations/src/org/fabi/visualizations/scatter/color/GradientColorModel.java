@@ -3,6 +3,7 @@ package org.fabi.visualizations.scatter.color;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JColorChooser;
@@ -23,19 +24,18 @@ import org.ytoh.configurations.annotations.Component;
 import org.ytoh.configurations.annotations.Property;
 
 @Component(name="Gradient color model")
-@Deprecated
 public class GradientColorModel extends ColorModelBase {
 
 	protected static final int LOW = 0;
 	protected static final int HIGH = 1;
 	
-	protected static final int HUE = 0;
-	protected static final int SATURATION = 1;
-	protected static final int BRIGHTNESS = 2;
+	protected static final int RED = 0;
+	protected static final int GREEN = 1;
+	protected static final int BLUE = 2;
 	protected static final int ALPHA = 3;
 	
 	@Property(name="components")
-	protected float[][][] h;
+	protected int[][][] components;
 	
 	@Property(name="gradient lower bounds")
 	protected double[] min;
@@ -51,49 +51,56 @@ public class GradientColorModel extends ColorModelBase {
 	 */
 	@Override
 	public Color getColor(double[] inputs, double[] outputs, boolean data, int index, int[] inputIndices, int[] outputIndices) {
-		Color[] colors = new Color[outputs.length];
+		List<Color> colors = new ArrayList<Color>(outputs.length);
+		int outputIndex = 0;
 		for (int i = 0; i < outputs.length; i++) {
-			colors[i] = getColorForOutput(outputs[i], i); 
+			if (outputIndex < outputIndices.length && outputIndices[outputIndex] == i) {
+				colors.add(getColorForOutput(outputs[i], i));
+				outputIndex++;
+			}
 		}
-		return mixColors(colors);
+		Color[] clrArray = new Color[colors.size()];
+		clrArray = colors.toArray(clrArray);
+		return mixColors(clrArray);
 	}
 	
 	protected Color getColorForOutput(double outputVal, int outputIndex) {
-		float b = (float) ((outputVal - min[outputIndex]) / range[outputIndex]);
-		b = Math.min(1.0f, Math.max(0.0f, b));
-		float[] res = new float[4];
-		for (int i = 0; i < 4; i++) {
-			res[i] = h[HIGH][i][outputIndex] + b * (h[HIGH][i][outputIndex] - h[LOW][i][outputIndex]); 
-		}
-		Color clr = Color.getHSBColor(res[HUE], res[SATURATION], res[BRIGHTNESS]);
-		float[] resClr = clr.getRGBComponents(null);
-		return new Color(resClr[0], resClr[1], resClr[2], res[ALPHA]);
+		double b = (outputVal - min[outputIndex]) / range[outputIndex];
+		b = Math.min(1.0, Math.max(0.0, b));
+		int[] res = new int[4];
+		res[RED] = getWeightedAverage(components[outputIndex][LOW][RED], components[outputIndex][HIGH][RED], b);
+		res[GREEN] = getWeightedAverage(components[outputIndex][LOW][GREEN], components[outputIndex][HIGH][GREEN], b);
+		res[BLUE] = getWeightedAverage(components[outputIndex][LOW][BLUE], components[outputIndex][HIGH][BLUE], b);
+		res[ALPHA] = getWeightedAverage(components[outputIndex][LOW][ALPHA], components[outputIndex][HIGH][ALPHA], b);
+		return new Color(res[RED], res[GREEN], res[BLUE], res[ALPHA]);
+	}
+	
+	protected static int getWeightedAverage(int lower, int upper, double disbalance) {
+		return (int) (lower + disbalance * (upper - lower));
 	}
 	
     protected static Color mixColors(Color[] colors) {
-        float[] avg = new float[4];
-        float[] current = new float[4];
-        for (Color c : colors) {
-        	c.getRGBComponents(current);
-            for (int i = 0; i < 3; i++) {
-            	avg[i] += current[i] * current[ALPHA];
-            }
-            avg[ALPHA] += current[ALPHA];
+        double[] res = new double[4];
+        for (Color clr : colors) {
+        	res[RED] += clr.getRed() * clr.getAlpha();
+        	res[GREEN] += clr.getGreen() * clr.getAlpha();
+        	res[BLUE] += clr.getBlue() * clr.getAlpha();
+        	res[ALPHA] += clr.getAlpha();
         }
-        if (avg[ALPHA] > 0.0f) {
-            for (int i = 0; i < 3; i++) {
-            	avg[i] /= avg[ALPHA];
-            }
-            avg[ALPHA] /= 4;
+        for (int i = 0; i < 3; i++) {
+        	res[i] /= res[ALPHA];
         }
-        return new Color(avg[HUE], avg[SATURATION], avg[BRIGHTNESS], avg[ALPHA]);
+        for (int i = 0; i < res.length; i++) {
+        	res[i] /= colors.length;
+        }
+        return new Color((int) res[RED], (int) res[GREEN], (int) res[BLUE], (int) res[ALPHA]);
     }
 
 	@Override
 	public void init(ScatterplotSource source) {
 		int len = source.getOutputsNumber();
 		boolean initColors = false;
-		if (h == null) { h = new float[2][4][len]; initColors = true; }
+		if (components == null) { components = new int[len][2][4]; initColors = true; }
 		if (min == null) { min = new double[len]; }
 		if (range == null) { range = new double[len]; for (int i = 0; i < range.length; i++) { range[i] = 1.0; }}
 		
@@ -101,15 +108,14 @@ public class GradientColorModel extends ColorModelBase {
 			ColorTools colorTools = new ColorTools();
 			for (int i = 0; i < len; i++) {
 				Color clr = colorTools.getPointColor(((double) i) / ((double) len - 1), 127);
-				float[] hsb = Color.RGBtoHSB(clr.getRed(), clr.getGreen(), clr.getBlue(), null);
-				for (int j : new int[]{HUE, BRIGHTNESS}) {
-					h[HIGH][j][i] = hsb[j];
-					h[LOW][j][i] = hsb[j];
-				}
-				h[HIGH][SATURATION][i] = 1.0f;
-				h[LOW][SATURATION][i] = 0.0f;
-				h[HIGH][ALPHA][i] = 1.0f;
-				h[LOW][ALPHA][i] = 1.0f;
+				components[i][HIGH][RED] = clr.getRed();
+				components[i][HIGH][GREEN] = clr.getGreen();
+				components[i][HIGH][BLUE] = clr.getBlue();
+				components[i][HIGH][ALPHA] = 255;
+				components[i][LOW][RED] = clr.getRed();
+				components[i][LOW][GREEN] = clr.getGreen();
+				components[i][LOW][BLUE] = clr.getBlue();
+				components[i][LOW][ALPHA] = 0;
 			}
 		}
 		
@@ -156,8 +162,8 @@ public class GradientColorModel extends ColorModelBase {
 		c.gridy = 0;
 		c.gridwidth = 3;
 		c.fill = GridBagConstraints.BOTH;
-		final JColorChooser chooser = new JColorChooser(Color.getHSBColor(h[bound][HUE][outputIndex],
-				h[bound][SATURATION][outputIndex], h[bound][BRIGHTNESS][outputIndex]));
+		final JColorChooser chooser = new JColorChooser(new Color(components[outputIndex][bound][RED],
+				components[outputIndex][bound][GREEN], components[outputIndex][bound][BLUE]));
 		res.add(chooser, c);
 		AbstractColorChooserPanel[] panels = chooser.getChooserPanels();
 		chooser.setChooserPanels(new AbstractColorChooserPanel[]{panels[1]});
@@ -166,23 +172,22 @@ public class GradientColorModel extends ColorModelBase {
 			@Override
 			public void stateChanged(ChangeEvent e) {
 				Color clr = chooser.getColor();
-				float[] hsb = Color.RGBtoHSB(clr.getRed(), clr.getGreen(), clr.getBlue(), null);
-				for (int i = 0; i < 3; i++) {
-					h[bound][i][outputIndex] = hsb[i];
-				}
+				components[outputIndex][bound][RED] = clr.getRed();
+				components[outputIndex][bound][GREEN] = clr.getGreen();
+				components[outputIndex][bound][BLUE] = clr.getBlue();
 			}
 		});
 		c.gridwidth = 1;
 		c.gridy = 1;
 		res.add(new JLabel("Alpha:"), c);
 		c.gridx = 1;
-		final JSlider slider = new JSlider(0, 1000, (int) h[bound][ALPHA][outputIndex] * 1000);
+		final JSlider slider = new JSlider(0, 255, components[outputIndex][bound][ALPHA]);
 		res.add(slider, c);
 		slider.addChangeListener(new ChangeListener() {
 			
 			@Override
 			public void stateChanged(ChangeEvent e) {
-				h[bound][ALPHA][outputIndex] = slider.getValue() / 1000.0f;
+				components[outputIndex][bound][ALPHA] = slider.getValue();
 			}
 		});
 		return res;

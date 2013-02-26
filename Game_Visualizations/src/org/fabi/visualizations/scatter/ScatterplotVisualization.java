@@ -3,6 +3,8 @@ package org.fabi.visualizations.scatter;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.image.BufferedImage;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -36,7 +38,7 @@ public class ScatterplotVisualization extends Visualization<ScatterplotSource> {
 	}
 	
 	public ScatterplotVisualization(ScatterplotSource source) {
-		super();
+		this();
 		setSource(source);
 	}
 	
@@ -266,12 +268,12 @@ public class ScatterplotVisualization extends Visualization<ScatterplotSource> {
 			if (metadata != null) {
 				List<AttributeInfo> inputs = metadata.getInputAttributeInfo();
 				// depends on jmathplot version:
-				//c.setAxisLabel(X_AXIS, inputs.get(xAxisAttributeIndex).getName());
-				c.setAxeLabel(X_AXIS, inputs.get(xAxisAttributeIndex).getName());
+				c.setAxisLabel(X_AXIS, inputs.get(xAxisAttributeIndex).getName());
+//				c.setAxeLabel(X_AXIS, inputs.get(xAxisAttributeIndex).getName());
 			} else {
 				// depends on jmathplot version:
-				// c.setAxisLabel(X_AXIS, "attr" + xAxisAttributeIndex);
-				c.setAxeLabel(X_AXIS, "attr" + xAxisAttributeIndex);
+				 c.setAxisLabel(X_AXIS, "attr" + xAxisAttributeIndex);
+//				c.setAxeLabel(X_AXIS, "attr" + xAxisAttributeIndex);
 			}
 		}
 		
@@ -282,22 +284,22 @@ public class ScatterplotVisualization extends Visualization<ScatterplotSource> {
 				List<AttributeInfo> inputs = metadata.getInputAttributeInfo();
 				if (yAxisAttributeIndex == OUTPUT_AXIS) {
 					// depends on jmathplot version:
-					// c.setAxisLabel(Y_AXIS, "output");
-					c.setAxeLabel(Y_AXIS, "output");
+					 c.setAxisLabel(Y_AXIS, "output");
+//					c.setAxeLabel(Y_AXIS, "output");
 				} else {
 					// depends on jmathplot version:
-					// c.setAxisLabel(Y_AXIS, inputs.get(yAxisAttributeIndex).getName());
-					c.setAxeLabel(Y_AXIS, inputs.get(yAxisAttributeIndex).getName());
+					 c.setAxisLabel(Y_AXIS, inputs.get(yAxisAttributeIndex).getName());
+//					c.setAxeLabel(Y_AXIS, inputs.get(yAxisAttributeIndex).getName());
 				}
 			} else {
 				if (yAxisAttributeIndex == OUTPUT_AXIS) {
 					// depends on jmathplot version:
-					// c.setAxisLabel(Y_AXIS, "output");
-					c.setAxeLabel(Y_AXIS, "output");
+					 c.setAxisLabel(Y_AXIS, "output");
+//					c.setAxeLabel(Y_AXIS, "output");
 				} else {
 					// depends on jmathplot version:
-					// c.setAxisLabel(Y_AXIS, "attr" + yAxisAttributeIndex);
-					c.setAxeLabel(Y_AXIS, "attr" + yAxisAttributeIndex);
+					 c.setAxisLabel(Y_AXIS, "attr" + yAxisAttributeIndex);
+//					c.setAxeLabel(Y_AXIS, "attr" + yAxisAttributeIndex);
 				}
 			}
 		}
@@ -707,6 +709,10 @@ public class ScatterplotVisualization extends Visualization<ScatterplotSource> {
 		if (colorModel != null) {
 			colorModel.init(this);
 		}
+
+//		java.util.logging.Logger.global.log(java.util.logging.Level.INFO, "Color Model Changed: " + this.colorModel
+//				+ " -> " + colorModel);
+		
 		this.colorModel = colorModel;
 		update(PROPERTY_COLOR_MODEL);
 	}
