@@ -123,6 +123,8 @@ public class TestVisualizationEvolutionPolynomialOneVsMore {
 		saveVisualizations(evolution, path + "1_");
 
 		bw2.newLine();
+		bw2.write("Relative similarity evaluation");
+		bw2.newLine();
 		bw2.close();
 		logger.log(Level.INFO, "Terminated.");
 	}

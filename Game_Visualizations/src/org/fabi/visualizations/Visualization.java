@@ -21,7 +21,7 @@ import javax.swing.JComponent;
 
 import org.fabi.visualizations.config.VisualizationConfig;
 
-public abstract class Visualization<S> extends Observable implements Observer {
+public abstract class Visualization<S> extends Observable implements Observer, Cloneable {
 	
 	protected S source;
 	
@@ -37,6 +37,14 @@ public abstract class Visualization<S> extends Observable implements Observer {
 	
 	public void setSource(S source) {
 		this.source = source;
+	}
+	
+	public Visualization<?> copy() {
+		try {
+			return (Visualization<?>) this.clone();
+		} catch (CloneNotSupportedException ex) {
+			throw new RuntimeException("Unexpected CloneNotSupportedException.");
+		}
 	}
 	
 	@Deprecated

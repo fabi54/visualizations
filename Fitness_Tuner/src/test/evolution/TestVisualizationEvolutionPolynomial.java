@@ -34,7 +34,7 @@ public class TestVisualizationEvolutionPolynomial {
 
 	protected static String PATH = "C:\\Users\\janf\\Documents\\Skola\\Dip\\Project\\Data\\Results\\Tests\\Evolution_Selected_Polynomial\\";
 	
-	protected static DataSource data = new RandomArtificialData();
+	protected static DataSource data = new ConstantLinearConstantData();
 	
 	public static final Logger logger = Logger.getLogger("Test Visualization Evolution Modgen");
 	
@@ -118,6 +118,8 @@ public class TestVisualizationEvolutionPolynomial {
 		}
 		BufferedWriter bw2 = new BufferedWriter(new FileWriter(path + "date.txt"));
 		bw2.write(new Date().toString());
+		bw2.newLine();
+		bw2.write("Relative similarity evaluation");
 		bw2.newLine();
 		bw2.close();
 		logger.log(Level.INFO, "Terminated.");

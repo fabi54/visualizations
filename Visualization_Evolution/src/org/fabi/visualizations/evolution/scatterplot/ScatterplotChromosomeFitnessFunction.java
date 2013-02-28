@@ -12,6 +12,10 @@ import org.jfree.data.Range;
 import static org.fabi.visualizations.evolution.scatterplot.FitnessTools.evaluateInterestingness;
 import static org.fabi.visualizations.evolution.scatterplot.FitnessTools.evaluateSimilarity;
 
+/*
+ * 2013-02-28 23:31: similarity evaluation changed to relative
+ */
+
 public class ScatterplotChromosomeFitnessFunction implements FitnessFunction {
 
 /*****************************************************************************/	
@@ -71,14 +75,53 @@ public class ScatterplotChromosomeFitnessFunction implements FitnessFunction {
 //    	if (Double.isNaN(evaluateSize(cfg, responses) * evaluateSimilarity(responses) * evaluateInterestingness(responses)))
 //    	System.out.println(evaluateSize(cfg, responses) + " " + evaluateSimilarity(responses) + " " + evaluateInterestingness(responses));
 //    	double res = evaluateSize(cfg, responses) * evaluateSimilarity(responses) * evaluateInterestingness(responses);
-    	double res = Math.tanh(evaluateSize(vis, responses)) * Math.tanh(evaluateSimilarity(responses)) * Math.tanh(evaluateInterestingness(responses));
-    	if (Double.isNaN(res) || Double.isInfinite(res)) {
-    		System.out.println(evaluateSize(vis, responses) + " " + evaluateSimilarity(responses) + " " + evaluateInterestingness(responses));
-    		return 0;
-		}
+    	double res = Math.tanh(evaluateSize(vis, responses)) * Math.tanh(evaluateSimilarity_relative(chrmsm, vis, responses)) * Math.tanh(evaluateInterestingness(responses));
+//    	if (Double.isNaN(res) || Double.isInfinite(res)) {
+//    		System.out.println(evaluateSize(vis, responses) + " " + evaluateSimilarity(vis, responses) + " " + evaluateInterestingness(responses));
+//    		return 0;
+//		}
 		return res;
     }
-    
+
+	public double evaluateSimilarity_relative(Chromosome chrmsm, ScatterplotVisualization vis, double[][][] responses) {
+		double similarity = 0.0;
+		double[] values = new double[responses.length];
+		for (int i = 0; i < responses[0].length; i++) {
+			for (int j = 0; j < responses.length; j++) {
+				values[j] = responses[j][i][0];
+			}
+			java.util.Arrays.sort(values);
+			int begin = 1;
+			int end = values.length - 2;
+			double actSimilarity = 0;
+			while (begin != end) {
+				actSimilarity += Math.abs(values[end] - values[begin]);
+				actSimilarity *= 2;
+				if (Math.abs(values[begin + 1] - values[begin])
+						> Math.abs(values[end] - values[end - 1])) {
+					begin++;
+				} else {
+					end--;
+				}
+			}
+			similarity += actSimilarity;
+		}
+		
+		// evolve neighbourhood
+		ScatterplotVisualization vis2 = (ScatterplotVisualization) vis.copy();
+		double xl = vis2.getxAxisRangeLower(), xu = vis2.getxAxisRangeUpper();
+		vis2.setxAxisRangeLower(2 * xl - xu);
+		vis2.setxAxisRangeUpper(xl);
+		
+		double neighbourhoodSimilarity = evaluateSimilarity(getResponses(vis2, getSource(chrmsm)));
+		
+		vis2.setxAxisRangeLower(xu);
+		vis2.setxAxisRangeUpper(2 * xu - xl);
+		
+		neighbourhoodSimilarity += evaluateSimilarity(getResponses(vis2, getSource(chrmsm)));
+				
+		return (neighbourhoodSimilarity / similarity);
+	}
 
 	protected double evaluateSize(ScatterplotVisualization vis, double[][][] responses) {
 		double yAxisRangeUpper = Double.NEGATIVE_INFINITY, yAxisRangeLower = Double.POSITIVE_INFINITY;
