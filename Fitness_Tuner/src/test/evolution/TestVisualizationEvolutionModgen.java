@@ -102,8 +102,8 @@ public class TestVisualizationEvolutionModgen {
 		}
 		bw.close();
 		for (int r = 0; r < 10; r++) {
-			logger.log(Level.INFO, r + ": Running ModGen: \"java -jar C:\\Users\\janf\\Documents\\Skola\\Dip\\Project\\External\\ModGen_0.14.jar -file " + rnd + ".txt -time 60 -sc\"");
-			Process p = Runtime.getRuntime().exec("java -jar C:\\Users\\janf\\Documents\\Skola\\Dip\\Project\\External\\ModGen_0.14.jar -file " + rnd + ".txt -time 60 -sc");
+			logger.log(Level.INFO, r + ": Running ModGen: \"java -jar C:\\Users\\janf\\Documents\\Skola\\Dip\\Project\\External\\ModGen_0.13.jar -file " + rnd + ".txt -time 60 -sc\"");
+			Process p = Runtime.getRuntime().exec("java -jar C:\\Users\\janf\\Documents\\Skola\\Dip\\Project\\External\\ModGen_0.13.jar -file " + rnd + ".txt -time 60 -sc");
 			java.io.InputStream ins = p.getInputStream();
 	        //int n;
 	        byte[] buffer = new byte[4096];
@@ -128,6 +128,7 @@ public class TestVisualizationEvolutionModgen {
 		for (int k = 0; k < files.length; k++) {
 			CfgTemplate cfg = ConfigurationFactory.getConfiguration(files[i].getAbsolutePath());
 			ms[k] = ModGenTools.learnRegressionModel(cfg, data);
+			files[i].renameTo(new File(path + files[i].getName()));
 		}
 		
 		evolution.setModeller(new Modeller() {

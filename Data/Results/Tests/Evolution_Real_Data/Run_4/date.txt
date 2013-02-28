@@ -1,0 +1,4 @@
+Thu Feb 28 22:58:22 CET 2013
+C:\Users\janf\Documents\Skola\Dip\Project\External\data\bosthouse.txt
+MinWeightedDistance: 0.1
+Evol. params: 0.5 1.0 2.0 1.5

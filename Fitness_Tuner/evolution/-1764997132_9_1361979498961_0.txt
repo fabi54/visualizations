@@ -1,0 +1,26 @@
+<configuration.models.ConnectableModelConfig>
+  <classRef>game.models.ConnectableModel</classRef>
+  <maxLearningVectors>-1</maxLearningVectors>
+  <maxInputsNumber>-1</maxInputsNumber>
+  <name>RegressionModel(1)|DecisionTree(min=6,variance=0.5441,folds=6,pruning=false)|</name>
+  <config class="configuration.models.single.DecisionTreeModelConfig">
+    <classRef>game.models.single.dt.DecisionTreeModel</classRef>
+    <maxLearningVectors>-1</maxLearningVectors>
+    <maxInputsNumber>-1</maxInputsNumber>
+    <pruning>false</pruning>
+    <minNum>6</minNum>
+    <variance>0.5441001739138843</variance>
+    <numFolds>6</numFolds>
+  </config>
+  <selectedInputs>
+    <boolean>true</boolean>
+  </selectedInputs>
+  <preprocessingMethods>
+    <elements class="string-array">
+      <string>NormalizationPreprocessing</string>
+    </elements>
+    <elementEnabled>
+      <boolean>true</boolean>
+    </elementEnabled>
+  </preprocessingMethods>
+</configuration.models.ConnectableModelConfig>

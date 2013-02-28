@@ -1,0 +1,34 @@
+<configuration.models.ConnectableModelConfig>
+  <maxLearningVectors>-1</maxLearningVectors>
+  <maxInputsNumber>-1</maxInputsNumber>
+  <name>RegressionModel(1)|Stacking[5x DecisionTree(min=2,variance=1,folds=3,pruning=false)]|</name>
+  <config class="configuration.models.ensemble.StackingModelConfig">
+    <classRef>game.models.ensemble.ModelStacking</classRef>
+    <maxLearningVectors>-1</maxLearningVectors>
+    <maxInputsNumber>-1</maxInputsNumber>
+    <modelsNumber>5</modelsNumber>
+    <baseModelsDef>RANDOM</baseModelsDef>
+    <baseModelCfgs>
+      <configuration.models.single.DecisionTreeModelConfig>
+        <classRef>game.models.single.dt.DecisionTreeModel</classRef>
+        <maxLearningVectors>-1</maxLearningVectors>
+        <maxInputsNumber>-1</maxInputsNumber>
+        <pruning>false</pruning>
+        <minNum>2</minNum>
+        <variance>1.0</variance>
+        <numFolds>3</numFolds>
+      </configuration.models.single.DecisionTreeModelConfig>
+    </baseModelCfgs>
+  </config>
+  <selectedInputs>
+    <boolean>true</boolean>
+  </selectedInputs>
+  <preprocessingMethods>
+    <elements class="string-array">
+      <string>NormalizationPreprocessing</string>
+    </elements>
+    <elementEnabled>
+      <boolean>true</boolean>
+    </elementEnabled>
+  </preprocessingMethods>
+</configuration.models.ConnectableModelConfig>

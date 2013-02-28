@@ -14,6 +14,6 @@
 	<classpathentry kind="lib" path="lib/jung-visualization.jar"/>
 	<classpathentry kind="lib" path="lib/configurations.jar" sourcepath="D:/Data/Dokumenty/Skola/B102/Y36BP/fakegame-old/configurations/trunk/src/main/java"/>
 	<classpathentry kind="lib" path="lib/groovy-all-1.7.7.jar"/>
-	<classpathentry kind="lib" path="C:/Users/janf/Documents/Skola/Dip/rapidminer/rapidminer/Vega/lib/jmathplot.jar"/>
+	<classpathentry kind="lib" path="lib/jmathplot.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

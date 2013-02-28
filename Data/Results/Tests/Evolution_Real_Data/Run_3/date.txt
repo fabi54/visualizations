@@ -1,0 +1,3 @@
+Thu Feb 28 21:33:09 CET 2013
+C:\Users\janf\Documents\Skola\Dip\Project\External\data\bosthouse.txt
+MinWeightedDistance: 0.1

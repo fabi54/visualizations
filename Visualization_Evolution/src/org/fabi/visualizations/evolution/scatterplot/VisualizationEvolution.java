@@ -41,6 +41,26 @@ public class VisualizationEvolution {
 	
 	protected Modeller modeller = new EvolutionModeller();
 	
+	public static void setMinWeightedDistance(double d) {
+		MIN_WEIGHTED_DISTANCE = d;
+	}
+	
+	public static void setSimilaritySignificance(double d) {
+		SIMILARITY_SIGNIFICANCE = d;
+	}
+	
+	public static void setSimilaritySignificance2(double d) {
+		SIMILARITY_SIGNIFICANCE2 = d;
+	}
+	
+	public static void setVarianceSignificance(double d) {
+		VARIANCE_SIGNIFICANCE = d;
+	}
+	
+	public static void setSizeSignificance(double d) {
+		SIZE_SIGNIFICANCE = d;
+	}
+	
 	public ScatterplotVisualization[] evolve(DataSource data) {
 		ModelSource[] models = modeller.getModels(data);
 		return evolve(data, models);
@@ -83,7 +103,7 @@ public class VisualizationEvolution {
 				for (int k = 0; k < p.size() && cnt++ < VISUALIZATIONS_NUMBER; k++) {
 					boolean add = true;
 					for (Chromosome b : best) {
-						if (((ScatterplotChromosome) p.getIth(k)).weightedDistanceTo((ScatterplotChromosome) b) < MIN_WEIGHTED_DISTANCE) {
+						if (((ScatterplotChromosome) p.getIth(k)).relativeWeightedDistanceTo((ScatterplotChromosome) b) < MIN_WEIGHTED_DISTANCE) {
 							add = false;
 							break;
 						}

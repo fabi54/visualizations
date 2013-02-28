@@ -1,0 +1,25 @@
+Thu Feb 28 20:06:14 CET 2013
+
+Polynomial(degree=2)
+Polynomial(degree=2)
+Polynomial(degree=2)
+Polynomial(degree=2)
+Polynomial(degree=2)
+Polynomial(degree=2)
+Polynomial(degree=2)
+Polynomial(degree=2)
+Polynomial(degree=2)
+Polynomial(degree=2)
+
+BoostingRT(tr=0,1)[5X 5*Polynomial(degree=2)]
+BoostingRT(tr=0,1)[5X 5*Polynomial(degree=2)]
+BoostingRT(tr=0,1)[5X 5*Polynomial(degree=2)]
+BoostingRT(tr=0,1)[5X 5*Polynomial(degree=2)]
+BoostingRT(tr=0,1)[5X 5*Polynomial(degree=2)]
+BoostingRT(tr=0,1)[5X 5*Polynomial(degree=2)]
+BoostingRT(tr=0,1)[5X 5*Polynomial(degree=2)]
+BoostingRT(tr=0,1)[5X 5*Polynomial(degree=2)]
+BoostingRT(tr=0,1)[5X 5*Polynomial(degree=2)]
+BoostingRT(tr=0,1)[5X 5*Polynomial(degree=2)]
+
+

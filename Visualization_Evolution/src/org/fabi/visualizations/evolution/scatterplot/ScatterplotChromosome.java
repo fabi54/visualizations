@@ -93,6 +93,10 @@ public class ScatterplotChromosome extends ChromosomeBase {
 		return result;
 	}
 	
+	protected double relativeWeightedDistanceTo(ScatterplotChromosome o) {
+		return weightedDistanceTo(o) / getFitness();
+	}
+	
 	public double weightedDistanceTo(ScatterplotChromosome o) {
 		if (o.indices.length != indices.length || o.others.length != others.length) {
 			return Double.MAX_VALUE;

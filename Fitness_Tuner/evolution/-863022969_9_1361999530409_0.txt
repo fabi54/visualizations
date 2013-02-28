@@ -1,0 +1,53 @@
+<configuration.models.ConnectableModelConfig>
+  <maxLearningVectors>-1</maxLearningVectors>
+  <maxInputsNumber>-1</maxInputsNumber>
+  <name>RegressionModel(1)|KNN(k=1,vote=false,measure=ChebychevDistance)|</name>
+  <config class="configuration.models.single.KNNModelConfig">
+    <classRef>game.models.single.KNNModel</classRef>
+    <maxLearningVectors>-1</maxLearningVectors>
+    <maxInputsNumber>-1</maxInputsNumber>
+    <nearestNeighbours>1</nearestNeighbours>
+    <weightedVote>false</weightedVote>
+    <measureType>
+      <elements class="string-array">
+        <string>EuclideanDistance</string>
+        <string>CamberraDistance</string>
+        <string>ChebychevDistance</string>
+        <string>CorrelationSimilarity</string>
+        <string>CosineSimilarity</string>
+        <string>DiceSimilarity</string>
+        <string>DynamicTimeWarpingDistance</string>
+        <string>InnerProductSimilarity</string>
+        <string>JaccardSimilarity</string>
+        <string>ManhattanDistance</string>
+        <string>MaxProductSimilarity</string>
+        <string>OverlapSimilarity</string>
+      </elements>
+      <elementEnabled>
+        <boolean>false</boolean>
+        <boolean>false</boolean>
+        <boolean>true</boolean>
+        <boolean>false</boolean>
+        <boolean>false</boolean>
+        <boolean>false</boolean>
+        <boolean>false</boolean>
+        <boolean>false</boolean>
+        <boolean>false</boolean>
+        <boolean>false</boolean>
+        <boolean>false</boolean>
+        <boolean>false</boolean>
+      </elementEnabled>
+    </measureType>
+  </config>
+  <selectedInputs>
+    <boolean>true</boolean>
+  </selectedInputs>
+  <preprocessingMethods>
+    <elements class="string-array">
+      <string>NormalizationPreprocessing</string>
+    </elements>
+    <elementEnabled>
+      <boolean>true</boolean>
+    </elementEnabled>
+  </preprocessingMethods>
+</configuration.models.ConnectableModelConfig>

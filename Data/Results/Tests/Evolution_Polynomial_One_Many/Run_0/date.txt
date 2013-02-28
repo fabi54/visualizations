@@ -1,0 +1,25 @@
+Thu Feb 28 20:02:18 CET 2013
+
+Polynomial(degree=2)
+Polynomial(degree=2)
+Polynomial(degree=2)
+Polynomial(degree=2)
+Polynomial(degree=2)
+Polynomial(degree=2)
+Polynomial(degree=2)
+Polynomial(degree=2)
+Polynomial(degree=2)
+Polynomial(degree=2)
+
+Polynomial(degree=2)
+Polynomial(degree=2)
+Polynomial(degree=2)
+Polynomial(degree=2)
+Polynomial(degree=2)
+Polynomial(degree=2)
+Polynomial(degree=2)
+Polynomial(degree=2)
+Polynomial(degree=2)
+Polynomial(degree=2)
+
+

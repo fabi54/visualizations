@@ -35,9 +35,9 @@ public class GameRegressionModelSource implements ModelSource {
 	@Override
 	public String getName() {
 		if (model instanceof ConnectableModel) {
-			return ((ConnectableModel) model).getModel().getConfig().getClassRef().getSimpleName();
+			return ((ConnectableModel) model).getModel().getConfig().toString();
 		} else {
-			return model.getConfig().getClassRef().getSimpleName();
+			return model.getConfig().getClassRef().toString();
 		}
 	}
 
