@@ -12,10 +12,9 @@ import javax.swing.JLabel;
 import org.fabi.visualizations.evolution.scatterplot.ScatterplotChromosome;
 import org.fabi.visualizations.evolution.scatterplot.ScatterplotChromosomeBoundsHolder;
 import org.fabi.visualizations.evolution.scatterplot.ScatterplotChromosomeFitnessFunction;
-import org.fabi.visualizations.evolution.scatterplot.modelling.ModelPool;
 import org.fabi.visualizations.evolution.scatterplot.modelling.evolution.EvolutionModeller;
 import org.fabi.visualizations.evolution.scatterplot.modelling.evolution.ModGenTools;
-import org.fabi.visualizations.scatter.AdditionalDrawer;
+import org.fabi.visualizations.scatter.additional.AdditionalDrawer;
 import org.fabi.visualizations.scatter.ScatterplotVisualization;
 import org.fabi.visualizations.scatter.color.ColorModel;
 import org.fabi.visualizations.scatter.sources.DataSource;
@@ -24,7 +23,6 @@ import org.fabi.visualizations.scatter.sources.ScatterplotSource;
 import org.fabi.visualizations.scatter.sources.ScatterplotSourceBase;
 import org.math.plot.render.AbstractDrawer;
 
-import configuration.CfgTemplate;
 import configuration.models.single.PolynomialModelConfig;
 
 import test.artificialdata.onedimensional.ConstantLinearConstantData;

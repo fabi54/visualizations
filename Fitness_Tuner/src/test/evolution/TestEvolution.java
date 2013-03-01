@@ -11,7 +11,7 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 
 import org.fabi.visualizations.evolution.scatterplot.VisualizationEvolution;
-import org.fabi.visualizations.scatter.AdditionalDrawer;
+import org.fabi.visualizations.scatter.additional.AdditionalDrawer;
 import org.fabi.visualizations.scatter.ScatterplotVisualization;
 import org.fabi.visualizations.scatter.color.ColorModel;
 import org.fabi.visualizations.scatter.dotsize.MinkowskiDistanceDotSizeModel;

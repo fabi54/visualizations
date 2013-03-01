@@ -1,4 +1,4 @@
-package org.fabi.visualizations.scatter;
+package org.fabi.visualizations.scatter.additional;
 
 import org.math.plot.render.AbstractDrawer;
 

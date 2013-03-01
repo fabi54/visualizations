@@ -14,7 +14,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 
 import org.fabi.visualizations.evolution.scatterplot.VisualizationEvolution;
-import org.fabi.visualizations.scatter.AdditionalDrawer;
+import org.fabi.visualizations.scatter.additional.AdditionalDrawer;
 import org.fabi.visualizations.scatter.ScatterplotVisualization;
 import org.fabi.visualizations.scatter.color.ColorModel;
 import org.fabi.visualizations.scatter.sources.DataSource;

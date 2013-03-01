@@ -3,6 +3,7 @@ package org.fabi.visualizations.scatter;
 import java.awt.Color;
 import java.util.Arrays;
 
+import org.fabi.visualizations.scatter.additional.AdditionalDrawer;
 import org.fabi.visualizations.scatter.color.ColorModel;
 import org.fabi.visualizations.scatter.color.ConstantColorModel;
 import org.fabi.visualizations.scatter.dotsize.DotSizeModel;

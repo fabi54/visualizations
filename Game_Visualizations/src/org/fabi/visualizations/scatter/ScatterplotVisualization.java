@@ -3,8 +3,6 @@ package org.fabi.visualizations.scatter;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.image.BufferedImage;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -16,6 +14,7 @@ import javax.swing.SwingUtilities;
 
 import org.fabi.visualizations.Visualization;
 import org.fabi.visualizations.config.VisualizationConfig;
+import org.fabi.visualizations.scatter.additional.AdditionalDrawer;
 import org.fabi.visualizations.scatter.color.ColorModel;
 import org.fabi.visualizations.scatter.dotsize.DotSizeModel;
 import org.fabi.visualizations.scatter.gui.ScatterplotVisualizationControlPanel;
