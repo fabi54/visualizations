@@ -4,20 +4,11 @@
  */
 package org.fabi.visualizations.evolution.fitness;
 
-import java.util.Arrays;
-
-import org.fabi.visualizations.config.VisualizationConfig;
 import org.fabi.visualizations.evolution.Chromosome;
-import org.fabi.visualizations.evolution.FitnessFunction;
 import org.fabi.visualizations.evolution.fitness.mockchromosomes.MockVisualizationChromosome;
-import org.fabi.visualizations.evolution.scatterplot_old.ScatterplotChromosomeFitnessFunction;
+import org.fabi.visualizations.evolution.scatterplot.ScatterplotChromosomeFitnessFunction;
 import org.fabi.visualizations.scatter.sources.DataSource;
 import org.fabi.visualizations.scatter.sources.ModelSource;
-import org.fabi.visualizations.scatter_old.DatasetGenerator;
-import org.fabi.visualizations.scatter_old.ModelInputGenerator;
-import org.fabi.visualizations.scatter_old.ScatterplotVisualization;
-import org.fabi.visualizations.scatter_old.sources.MultiModelSource;
-import org.fabi.visualizations.tools.math.ManyToOne;
 
 /**
  * History:
@@ -50,19 +41,7 @@ import org.fabi.visualizations.tools.math.ManyToOne;
 public class VisualizationFitnessFunction extends ScatterplotChromosomeFitnessFunction {
 	
 	public VisualizationFitnessFunction() {
-		super(new MultiModelSource() {
-			@Override public int outputsNumber() { return 0; }
-			@Override public int inputsNumber() { return 0; }
-			@Override public double[][] getModelResponses(double[][] inputs) { return new double[inputs.length][0];	}
-			@Override public void setCountMethod(ManyToOne method) { }
-			@Override public double[][] getModelResponses(int index, double[][] inputs) { return new double[inputs.length][0]; }
-			@Override public int getModelCount() { return 0; }
-			@Override public ModelSource getModel(int index) { return null; }
-			@Override public double[][] getMinResponses(double[][] inputs) { return new double[inputs.length][0]; }
-			@Override public double[][] getMaxResponses(double[][] inputs) { return new double[inputs.length][0]; }
-			@Override public String getName() { return ""; }
-			@Override public ModelSource[] getModels() { return null;	}
-		}, new DataSource() {
+		super(new ModelSource[0], new DataSource() {
 			@Override public int outputsNumber() { return 0; }
 			@Override public int inputsNumber() { return 0; }
 			@Override public double[][] getOutputDataVectors() { return new double[0][0]; }
@@ -70,18 +49,9 @@ public class VisualizationFitnessFunction extends ScatterplotChromosomeFitnessFu
 			@Override public String getName() { return ""; }
 		});
 	}
+
 	
-	protected double[][][] getResponses(VisualizationConfig cfg, MultiModelSource models) {
-		double[][][] responses = new double[models.getModelCount()][][];
-		for (int i = 0; i < models.getModelCount(); i++) {
-			ScatterplotVisualization v = new ScatterplotVisualization(new DatasetGenerator(models.getModel(i), null), cfg);
-			v.updateActualAxesRanges();
-			responses[i] = models.getModelResponses(i, ModelInputGenerator.generateData(v));
-		}
-		return responses;
-	}
-	
-	protected MultiModelSource getSource(Chromosome chrmsm) {
-		return (MockVisualizationChromosome) chrmsm;
+	protected ModelSource[] getSource(Chromosome chrmsm) {
+		return ((MockVisualizationChromosome) chrmsm).models();
 	}
 }

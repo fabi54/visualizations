@@ -34,7 +34,7 @@ public class TestVisualizationEvolutionPolynomial {
 
 	protected static String PATH = "C:\\Users\\janf\\Documents\\Skola\\Dip\\Project\\Data\\Results\\Tests\\Evolution_Selected_Polynomial\\";
 	
-	protected static DataSource data = new ConstantLinearConstantData();
+	protected static DataSource data = new HeavisideData();
 	
 	public static final Logger logger = Logger.getLogger("Test Visualization Evolution Modgen");
 	

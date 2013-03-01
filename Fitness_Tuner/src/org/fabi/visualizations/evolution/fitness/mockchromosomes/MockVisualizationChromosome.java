@@ -4,22 +4,18 @@
  */
 package org.fabi.visualizations.evolution.fitness.mockchromosomes;
 
-import org.fabi.visualizations.config.VisualizationConfig;
 import org.fabi.visualizations.evolution.Chromosome;
 import org.fabi.visualizations.evolution.ChromosomeBase;
+import org.fabi.visualizations.scatter.ScatterplotVisualization;
 import org.fabi.visualizations.scatter.sources.ModelSource;
-import org.fabi.visualizations.scatter_old.ScatterplotVisualization;
-import org.fabi.visualizations.scatter_old.sources.MultiModelSource;
 import org.fabi.visualizations.tools.math.ArithmeticAverage;
 import org.fabi.visualizations.tools.math.ManyToOne;
-import org.fabi.visualizations.tools.math.Maximum;
-import org.fabi.visualizations.tools.math.Minimum;
 
 /**
  *
  * @author janf
  */
-public class MockVisualizationChromosome extends ChromosomeBase implements MultiModelSource {
+public class MockVisualizationChromosome extends ChromosomeBase {
 
     protected double begin;
     protected double end;
@@ -29,6 +25,14 @@ public class MockVisualizationChromosome extends ChromosomeBase implements Multi
     
     protected static int MODEL_PRECISION = 50;
 
+    public ModelSource[] models() {
+    	ModelSource[] res = new ModelSource[models.length];
+    	for (int i = 0; i < res.length; i++) {
+    		res[i] = models[i];
+    	}
+    	return res;
+    }
+    
     public MockVisualizationChromosome(double begin, double end, AbstractFunction[] models) {
         this.begin = begin;
         this.end = end;
@@ -41,11 +45,10 @@ public class MockVisualizationChromosome extends ChromosomeBase implements Multi
     @Override public void cross(Chromosome chrmsm) { throw new UnsupportedOperationException("Not supported.");}
     @Override public Chromosome copy() { throw new UnsupportedOperationException("Not supported.");}
     @Override public int compareTo(Chromosome t) { throw new UnsupportedOperationException("Not supported.");}
-	@Override public String getName() { return ""; }
     
     @Override
-    public Object getPhenotype() {
-        VisualizationConfig cfg = new VisualizationConfig(ScatterplotVisualization.class);
+    public ScatterplotVisualization getPhenotype() {
+    	ScatterplotVisualization vis = new ScatterplotVisualization();
         double[][] inputs = new double[MODEL_PRECISION][1];
         double d = begin;
         double step = (end - begin) / MODEL_PRECISION;
@@ -63,87 +66,18 @@ public class MockVisualizationChromosome extends ChromosomeBase implements Multi
         		}
         	}
         }
-        cfg.setTypedProperty(ScatterplotVisualization.PROPERTY_X_AXIS_RANGE_LOWER, begin);
-        cfg.setTypedProperty(ScatterplotVisualization.PROPERTY_X_AXIS_RANGE_UPPER, end);
-        cfg.setTypedProperty(ScatterplotVisualization.PROPERTY_Y_AXIS_RANGE_LOWER, min);
-        cfg.setTypedProperty(ScatterplotVisualization.PROPERTY_Y_AXIS_RANGE_UPPER, max);
-        cfg.setTypedProperty(ScatterplotVisualization.PROPERTY_DATA_VISIBLE, false);
-        cfg.setTypedProperty(ScatterplotVisualization.PROPERTY_Y_AXIS_INPUT, false);
-        //cfg.setTypedProperty(ScatterplotVisualization.PROPERTY_LEGEND_VISIBLE, false);
-        cfg.setTypedProperty(ScatterplotVisualization.PROPERTY_DISPLAY_MULTIPLE_MODELS, true);
-        cfg.setTypedProperty(ScatterplotVisualization.PROPERTY_OUTPUT_PRECISION, MODEL_PRECISION);
-        return cfg;
+        vis.setxAxisRangeLower(begin);
+        vis.setxAxisRangeUpper(end);
+        vis.setyAxisRangeLower(min);
+        vis.setyAxisRangeUpper(max);
+        vis.setInputsSetting(new double[]{0});
+        vis.setOutputPrecision(MODEL_PRECISION);
+        return vis;
     }
-
-    @Override
-    public void setCountMethod(ManyToOne mto) {
-        this.mto = mto;
+    
+    public double[][] getModelResponses(int i, double[][] inputs) {
+    	return models[i].getModelResponses(inputs);
     }
-
-    @Override
-    public double[][] getModelResponses(int i, double[][] doubles) {
-        return models[i].getModelResponses(doubles);
-    }
-
-    @Override
-    public double[][] getMaxResponses(double[][] doubles) {
-        ManyToOne bck = mto;
-        setCountMethod(new Maximum());
-        double[][] res = getModelResponses(doubles);
-        mto = bck;
-        return res;
-    }
-
-    @Override
-    public double[][] getMinResponses(double[][] doubles) {
-        ManyToOne bck = mto;
-        setCountMethod(new Minimum());
-        double[][] res = getModelResponses(doubles);
-        mto = bck;
-        return res;
-    }
-
-    @Override
-    public int getModelCount() {
-        return models.length;
-    }
-
-    @Override
-    public ModelSource getModel(int i) {
-        return models[i];
-    }
-
-    @Override
-    public double[][] getModelResponses(double[][] doubles) {
-        double[][][] responses = new double[models.length][][];
-        for (int i = 0; i < models.length; i++) {
-            responses[i] = models[i].getModelResponses(doubles);
-        }
-        double[][] res = new double[doubles.length][1];
-        for (int i = 0; i < res.length; i++) {
-            double[] tmp = new double[models.length];
-            for (int j = 0; j < models.length; j++) {
-                tmp[j] = responses[j][i][0];
-            }
-            res[i][0] = mto.getResult(tmp);
-        }
-        return res;
-    }
-
-    @Override
-    public int inputsNumber() {
-        return 1;
-    }
-
-    @Override
-    public int outputsNumber() {
-        return 1;
-    }
-
-	@Override
-	public ModelSource[] getModels() {
-		return models;
-	}
 
     
 }

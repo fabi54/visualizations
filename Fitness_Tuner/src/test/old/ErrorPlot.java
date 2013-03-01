@@ -13,7 +13,6 @@ import javax.swing.JLabel;
 import org.fabi.visualizations.Global;
 import org.fabi.visualizations.evolution.FitnessFunction;
 import org.fabi.visualizations.evolution.fitness.VisualizationFitnessFunction;
-import org.fabi.visualizations.evolution.fitness.VisualizationFitnessFunction2;
 import org.fabi.visualizations.evolution.fitness.mockchromosomes.AbstractFunction;
 import org.fabi.visualizations.evolution.fitness.mockchromosomes.ConstantFunction;
 import org.fabi.visualizations.evolution.fitness.mockchromosomes.LinearFunction;

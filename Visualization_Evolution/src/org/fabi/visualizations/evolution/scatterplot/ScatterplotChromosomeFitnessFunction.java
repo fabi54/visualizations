@@ -14,6 +14,12 @@ import static org.fabi.visualizations.evolution.scatterplot.FitnessTools.evaluat
 
 /*
  * 2013-02-28 23:31: similarity evaluation changed to relative
+ * 2013-03-01 0:00:  significance bug fixed
+ * 2013-03-01 0:45:  default similarity significance: 10 -> 1
+ * 2013-03-01 0:46:  similarity evaluation reverted to non-relative
+ * 2013-03-01 0:47:  default significances changed: (sim var siz) 1 0.5 1
+ * 2013-03-01 0:49:  default significances changed: (sim var siz) 1 0.1 1
+ * 2013-03-01 0:50:  default significances changed: (sim var siz) 1 1 1
  */
 
 public class ScatterplotChromosomeFitnessFunction implements FitnessFunction {
@@ -36,7 +42,7 @@ public class ScatterplotChromosomeFitnessFunction implements FitnessFunction {
 	public static double SIMILARITY_SIGNIFICANCE = 10;
 	public static double SIMILARITY_SIGNIFICANCE2 = 10;
 	public static double VARIANCE_SIGNIFICANCE = 1;
-	public static double SIZE_SIGNIFICANCE = 0.5;
+	public static double SIZE_SIGNIFICANCE = 1;
 
 /*****************************************************************************/	
 		
@@ -75,7 +81,10 @@ public class ScatterplotChromosomeFitnessFunction implements FitnessFunction {
 //    	if (Double.isNaN(evaluateSize(cfg, responses) * evaluateSimilarity(responses) * evaluateInterestingness(responses)))
 //    	System.out.println(evaluateSize(cfg, responses) + " " + evaluateSimilarity(responses) + " " + evaluateInterestingness(responses));
 //    	double res = evaluateSize(cfg, responses) * evaluateSimilarity(responses) * evaluateInterestingness(responses);
-    	double res = Math.tanh(evaluateSize(vis, responses)) * Math.tanh(evaluateSimilarity_relative(chrmsm, vis, responses)) * Math.tanh(evaluateInterestingness(responses));
+    	double res = Math.pow(Math.tanh(evaluateSize(vis, responses)), SIZE_SIGNIFICANCE)
+    			* Math.pow(Math.tanh(/*evaluateSimilarity_relative(chrmsm, vis, responses)*/
+    					evaluateSimilarity(responses)), SIMILARITY_SIGNIFICANCE)
+    			* Math.pow(Math.tanh(evaluateInterestingness(responses)), VARIANCE_SIGNIFICANCE);
 //    	if (Double.isNaN(res) || Double.isInfinite(res)) {
 //    		System.out.println(evaluateSize(vis, responses) + " " + evaluateSimilarity(vis, responses) + " " + evaluateInterestingness(responses));
 //    		return 0;

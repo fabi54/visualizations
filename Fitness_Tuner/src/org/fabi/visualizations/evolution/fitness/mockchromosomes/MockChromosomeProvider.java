@@ -21,10 +21,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import org.fabi.visualizations.Global;
-import org.fabi.visualizations.config.VisualizationConfig;
-import org.fabi.visualizations.scatter_old.DatasetGenerator;
-import org.fabi.visualizations.scatter_old.ScatterplotVisualization;
+import org.fabi.visualizations.scatter.sources.ScatterplotSourceBase;
+import org.fabi.visualizations.scatter.ScatterplotVisualization;
 
 /**
  *
@@ -190,10 +188,9 @@ public class MockChromosomeProvider {
     protected static int DIMENSION_CONST = 200;
     
     protected static JComponent getComponent(MockVisualizationChromosome c) {
-    	VisualizationConfig cfg = (VisualizationConfig) c.getPhenotype();
-    	ScatterplotVisualization vis = new ScatterplotVisualization(new DatasetGenerator(c, null), cfg);
-    	double x = cfg.<Double>getTypedProperty(ScatterplotVisualization.PROPERTY_X_AXIS_RANGE_UPPER) - cfg.<Double>getTypedProperty(ScatterplotVisualization.PROPERTY_X_AXIS_RANGE_LOWER);
-    	double y = cfg.<Double>getTypedProperty(ScatterplotVisualization.PROPERTY_Y_AXIS_RANGE_UPPER) - cfg.<Double>getTypedProperty(ScatterplotVisualization.PROPERTY_Y_AXIS_RANGE_LOWER);
+    	ScatterplotVisualization vis = new ScatterplotVisualization(new ScatterplotSourceBase(c.models()));
+    	double x = vis.getxAxisRangeUpper() - vis.getxAxisRangeLower();
+    	double y = vis.getyAxisRangeUpper() - vis.getyAxisRangeLower();
     	vis.setProperty(ScatterplotVisualization.PROPERTY_LEGEND_VISIBLE, false);
     	JComponent comp = vis.getVisualizationAsComponent();
     	comp.setPreferredSize(new Dimension((int) (x * DIMENSION_CONST), (int) (y * DIMENSION_CONST)));
@@ -215,7 +212,6 @@ public class MockChromosomeProvider {
     public static String OUTPUT_PATH = "D:/Data/Dokumenty/Skola/FIT-MI/misc/fakegame/outputs/visrules";
     
     public static void main(String[] args) throws IOException {
-		Global.getInstance().init();
 		int i = 0;
 		for (Rule r : getRules()) {
 			JFrame frame = new JFrame();

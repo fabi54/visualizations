@@ -6,7 +6,6 @@ package org.fabi.visualizations.evolution.fitness.test;
 
 import java.util.List;
 
-import org.fabi.visualizations.Global;
 import org.fabi.visualizations.evolution.FitnessFunction;
 import org.fabi.visualizations.evolution.fitness.VisualizationFitnessFunction;
 import org.fabi.visualizations.evolution.fitness.mockchromosomes.MockChromosomeProvider;
@@ -19,8 +18,6 @@ import org.fabi.visualizations.evolution.fitness.mockchromosomes.Rule;
 public class FitnessTest {
     
     public static void main(String[] args) {
-
-		Global.getInstance().init();
     	
         List<Rule> rules = MockChromosomeProvider.getRules();
         FitnessFunction fitness = new VisualizationFitnessFunction();
