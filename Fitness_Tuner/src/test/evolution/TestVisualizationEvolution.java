@@ -37,7 +37,7 @@ public class TestVisualizationEvolution {
 
 	protected static String PATH = "C:\\Users\\janf\\Documents\\Skola\\Dip\\Project\\Data\\Results\\Tests\\Evolution_Selected_Models\\";
 	
-	protected static DataSource data = new LongHeavisideData();
+	protected static DataSource data = new RandomArtificialData();
 	
 	public static final Logger logger = Logger.getLogger("Test Visualization Evolution");
 	

@@ -20,6 +20,7 @@ import static org.fabi.visualizations.evolution.scatterplot.FitnessTools.evaluat
  * 2013-03-01 0:47:  default significances changed: (sim var siz) 1 0.5 1
  * 2013-03-01 0:49:  default significances changed: (sim var siz) 1 0.1 1
  * 2013-03-01 0:50:  default significances changed: (sim var siz) 1 1 1
+ * 2013-03-01 23:08: change to local similarity+significance evaluation
  */
 
 public class ScatterplotChromosomeFitnessFunction implements FitnessFunction {
@@ -81,15 +82,16 @@ public class ScatterplotChromosomeFitnessFunction implements FitnessFunction {
 //    	if (Double.isNaN(evaluateSize(cfg, responses) * evaluateSimilarity(responses) * evaluateInterestingness(responses)))
 //    	System.out.println(evaluateSize(cfg, responses) + " " + evaluateSimilarity(responses) + " " + evaluateInterestingness(responses));
 //    	double res = evaluateSize(cfg, responses) * evaluateSimilarity(responses) * evaluateInterestingness(responses);
-    	double res = Math.pow(Math.tanh(evaluateSize(vis, responses)), SIZE_SIGNIFICANCE)
-    			* Math.pow(Math.tanh(/*evaluateSimilarity_relative(chrmsm, vis, responses)*/
-    					evaluateSimilarity(responses)), SIMILARITY_SIGNIFICANCE)
-    			* Math.pow(Math.tanh(evaluateInterestingness(responses)), VARIANCE_SIGNIFICANCE);
+//    	double res = Math.pow(Math.tanh(evaluateSize(vis, responses)), SIZE_SIGNIFICANCE)
+//    			* Math.pow(Math.tanh(/*evaluateSimilarity_relative(chrmsm, vis, responses)*/
+//    					evaluateSimilarity(responses)), SIMILARITY_SIGNIFICANCE)
+//    			* Math.pow(Math.tanh(evaluateInterestingness(responses)), VARIANCE_SIGNIFICANCE);
 //    	if (Double.isNaN(res) || Double.isInfinite(res)) {
 //    		System.out.println(evaluateSize(vis, responses) + " " + evaluateSimilarity(vis, responses) + " " + evaluateInterestingness(responses));
 //    		return 0;
 //		}
-		return res;
+//		return res;
+    	return evaluateSize(vis, responses) * FitnessTools.evaluateSimilarityAndInterestingnessLocal(responses);
     }
 
 	public double evaluateSimilarity_relative(Chromosome chrmsm, ScatterplotVisualization vis, double[][][] responses) {

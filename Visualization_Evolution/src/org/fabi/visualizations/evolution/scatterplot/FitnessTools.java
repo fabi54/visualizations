@@ -64,4 +64,35 @@ public class FitnessTools {
 		}
 		return interestingness / (responses[0].length);
 	} 
+	
+	public static double evaluateSimilarityAndInterestingnessLocal(double[][][] responses) {
+		double result = 0.0;
+		double prevAvg = Double.NaN;
+		double actAvg, actVar;
+		double[] values = new double[responses.length];
+		for (int i = 0; i < responses[0].length; i++) {
+			for (int j = 0; j < responses.length; j++) {
+				values[j] = responses[j][i][0];
+			}
+			java.util.Arrays.sort(values);
+			actAvg = 0.0;
+			actVar = 0.0;
+			for (int j = 1; j < responses.length - 1; j++) {
+				if (!Double.isNaN(values[j])) {
+					actAvg += values[j];
+				}
+			}
+			actAvg /= responses.length;
+			for (int j = 0; j < responses.length; j++) {
+				actVar += (Math.abs(responses[j][i][0] - actAvg)); // absolute variance
+			}
+			actVar /= responses.length;
+//			System.out.println(actVar + " " + (!Double.isNaN(prevAvg) ? (prevAvg - actAvg): ""));
+			if (!Double.isNaN(prevAvg)) {
+				result += (1 / actVar) * Math.abs(prevAvg - actAvg);
+			}
+			prevAvg = actAvg;
+		}
+		return result / (responses[0].length);
+	} 
 }
