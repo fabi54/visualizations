@@ -89,35 +89,35 @@ public class AxisRangeControlPanel extends JPanel {
 			
 			@Override
 			public void stateChanged(ChangeEvent e) {
-				visualization.setxAxisRangeLower((Double) xAxisLower.getValue());
+				visualization.setProperty(ScatterplotVisualization.PROPERTY_X_AXIS_RANGE_LOWER, (Double) xAxisLower.getValue());
 			}
 		});
 		xAxisRange.addChangeListener(new ChangeListener() {
 			
 			@Override
 			public void stateChanged(ChangeEvent e) {
-				visualization.setxAxisRangeUpper((Double) xAxisLower.getValue() + (Double) xAxisRange.getValue());
+				visualization.setProperty(ScatterplotVisualization.PROPERTY_X_AXIS_RANGE_UPPER, (Double) xAxisLower.getValue() + (Double) xAxisRange.getValue());
 			}
 		});
 		yAxisLower.addChangeListener(new ChangeListener() {
 			
 			@Override
 			public void stateChanged(ChangeEvent e) {
-				visualization.setyAxisRangeLower((Double) yAxisLower.getValue());
+				visualization.setProperty(ScatterplotVisualization.PROPERTY_Y_AXIS_RANGE_LOWER, (Double) yAxisLower.getValue());
 			}
 		});
 		yAxisRange.addChangeListener(new ChangeListener() {
 			
 			@Override
 			public void stateChanged(ChangeEvent e) {
-				visualization.setyAxisRangeUpper((Double) yAxisLower.getValue() + (Double) yAxisRange.getValue());
+				visualization.setProperty(ScatterplotVisualization.PROPERTY_Y_AXIS_RANGE_UPPER, (Double) yAxisLower.getValue() + (Double) yAxisRange.getValue());
 			}
 		});
 		xAxisLowerChB.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				visualization.setxAxisRangeLower(!xAxisLowerChB.isSelected() ? Double.NaN : (Double) xAxisLower.getValue());
+				visualization.setProperty(ScatterplotVisualization.PROPERTY_X_AXIS_RANGE_LOWER, !xAxisLowerChB.isSelected() ? Double.NaN : (Double) xAxisLower.getValue());
 				xAxisLower.setEnabled(xAxisLowerChB.isSelected());
 			}
 		});
@@ -125,7 +125,7 @@ public class AxisRangeControlPanel extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				visualization.setxAxisRangeUpper(!xAxisLowerChB.isSelected() ? Double.NaN : ((Double) xAxisLower.getValue() + (Double) xAxisRange.getValue()));
+				visualization.setProperty(ScatterplotVisualization.PROPERTY_X_AXIS_RANGE_UPPER, !xAxisLowerChB.isSelected() ? Double.NaN : ((Double) xAxisLower.getValue() + (Double) xAxisRange.getValue()));
 				xAxisRange.setEnabled(xAxisRangeChB.isSelected());
 			}
 		});
@@ -133,7 +133,7 @@ public class AxisRangeControlPanel extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				visualization.setyAxisRangeLower(!yAxisLowerChB.isSelected() ? Double.NaN : (Double) yAxisLower.getValue());
+				visualization.setProperty(ScatterplotVisualization.PROPERTY_Y_AXIS_RANGE_LOWER, !yAxisLowerChB.isSelected() ? Double.NaN : (Double) yAxisLower.getValue());
 				yAxisLower.setEnabled(yAxisLowerChB.isSelected());
 			}
 		});
@@ -141,7 +141,7 @@ public class AxisRangeControlPanel extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				visualization.setyAxisRangeUpper(!yAxisLowerChB.isSelected() ? Double.NaN : ((Double) yAxisLower.getValue() + (Double) yAxisRange.getValue()));
+				visualization.setProperty(ScatterplotVisualization.PROPERTY_Y_AXIS_RANGE_UPPER, !yAxisLowerChB.isSelected() ? Double.NaN : ((Double) yAxisLower.getValue() + (Double) yAxisRange.getValue()));
 				yAxisRange.setEnabled(yAxisRangeChB.isSelected());
 			}
 		});

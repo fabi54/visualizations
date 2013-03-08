@@ -22,6 +22,9 @@ import org.fabi.visualizations.scatter.sources.ScatterplotSource;
 import org.ytoh.configurations.annotations.Component;
 import org.ytoh.configurations.annotations.Property;
 
+// TODO rewrite
+
+@Deprecated
 @Component(name="Regression monochromatic gradient color model")
 public class RegressionMonochromaticGradientColorModel extends ColorModelBase {
 

@@ -13,10 +13,12 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 
+import org.fabi.visualizations.evolution.scatterplot.ScatterplotChromosomeFitnessFunction;
 import org.fabi.visualizations.evolution.scatterplot.VisualizationEvolution;
 import org.fabi.visualizations.evolution.scatterplot.modelling.Modeller;
 import org.fabi.visualizations.evolution.scatterplot.modelling.evolution.ModGenTools;
 import org.fabi.visualizations.scatter.additional.AdditionalDrawer;
+import org.fabi.visualizations.scatter.additional.HistogramAdditionalDrawer;
 import org.fabi.visualizations.scatter.ScatterplotVisualization;
 import org.fabi.visualizations.scatter.color.ColorModel;
 import org.fabi.visualizations.scatter.sources.DataSource;
@@ -28,6 +30,7 @@ import configuration.models.single.PolynomialModelConfig;
 
 import test.artificialdata.onedimensional.*;
 import test.evolution.TestEvolution.AreaAdditionalDrawer;
+import test.fitness.LocalFitness;
 
 public class TestVisualizationEvolutionPolynomial {
 	
@@ -49,6 +52,8 @@ public class TestVisualizationEvolutionPolynomial {
 		String path = dir.getPath() + "\\";
 		
 		VisualizationEvolution evolution = new VisualizationEvolution();
+		VisualizationEvolution.POPULATION_SIZE = 100;
+		VisualizationEvolution.STEPS = 1000;
 		
 		evolution.setModeller(new Modeller() {
 			
@@ -78,22 +83,33 @@ public class TestVisualizationEvolutionPolynomial {
 		
 		for (int j = 0; j < vis.length; j++) {
 			vis[j].getVisualizationAsComponent();
-			double[] yBounds = TestEvolution.getyBounds(vis[j]);
-			vis[j].setAdditionalDrawers(new AdditionalDrawer[]{new AreaAdditionalDrawer(
-					vis[j].getxAxisRangeLower(),
-					vis[j].getxAxisRangeUpper(),
-					yBounds[0],
-					yBounds[1])});
+			double[] xBoundsOrig = new double[]{vis[j].getxAxisRangeLower(), vis[j].getxAxisRangeUpper()};
+			double[] yBoundsOrig = TestEvolution.getyBounds(vis[j]);
+			
+
+			ModelSource[] models = new ModelSource[vis[j].getSource().getModelSourceCount()];
+			for (int z = 0; z < models.length; z++) {
+				models[z] = vis[j].getSource().getModelSource(z);
+			}
+//			double[][][] responses = LocalFitness.getResponses(vis[j], models);
+//			double[][] inputs = LocalFitness.getModelInputs(vis[j]);
+//			
+//			double[][] histogram = new double[inputs.length - 1][2];
+//			for (int z = 0; z < histogram.length; z++) {
+//				histogram[z][0] = inputs[z + 1][vis[j].getxAxisAttributeIndex()];
+//				histogram[z][1] = LocalFitness.evaluateLocalAt(responses, z + 1, vis[j]);
+//			}
+//			double w = inputs[1][vis[j].getxAxisAttributeIndex()] - inputs[0][vis[j].getxAxisAttributeIndex()];
 			double[] xBounds = TestEvolution.getxBounds(vis[j]);
 			double offset = (xBounds[1] - xBounds[0]) * 0.1;
 			vis[j].setxAxisRangeLower(xBounds[0] - offset);
 			vis[j].setxAxisRangeUpper(xBounds[1] + offset);
-			yBounds = TestEvolution.getyBounds(vis[j]);
+			double[] yBounds = TestEvolution.getyBounds(vis[j]);
 			offset = (yBounds[1] - yBounds[0]) * 0.1;
 			vis[j].setyAxisRangeLower(yBounds[0] - offset);
 			vis[j].setyAxisRangeUpper(yBounds[1] + offset);
-			vis[j].setGridVisible(false);
-			vis[j].setBackground(Color.BLACK);
+//			vis[j].setGridVisible(false);
+//			vis[j].setBackground(Color.BLACK);
 			vis[j].setDotSizeModel(TestEvolution.getDotSizeModel(vis[j]));
 			vis[j].setColorModel(new ColorModel() {
 				@Override public void init(ScatterplotSource source) { }
@@ -105,12 +121,21 @@ public class TestVisualizationEvolutionPolynomial {
 				public Color getColor(double[] inputs, double[] outputs, boolean data,
 						int index, int[] inputsIndices, int[] outputsIndices) {
 					if (data) {
-						return new Color(1.0f, 1.0f, 1.0f, 0.25f);
+						return new Color(0.0f, 0.0f, 0.0f, 0.25f);
 					} else {
-						return new Color(0.0f, 1.0f, 1.0f, 1.0f);
+						return new Color(1.0f, 0.0f, 0.0f, 1.0f);
 					}
 				}
 			});
+			
+			vis[j].setAdditionalDrawers(new AdditionalDrawer[]{new AreaAdditionalDrawer(
+					xBoundsOrig[0],
+					xBoundsOrig[1],
+					yBoundsOrig[0],
+					yBoundsOrig[1], Color.BLACK),
+//					new HistogramAdditionalDrawer(vis[j], "Fitness", new Color(1.0f, 0.0f, 0.0f, 1.0f), histogram, w, 0.1)});
+			});
+					
 			logger.log(Level.INFO, "Saving visualization #" + j + ".");
 			BufferedImage img = vis[j].getVisualizationAsImage(800, 600);
 			String n = (j < 10) ? ("0" + Integer.toString(j)) : Integer.toString(j);

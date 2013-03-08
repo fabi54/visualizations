@@ -1,0 +1,4 @@
+Sun Mar 03 12:42:12 CET 2013
+Local fitness evaluation.
+
+Without tanh

@@ -192,5 +192,39 @@ public class GradientColorModel extends ColorModelBase {
 		});
 		return res;
 	}
+
+	public int[][][] getComponents() {
+		return components;
+	}
+
+	public void setComponents(int[][][] components) {
+		this.components = components;
+	}
+
+	public double[] getMin() {
+		return min;
+	}
+
+	public void setMin(double[] min) {
+		this.min = min;
+	}
+
+	public double[] getRange() {
+		return range;
+	}
+
+	public void setRange(double[] range) {
+		this.range = range;
+	}
+
+	public String[] getNames() {
+		return names;
+	}
+
+	public void setNames(String[] names) {
+		this.names = names;
+	}
+	
+	
 	
 }

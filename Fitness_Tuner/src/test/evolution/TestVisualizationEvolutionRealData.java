@@ -16,6 +16,9 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 
+import org.fabi.visualizations.evolution.Population;
+import org.fabi.visualizations.evolution.observers.BestFitnessVisualizationObserver;
+import org.fabi.visualizations.evolution.observers.EvolutionObserver;
 import org.fabi.visualizations.evolution.scatterplot.VisualizationEvolution;
 import org.fabi.visualizations.evolution.scatterplot.modelling.Modeller;
 import org.fabi.visualizations.evolution.scatterplot.modelling.evolution.ModGenTools;
@@ -89,13 +92,15 @@ public class TestVisualizationEvolutionRealData {
 			}
 		};
 		
-		double minWeightedDistance = 0.1;
-		double s1 = 0.5, s2 = 1.0, v = 2.0, si = 1.5;
-		VisualizationEvolution.setMinWeightedDistance(minWeightedDistance);
-		VisualizationEvolution.setSimilaritySignificance(s1);
-		VisualizationEvolution.setSimilaritySignificance2(s2);
-		VisualizationEvolution.setVarianceSignificance(v);
-		VisualizationEvolution.setSizeSignificance(si);
+//		double minWeightedDistance = 0.1;
+//		double s1 = 0.5, s2 = 1.0, v = 2.0, si = 1.5;
+//		VisualizationEvolution.setMinWeightedDistance(minWeightedDistance);
+//		VisualizationEvolution.setSimilaritySignificance(s1);
+//		VisualizationEvolution.setSimilaritySignificance2(s2);
+//		VisualizationEvolution.setVarianceSignificance(v);
+//		VisualizationEvolution.setSizeSignificance(si);
+		VisualizationEvolution.POPULATION_SIZE = 100;
+		VisualizationEvolution.STEPS = 250;
 		
 		VisualizationEvolution evolution = new VisualizationEvolution();
 		
@@ -120,6 +125,7 @@ public class TestVisualizationEvolutionRealData {
 				return ms;
 			}
 		});
+		evolution.setObservers(new EvolutionObserver[]{new BestFitnessVisualizationObserver(path + "fitness.png", false)});
 		
 //		
 		logger.log(Level.INFO, "Starting visualization evolution.");
@@ -170,9 +176,11 @@ public class TestVisualizationEvolutionRealData {
 		bw.newLine();
 		bw.write(DATA);
 		bw.newLine();
-		bw.write("MinWeightedDistance: " + minWeightedDistance);
-		bw.newLine();
-		bw.write("Evol. params: " + s1 + " " + s2 + " " + v + " " + si);
+		bw.write("100 individuals x 250 generations");
+//		bw.newLine();
+//		bw.write("MinWeightedDistance: " + minWeightedDistance);
+//		bw.newLine();
+//		bw.write("Evol. params: " + s1 + " " + s2 + " " + v + " " + si);
 		bw.newLine();
 		bw.close();
 		logger.log(Level.INFO, "Terminated.");

@@ -1,0 +1,1 @@
+local fitness: interestingness ^2

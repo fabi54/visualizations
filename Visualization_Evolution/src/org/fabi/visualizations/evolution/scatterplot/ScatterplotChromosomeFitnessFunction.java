@@ -13,15 +13,19 @@ import static org.fabi.visualizations.evolution.scatterplot.FitnessTools.evaluat
 import static org.fabi.visualizations.evolution.scatterplot.FitnessTools.evaluateSimilarity;
 
 /*
- * 2013-02-28 23:31: similarity evaluation changed to relative
- * 2013-03-01 0:00:  significance bug fixed
- * 2013-03-01 0:45:  default similarity significance: 10 -> 1
- * 2013-03-01 0:46:  similarity evaluation reverted to non-relative
- * 2013-03-01 0:47:  default significances changed: (sim var siz) 1 0.5 1
- * 2013-03-01 0:49:  default significances changed: (sim var siz) 1 0.1 1
- * 2013-03-01 0:50:  default significances changed: (sim var siz) 1 1 1
- * 2013-03-01 23:08: change to local similarity+significance evaluation
- */
+* 2013-02-28 23:31: similarity evaluation changed to relative
+* 2013-03-01 0:00:  significance bug fixed
+* 2013-03-01 0:45:  default similarity significance: 10 -> 1
+* 2013-03-01 0:46:  similarity evaluation reverted to non-relative
+* 2013-03-01 0:47:  default significances changed: (sim var siz) 1 0.5 1
+* 2013-03-01 0:49:  default significances changed: (sim var siz) 1 0.1 1
+* 2013-03-01 0:50:  default significances changed: (sim var siz) 1 1 1
+* 2013-03-01 23:08: change to local similarity+significance evaluation
+* ... (see notes in date.txt)
+* 2013-03-03 18:40: significance = abs(significance), similarity = 1 - similarity
+* 2013-03-03 18:41: significance = abs(significance), similarity = 20 - similarity
+* 2013-03-03 18:41: significance = abs(significance), similarity = 15 - similarity
+*/
 
 public class ScatterplotChromosomeFitnessFunction implements FitnessFunction {
 
@@ -43,10 +47,10 @@ public class ScatterplotChromosomeFitnessFunction implements FitnessFunction {
 	public static double SIMILARITY_SIGNIFICANCE = 10;
 	public static double SIMILARITY_SIGNIFICANCE2 = 10;
 	public static double VARIANCE_SIGNIFICANCE = 1;
-	public static double SIZE_SIGNIFICANCE = 1;
+	public static double SIZE_SIGNIFICANCE = 0.5;
 
 /*****************************************************************************/	
-		
+	
 	public ScatterplotChromosomeFitnessFunction(ModelSource[] models, DataSource data) {
 		this.models = models;
 		this.data = new DataSource[]{data};
@@ -68,33 +72,11 @@ public class ScatterplotChromosomeFitnessFunction implements FitnessFunction {
 		MODEL_OUTPUT_PRECISION = precision;
 	}
 	
-/*****************************************************************************/	
-    @Override
-    public double getFitness(Chromosome chrmsm) {
-    	ScatterplotVisualization vis = null;
-    	try {
-    		vis = getVisualization(chrmsm);
-    	} catch (ClassCastException ex) {
-    		ex.printStackTrace();
-    		return Double.NaN;
-    	}
-    	double[][][] responses = getResponses(vis, getSource(chrmsm));
-//    	if (Double.isNaN(evaluateSize(cfg, responses) * evaluateSimilarity(responses) * evaluateInterestingness(responses)))
-//    	System.out.println(evaluateSize(cfg, responses) + " " + evaluateSimilarity(responses) + " " + evaluateInterestingness(responses));
-//    	double res = evaluateSize(cfg, responses) * evaluateSimilarity(responses) * evaluateInterestingness(responses);
-//    	double res = Math.pow(Math.tanh(evaluateSize(vis, responses)), SIZE_SIGNIFICANCE)
-//    			* Math.pow(Math.tanh(/*evaluateSimilarity_relative(chrmsm, vis, responses)*/
-//    					evaluateSimilarity(responses)), SIMILARITY_SIGNIFICANCE)
-//    			* Math.pow(Math.tanh(evaluateInterestingness(responses)), VARIANCE_SIGNIFICANCE);
-//    	if (Double.isNaN(res) || Double.isInfinite(res)) {
-//    		System.out.println(evaluateSize(vis, responses) + " " + evaluateSimilarity(vis, responses) + " " + evaluateInterestingness(responses));
-//    		return 0;
-//		}
-//		return res;
-    	return evaluateSize(vis, responses) * FitnessTools.evaluateSimilarityAndInterestingnessLocal(responses);
-    }
-
-	public double evaluateSimilarity_relative(Chromosome chrmsm, ScatterplotVisualization vis, double[][][] responses) {
+/*****************************************************************************/
+	
+	protected static double BOUND = 5000;
+	
+	public static double evaluateSimilarity(double[][][] responses) {
 		double similarity = 0.0;
 		double[] values = new double[responses.length];
 		for (int i = 0; i < responses[0].length; i++) {
@@ -117,22 +99,31 @@ public class ScatterplotChromosomeFitnessFunction implements FitnessFunction {
 			}
 			similarity += actSimilarity;
 		}
-		
-		// evolve neighbourhood
-		ScatterplotVisualization vis2 = (ScatterplotVisualization) vis.copy();
-		double xl = vis2.getxAxisRangeLower(), xu = vis2.getxAxisRangeUpper();
-		vis2.setxAxisRangeLower(2 * xl - xu);
-		vis2.setxAxisRangeUpper(xl);
-		
-		double neighbourhoodSimilarity = evaluateSimilarity(getResponses(vis2, getSource(chrmsm)));
-		
-		vis2.setxAxisRangeLower(xu);
-		vis2.setxAxisRangeUpper(2 * xu - xl);
-		
-		neighbourhoodSimilarity += evaluateSimilarity(getResponses(vis2, getSource(chrmsm)));
-				
-		return (neighbourhoodSimilarity / similarity);
+		similarity /= responses[0].length;
+		return (BOUND - similarity) / BOUND;
 	}
+	
+    @Override
+    public double getFitness(Chromosome chrmsm) {
+    	ScatterplotVisualization vis = null;
+    	try {
+    		vis = getVisualization(chrmsm);
+    	} catch (ClassCastException ex) {
+    		ex.printStackTrace();
+    		return Double.NaN;
+    	}
+    	double[][][] responses = getResponses(vis, getSource(chrmsm));
+//    	if (Double.isNaN(evaluateSize(cfg, responses) * evaluateSimilarity(responses) * evaluateInterestingness(responses)))
+//    	System.out.println(evaluateSize(cfg, responses) + " " + evaluateSimilarity(responses) + " " + evaluateInterestingness(responses));
+//    	double res = evaluateSize(cfg, responses) * evaluateSimilarity(responses) * evaluateInterestingness(responses);
+    	double res = Math.tanh(evaluateSize(vis, responses)) * Math.tanh(evaluateSimilarity(responses)) * Math.tanh(evaluateInterestingness(responses));
+    	if (Double.isNaN(res) || Double.isInfinite(res)) {
+    		System.out.println(evaluateSize(vis, responses) + " " + evaluateSimilarity(responses) + " " + evaluateInterestingness(responses));
+    		return 0;
+		}
+		return res;
+    }
+    
 
 	protected double evaluateSize(ScatterplotVisualization vis, double[][][] responses) {
 		double yAxisRangeUpper = Double.NEGATIVE_INFINITY, yAxisRangeLower = Double.POSITIVE_INFINITY;

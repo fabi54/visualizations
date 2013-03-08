@@ -1,0 +1,4 @@
+Thu Mar 07 22:02:12 CET 2013
+C:\Users\janf\Documents\Skola\Dip\Project\External\data\bosthouse.txt
+100 individuals x 250 generations
+FitnessFunctionNormSim                                                                                                                                       

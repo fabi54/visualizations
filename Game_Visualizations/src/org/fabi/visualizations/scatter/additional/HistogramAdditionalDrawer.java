@@ -35,8 +35,9 @@ public class HistogramAdditionalDrawer implements AdditionalDrawer {
 	
 	@Override
 	public void draw(AbstractDrawer draw) {
+		visualization.getVisualizationAsComponent();
 		double[][] bounds = visualization.getActualAxesBounds();
-		double axis = bounds[ScatterplotVisualization.X_AXIS][ScatterplotVisualization.LOWER_BOUND];
+		double axis = bounds[ScatterplotVisualization.Y_AXIS][ScatterplotVisualization.LOWER_BOUND];
 		double coef = ((bounds[ScatterplotVisualization.Y_AXIS][ScatterplotVisualization.UPPER_BOUND]
 				- bounds[ScatterplotVisualization.Y_AXIS][ScatterplotVisualization.LOWER_BOUND]) * relativeHeight / max);
 		draw.setColor(c);

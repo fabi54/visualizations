@@ -1,0 +1,6 @@
+Sun Mar 03 18:24:46 CET 2013
+Local fitness evaluation.
+
+interestingness negative bound: 0.1
+
+similarity -> 0.5 - similarity

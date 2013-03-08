@@ -4,7 +4,7 @@ import org.fabi.visualizations.tools.math.Arrays;
 
 public class ScatterplotChromosomeBoundsHolder {
 	
-	double[][] bounds;
+	public double[][] bounds;
 	
 	public ScatterplotChromosomeBoundsHolder(double[][] inputs) {
 		bounds = Arrays.getBasicStats(inputs);

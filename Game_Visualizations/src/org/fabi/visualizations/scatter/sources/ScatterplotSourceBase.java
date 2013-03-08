@@ -62,11 +62,13 @@ public class ScatterplotSourceBase extends Observable implements ScatterplotSour
 			}
 		}
 		if (this.models.length > 0) {
-			if (data.length > 0) {
+			int i = 0;
+			if (this.data.length == 0) {
 				inputsNr = this.models[0].inputsNumber();
 				outputsNr = this.models[0].outputsNumber();
+				i++;
 			}
-			for (int i = 0; i < this.models.length; i++) {
+			for (; i < this.models.length; i++) {
 				if (this.models[i].inputsNumber() != inputsNr) {
 					inputsNr = UNDEFINED_ATTR_CNT;
 				}

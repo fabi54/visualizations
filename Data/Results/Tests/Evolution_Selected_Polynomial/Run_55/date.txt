@@ -1,0 +1,6 @@
+Sun Mar 03 18:30:08 CET 2013
+Local fitness evaluation.
+
+interestingness: always positive
+
+similarity -> 5 - similarity

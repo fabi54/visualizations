@@ -181,6 +181,11 @@ public class TestEvolution {
 			this.xl = xl; this.xu = xu; this.yl = yl; this.yu = yu;
 		}
 		
+		public AreaAdditionalDrawer(double xl, double xu, double yl, double yu, Color clr) {
+			this.xl = xl; this.xu = xu; this.yl = yl; this.yu = yu;
+			setColor(clr);
+		}
+		
 		public void setColor(Color clr) {
 			this.clr = clr;
 		}

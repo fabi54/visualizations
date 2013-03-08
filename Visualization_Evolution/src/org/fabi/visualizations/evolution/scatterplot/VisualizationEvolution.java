@@ -13,6 +13,7 @@ import org.fabi.visualizations.evolution.GeneticAlgorithm;
 import org.fabi.visualizations.evolution.Population;
 import org.fabi.visualizations.evolution.PopulationBase;
 import org.fabi.visualizations.evolution.SymetricCrossoverEvolutionStrategy;
+import org.fabi.visualizations.evolution.observers.EvolutionObserver;
 import org.fabi.visualizations.evolution.scatterplot.modelling.Modeller;
 import org.fabi.visualizations.evolution.scatterplot.modelling.evolution.EvolutionModeller;
 import org.fabi.visualizations.scatter.ScatterplotVisualization;
@@ -25,11 +26,11 @@ public class VisualizationEvolution {
 
 	protected static Logger logger = Logger.getLogger("Visualization evolution");
 
-	protected static int POPULATION_SIZE = 100;
-	protected static int STEPS = 100;
-	protected static double SELECTION_PRESSURE = 0.5;
-	protected static double MUTATION_PROBABILITY = 0.05;
-	protected static int ELITISM = 1;
+	public static int POPULATION_SIZE = 100;
+	public static int STEPS = 100;
+	public static double SELECTION_PRESSURE = 0.5;
+	public static double MUTATION_PROBABILITY = 0.05;
+	public static int ELITISM = 1;
 	protected static double SIMILARITY_SIGNIFICANCE = 1.0;
 	protected static double SIMILARITY_SIGNIFICANCE2 = 2.0;
 	protected static double VARIANCE_SIGNIFICANCE = 1.0;
@@ -38,6 +39,12 @@ public class VisualizationEvolution {
 	protected static double MIN_WEIGHTED_DISTANCE = 0.0;
 	
 	protected static int VISUALIZATIONS_NUMBER = 5;
+	
+	protected EvolutionObserver[] observers = new EvolutionObserver[0];
+	
+	public void setObservers(EvolutionObserver[] observers) {
+		this.observers = observers;
+	}
 	
 	protected Modeller modeller = new EvolutionModeller();
 	
@@ -90,7 +97,7 @@ public class VisualizationEvolution {
 	}
 	
 
-    protected static List<Chromosome> evolveRegression(DataSource data, FitnessFunction fitness) {
+    protected List<Chromosome> evolveRegression(DataSource data, FitnessFunction fitness) {
     	List<Chromosome> best = new LinkedList<Chromosome>();
 		for (int j = 0; j < data.inputsNumber(); j++) {
 	    	ScatterplotChromosomeGenerator generator = new ScatterplotChromosomeGenerator(fitness,
@@ -123,7 +130,7 @@ public class VisualizationEvolution {
 		return best;
     }
     
-    protected static List<Chromosome> evolveClassification(DataSource data, FitnessFunction fitness) {
+    protected List<Chromosome> evolveClassification(DataSource data, FitnessFunction fitness) {
     	List<Chromosome> best = new LinkedList<Chromosome>();
     	ScatterplotChromosomeGenerator generator = new ScatterplotChromosomeGenerator(fitness,
     			data.getInputDataVectors(),
@@ -177,8 +184,11 @@ public class VisualizationEvolution {
 		return best;
     }
     
-    protected static Population evolve(Population population) {
+    protected Population evolve(Population population) {
 		GeneticAlgorithm algorithm = new GeneticAlgorithm();
+		for (EvolutionObserver o : observers) {
+			algorithm.addEvolutionObserver(o);
+		}
 		algorithm.init(population, new SymetricCrossoverEvolutionStrategy(ELITISM,
 				MUTATION_PROBABILITY, SELECTION_PRESSURE));
 		Chromosome b = algorithm.getBest();
@@ -187,6 +197,9 @@ public class VisualizationEvolution {
 			algorithm.optimize();
 			b = algorithm.getBest();
 			logger.log(Level.INFO, (i + 1) + ": [" + b.getFitness() + "] " + b);
+		}
+		for (EvolutionObserver o : observers) {
+			o.finalise();
 		}
 		return algorithm.getPopulation();
     }

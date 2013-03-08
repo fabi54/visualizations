@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 
+import org.fabi.visualizations.evolution.scatterplot.ScatterplotChromosomeFitnessFunction;
 import org.fabi.visualizations.evolution.scatterplot.VisualizationEvolution;
 import org.fabi.visualizations.scatter.additional.AdditionalDrawer;
 import org.fabi.visualizations.scatter.ScatterplotVisualization;
@@ -56,6 +57,7 @@ public class TestVisualizationEvolution {
 		for (int j = 0; j < vis.length; j++) {
 			vis[j].getVisualizationAsComponent();
 			double[] yBounds = TestEvolution.getyBounds(vis[j]);
+			
 			vis[j].setAdditionalDrawers(new AdditionalDrawer[]{new AreaAdditionalDrawer(
 					vis[j].getxAxisRangeLower(),
 					vis[j].getxAxisRangeUpper(),
