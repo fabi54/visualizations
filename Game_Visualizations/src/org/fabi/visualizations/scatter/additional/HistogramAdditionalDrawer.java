@@ -30,6 +30,9 @@ public class HistogramAdditionalDrawer implements AdditionalDrawer {
 			if (values[i][1] > 0) {
 				max = Math.max(values[i][1], max);
 			}
+			if (max == 0) {
+				max = 1.0;
+			}
 		}
 	}
 	

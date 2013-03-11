@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import javax.imageio.ImageIO;
 
@@ -30,6 +31,7 @@ import org.fabi.visualizations.scatter.sources.ScatterplotSourceBase;
 import org.fabi.visualizations.tools.transformation.ReversibleTransformation;
 
 import test.artificialdata.onedimensional.*;
+import test.fitness.LocalFitnessTest.BootstrappedDataSource;
 
 import configuration.CfgTemplate;
 import configuration.models.single.PolynomialModelConfig;
@@ -40,7 +42,8 @@ public class CompareGlobalToLocal {
 	
 	protected static DataSource data = new ConstantLinearConstantData();
 	protected static double[][] optimum = new double[0][0]/*{{0.0,1.0}}*/;
-	
+		
+	// 2013-03-08 23:11: added bootstrapping
 	protected static ModelSource[] getModels(DataSource data) {
 		CfgTemplate[] templates = new CfgTemplate[10];
 		for (int i = 0; i < templates.length; i++) {
@@ -50,10 +53,24 @@ public class CompareGlobalToLocal {
 		}
 		ModelSource[] ms = new ModelSource[10];
 		for (int i = 0; i < ms.length; i++) {
-			ms[i] = ModGenTools.learnRegressionModel(templates[i], data);
+			ms[i] = ModGenTools.learnRegressionModel(templates[i], new BootstrappedDataSource(data));
 		}
 		return ms;
 	}
+	
+//	protected static ModelSource[] getModels(DataSource data) {
+//		CfgTemplate[] templates = new CfgTemplate[8];
+//		for (int i = 0; i < templates.length; i++) {
+//			PolynomialModelConfig cfg = new PolynomialModelConfig();
+//			cfg.setMaxDegree(i + 3);
+//			templates[i] = cfg;
+//		}
+//		ModelSource[] ms = new ModelSource[8];
+//		for (int i = 0; i < ms.length; i++) {
+//			ms[i] = ModGenTools.learnRegressionModel(templates[i], data);
+//		}
+//		return ms;
+//	}
 	
 	public static void main(String[] args) throws IOException {
 		String s = "Run_";
@@ -68,7 +85,7 @@ public class CompareGlobalToLocal {
 		ModelSource[] models = getModels(data);
 		final ScatterplotChromosomeFitnessFunction f = new ScatterplotChromosomeFitnessFunction(models, data);
 //		final OldFitness fg = new OldFitness(models, data);
-		final ScatterplotChromosomeFitnessFunctionSubtrSim fg = new ScatterplotChromosomeFitnessFunctionSubtrSim(models, data);
+//		final LocalFitness fg = new LocalFitness(models, data);
 		final ScatterplotChromosomeBoundsHolder bounds = new ScatterplotChromosomeBoundsHolder(data.getInputDataVectors());
 		ModelSource ms = new ModelSource() {
 			
@@ -99,8 +116,8 @@ public class CompareGlobalToLocal {
 					} else {
 						ScatterplotChromosome c = new ScatterplotChromosome(f, new int[]{0}, new double[]{lower}, new double[]{length}, new double[]{0.0}, true, bounds);
 						responses[i][0] = c.getFitness();
-						ScatterplotChromosome c2 = new ScatterplotChromosome(fg, new int[]{0}, new double[]{lower}, new double[]{length}, new double[]{0.0}, true, bounds);
-						responses[i][1] = c2.getFitness();
+//						ScatterplotChromosome c2 = new ScatterplotChromosome(fg, new int[]{0}, new double[]{lower}, new double[]{length}, new double[]{0.0}, true, bounds);
+//						responses[i][1] = c2.getFitness();
 					}
 				}
 				return responses;
@@ -163,10 +180,10 @@ public class CompareGlobalToLocal {
 		};
 		
 		ScatterplotVisualization vis = new ScatterplotVisualization(new ScatterplotSourceBase(new DataSource[]{ods}, new ModelSource[]{ms}, md));
-		vis.setxAxisRangeLower(-3);
-		vis.setxAxisRangeUpper(3);
-		vis.setyAxisRangeLower(-3);
-		vis.setyAxisRangeUpper(3);
+		vis.setxAxisRangeLower(-10);
+		vis.setxAxisRangeUpper(10);
+		vis.setyAxisRangeLower(-10);
+		vis.setyAxisRangeUpper(10);
 		vis.setxAxisAttributeIndex(0);
 		vis.setyAxisAttributeIndex(1);
 		vis.setOutputPrecision(500);
@@ -214,25 +231,25 @@ public class CompareGlobalToLocal {
 		vis2.setAdditionalDrawers(new AdditionalDrawer[]{ad});
 		
 		BufferedImage img = vis.getVisualizationAsImage(800, 600);
-		ImageIO.write(img, "png",new File(path + "subtrsim_5000.png"));
+		ImageIO.write(img, "png",new File(path + "global.png"));
 		img = vis2.getVisualizationAsImage(800, 600);
-		ImageIO.write(img, "png",new File(path + "subtrsim_5000_area.png"));
+		ImageIO.write(img, "png",new File(path + "global_area.png"));
 		
-		maxR = 0;
-		for (int i2 = 1; i2 < responses[0].length; i2++) {
-			if (responses[0][i2][1] > responses[0][maxR][1]) {
-				maxR = i2;
-			}
-		}
-		visBounds = LocalFitness.getModelInputs(vis)[maxR];
-		ad = new AreaAdditionalDrawer(visBounds[0], visBounds[1], abounds[1][0], abounds[1][1]);
-		ad.setColor(Color.BLACK);
-		vis2.setAdditionalDrawers(new AdditionalDrawer[]{ad});
-		img = vis2.getVisualizationAsImage(800, 600);
-		ImageIO.write(img, "png",new File(path + "def_area.png"));
-		
-		vis.setModelsVisible(new boolean[][]{{false, true}});
-		img = vis.getVisualizationAsImage(800, 600);
-		ImageIO.write(img, "png",new File(path + "def.png"));
+//		maxR = 0;
+//		for (int i2 = 1; i2 < responses[0].length; i2++) {
+//			if (responses[0][i2][1] > responses[0][maxR][1]) {
+//				maxR = i2;
+//			}
+//		}
+//		visBounds = LocalFitness.getModelInputs(vis)[maxR];
+//		ad = new AreaAdditionalDrawer(visBounds[0], visBounds[1], abounds[1][0], abounds[1][1]);
+//		ad.setColor(Color.BLACK);
+//		vis2.setAdditionalDrawers(new AdditionalDrawer[]{ad});
+//		img = vis2.getVisualizationAsImage(800, 600);
+//		ImageIO.write(img, "png",new File(path + "local_area.png"));
+//		
+//		vis.setModelsVisible(new boolean[][]{{false, true}});
+//		img = vis.getVisualizationAsImage(800, 600);
+//		ImageIO.write(img, "png",new File(path + "local.png"));
 	}
 }

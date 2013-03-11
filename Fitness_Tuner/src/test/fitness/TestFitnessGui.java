@@ -1,28 +1,35 @@
 package test.fitness;
 
+import game.data.AbstractGameData;
+import game.evolution.treeEvolution.evolutionControl.EvolutionUtils;
+
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
 
-import game.data.AbstractGameData;
-import game.evolution.treeEvolution.evolutionControl.EvolutionUtils;
-
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import org.fabi.visualizations.evolution.Chromosome;
 import org.fabi.visualizations.evolution.ChromosomeBase;
-import org.fabi.visualizations.evolution.scatterplot.ScatterplotChromosomeFitnessFunction;
 import org.fabi.visualizations.evolution.scatterplot.VisualizationEvolution;
 import org.fabi.visualizations.evolution.scatterplot.modelling.Modeller;
 import org.fabi.visualizations.evolution.scatterplot.modelling.evolution.ModGenTools;
 import org.fabi.visualizations.scatter.ScatterplotVisualization;
+import org.fabi.visualizations.scatter.additional.AdditionalDrawer;
+import org.fabi.visualizations.scatter.additional.HistogramAdditionalDrawer;
+import org.fabi.visualizations.scatter.color.ColorModel;
 import org.fabi.visualizations.scatter.dotsize.MinkowskiDistanceDotSizeModel;
 import org.fabi.visualizations.scatter.sources.DataSource;
 import org.fabi.visualizations.scatter.sources.ModelSource;
+import org.fabi.visualizations.scatter.sources.ScatterplotSource;
 import org.fabi.visualizations.scatter.sources.ScatterplotSourceBase;
+
+import test.artificialdata.onedimensional.ConstantLinearConstantData;
 
 import configuration.CfgTemplate;
 import configuration.models.single.PolynomialModelConfig;
@@ -45,15 +52,9 @@ public class TestFitnessGui extends JFrame {
 	
 	public static void main(String[] args) {
 		File data = new File("C:\\Users\\janf\\Documents\\Skola\\Dip\\Project\\External\\data\\bosthouse.txt");
-		new TestFitnessGui(data);
-	}
+		final AbstractGameData d = EvolutionUtils.readDataFromFile(data.getAbsolutePath());
 
-	private static final long serialVersionUID = -5067283467357036835L;
-
-	public TestFitnessGui(File src) {
-		final AbstractGameData d = EvolutionUtils.readDataFromFile(src.getAbsolutePath());
-
-		DataSource data = new DataSource() {
+		DataSource ds = new DataSource() {
 			
 			@Override
 			public int outputsNumber() {
@@ -62,7 +63,7 @@ public class TestFitnessGui extends JFrame {
 			
 			@Override
 			public int inputsNumber() {
-				return 1;
+				return d.getINumber();
 			}
 			
 			@Override
@@ -79,16 +80,24 @@ public class TestFitnessGui extends JFrame {
 			
 			@Override
 			public double[][] getInputDataVectors() {
-				if (iv == null) {
-					double[][] r = d.getInputVectors();
-					iv = new double[r.length][1];
-					for (int i = 0; i < iv.length; i++) {
-						iv[i][0] = r[i][0];
-					}
-				}
-				return iv;
+				return d.getInputVectors();
+//				if (iv == null) {
+//					double[][] r = d.getInputVectors();
+//					iv = new double[r.length][1];
+//					for (int i = 0; i < iv.length; i++) {
+//						iv[i][0] = r[i][0];
+//					}
+//				}
+//				return iv;
 			}
 		};
+		new TestFitnessGui(ds);
+//		new TestFitnessGui(new ConstantLinearConstantData());
+	}
+
+	private static final long serialVersionUID = -5067283467357036835L;
+
+	public TestFitnessGui(DataSource  data) {
 //		DataSource data = new DataSource() {
 //			
 //			@Override
@@ -129,22 +138,50 @@ public class TestFitnessGui extends JFrame {
 				return models;
 			}
 		});
-		final ScatterplotVisualization vis = evolution.evolve(data)[0];
+		final ScatterplotVisualization vis = evolution.evolve(data)[0]; // new ScatterplotVisualization(new ScatterplotSourceBase(new DataSource[]{data}, models));
 		vis.setSource(new ScatterplotSourceBase(new DataSource[]{data}, models));
 		vis.setDotSizeModel(new MinkowskiDistanceDotSizeModel(2, 0.0, 100.0, 1, 3));
+		vis.setColorModel(new ColorModel() {
+			@Override public void init(ScatterplotSource source) { }
+			@Override public void init(ScatterplotVisualization visualization) { }
+			@Override public String getName() { return ""; }
+			@Override public JComponent getControls() { return null; }
+			
+			@Override
+			public Color getColor(double[] inputs, double[] outputs, boolean data,
+					int index, int[] inputsIndices, int[] outputsIndices) {
+				if (data) {
+					return new Color(0.0f, 0.0f, 0.0f, 0.25f);
+				} else {
+					return new Color(1.0f, 0.0f, 0.0f, 1.0f);
+				}
+			}
+		});
+		
+		double[][][] responses = LocalFitness.getResponses(vis, models);
+		double[][] inputs = LocalFitness.getModelInputs(vis);
+		
+		double[][] histogram = new double[inputs.length - 1][2];
+		for (int z = 0; z < histogram.length; z++) {
+			histogram[z][0] = inputs[z + 1][vis.getxAxisAttributeIndex()];
+			histogram[z][1] = org.fabi.visualizations.evolution.scatterplot.ScatterplotChromosomeFitnessFunction.evaluateLocalAt(responses, z + 1, vis);
+		}
+		double w = inputs[1][vis.getxAxisAttributeIndex()] - inputs[0][vis.getxAxisAttributeIndex()];
+		vis.setAdditionalDrawers(new AdditionalDrawer[]{new HistogramAdditionalDrawer(vis, "Fitness", new Color(1.0f, 0.0f, 0.0f, 1.0f), histogram, w, 0.1)});
 		add(vis.getVisualizationAsComponent(), BorderLayout.CENTER);
 		add(vis.getControls(), BorderLayout.WEST);
 		final JLabel l = new JLabel();
 		add(l, BorderLayout.SOUTH);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		final ScatterplotChromosomeFitnessFunctionBoundSim f = new ScatterplotChromosomeFitnessFunctionBoundSim(models, data);
+		final org.fabi.visualizations.evolution.scatterplot.ScatterplotChromosomeFitnessFunction f = new org.fabi.visualizations.evolution.scatterplot.ScatterplotChromosomeFitnessFunction(models, data);
 		vis.addPropertyChangeListener(new String[]{ScatterplotVisualization.PROPERTY_X_AXIS_RANGE_LOWER,
 			ScatterplotVisualization.PROPERTY_X_AXIS_RANGE_UPPER, ScatterplotVisualization.PROPERTY_INPUTS_SETTING,
 			ScatterplotVisualization.PROPERTY_X_AXIS_ATTRIBUTE_INDEX}, new PropertyChangeListener() {
 				@Override
 				public void propertyChange(PropertyChangeEvent evt) {
 					System.out.println(evt.getPropertyName());
-					l.setText(Double.toString(f.getFitness(new ChromosomeBase() {
+					double[][][] responses = org.fabi.visualizations.evolution.scatterplot.ScatterplotChromosomeFitnessFunction.getResponses(vis, models);
+					l.setText(f.getFitness(new ChromosomeBase() {
 						
 						@Override
 						public int compareTo(Chromosome arg0) {	return 0;}
@@ -162,7 +199,9 @@ public class TestFitnessGui extends JFrame {
 						
 						@Override
 						public Chromosome copy() {return null;						}
-					})));
+					}) + "/ size: " +
+						org.fabi.visualizations.evolution.scatterplot.ScatterplotChromosomeFitnessFunction.evaluateGlobal(responses, vis)
+						+ ", local sum: "+ org.fabi.visualizations.evolution.scatterplot.ScatterplotChromosomeFitnessFunction.evaluateLocal(responses, vis));
 				}
 		});
 		setVisible(true);

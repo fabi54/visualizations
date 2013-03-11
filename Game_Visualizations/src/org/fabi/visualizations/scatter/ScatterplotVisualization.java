@@ -743,6 +743,7 @@ public class ScatterplotVisualization extends Visualization<ScatterplotSource> {
 
 	public void setAdditionalDrawers(AdditionalDrawer[] drawers) {
 		this.additionalDrawers = drawers;
+		update(PROPERTY_ADDITIONAL_DRAWERS);
 	}
 
 	public boolean isGridVisible() {
@@ -751,5 +752,6 @@ public class ScatterplotVisualization extends Visualization<ScatterplotSource> {
 
 	public void setGridVisible(boolean gridVisible) {
 		this.gridVisible = gridVisible;
+		update(PROPERTY_GRID_VISIBLE);
 	}
 }

@@ -9,8 +9,6 @@ import org.fabi.visualizations.tools.math.Arrays;
 import org.fabi.visualizations.tools.transformation.ReversibleTransformation;
 import org.jfree.data.Range;
 
-import static org.fabi.visualizations.evolution.scatterplot.FitnessTools.evaluateInterestingness;
-import static org.fabi.visualizations.evolution.scatterplot.FitnessTools.evaluateSimilarity;
 
 /*
 * 2013-02-28 23:31: similarity evaluation changed to relative
@@ -25,6 +23,13 @@ import static org.fabi.visualizations.evolution.scatterplot.FitnessTools.evaluat
 * 2013-03-03 18:40: significance = abs(significance), similarity = 1 - similarity
 * 2013-03-03 18:41: significance = abs(significance), similarity = 20 - similarity
 * 2013-03-03 18:41: significance = abs(significance), similarity = 15 - similarity
+* 
+* 2013-03-08 15:46: LocalFitnessFunction <-> ScatterplotChromosomeFitnessFunction (this = further LocalFitnessFunction)
+* 2013-03-08 20:47: basically tuned evaluateLocalAt function
+* 2013-03-08 21:25: Math.tanh removed
+* 2013-03-08 22:52: new evaluateLocalAt version
+* 2013-03-08 23:07: evaluateLocalAt with subtractive similarity
+* 2013-03-09 10:05: removed yAxis from size evaluation
 */
 
 public class ScatterplotChromosomeFitnessFunction implements FitnessFunction {
@@ -42,7 +47,7 @@ public class ScatterplotChromosomeFitnessFunction implements FitnessFunction {
 	protected double[] lowerInputs;
 	protected double[] inputsRange; 
 	
-	protected static int MODEL_OUTPUT_PRECISION = 20;
+	public static int MODEL_OUTPUT_PRECISION = 20;
 
 	public static double SIMILARITY_SIGNIFICANCE = 10;
 	public static double SIMILARITY_SIGNIFICANCE2 = 10;
@@ -50,7 +55,7 @@ public class ScatterplotChromosomeFitnessFunction implements FitnessFunction {
 	public static double SIZE_SIGNIFICANCE = 0.5;
 
 /*****************************************************************************/	
-	
+		
 	public ScatterplotChromosomeFitnessFunction(ModelSource[] models, DataSource data) {
 		this.models = models;
 		this.data = new DataSource[]{data};
@@ -72,37 +77,7 @@ public class ScatterplotChromosomeFitnessFunction implements FitnessFunction {
 		MODEL_OUTPUT_PRECISION = precision;
 	}
 	
-/*****************************************************************************/
-	
-	protected static double BOUND = 5000;
-	
-	public static double evaluateSimilarity(double[][][] responses) {
-		double similarity = 0.0;
-		double[] values = new double[responses.length];
-		for (int i = 0; i < responses[0].length; i++) {
-			for (int j = 0; j < responses.length; j++) {
-				values[j] = responses[j][i][0];
-			}
-			java.util.Arrays.sort(values);
-			int begin = 1;
-			int end = values.length - 2;
-			double actSimilarity = 0;
-			while (begin != end) {
-				actSimilarity += Math.abs(values[end] - values[begin]);
-				actSimilarity *= 2;
-				if (Math.abs(values[begin + 1] - values[begin])
-						> Math.abs(values[end] - values[end - 1])) {
-					begin++;
-				} else {
-					end--;
-				}
-			}
-			similarity += actSimilarity;
-		}
-		similarity /= responses[0].length;
-		return (BOUND - similarity) / BOUND;
-	}
-	
+/*****************************************************************************/	
     @Override
     public double getFitness(Chromosome chrmsm) {
     	ScatterplotVisualization vis = null;
@@ -113,34 +88,342 @@ public class ScatterplotChromosomeFitnessFunction implements FitnessFunction {
     		return Double.NaN;
     	}
     	double[][][] responses = getResponses(vis, getSource(chrmsm));
-//    	if (Double.isNaN(evaluateSize(cfg, responses) * evaluateSimilarity(responses) * evaluateInterestingness(responses)))
-//    	System.out.println(evaluateSize(cfg, responses) + " " + evaluateSimilarity(responses) + " " + evaluateInterestingness(responses));
-//    	double res = evaluateSize(cfg, responses) * evaluateSimilarity(responses) * evaluateInterestingness(responses);
-    	double res = Math.tanh(evaluateSize(vis, responses)) * Math.tanh(evaluateSimilarity(responses)) * Math.tanh(evaluateInterestingness(responses));
-    	if (Double.isNaN(res) || Double.isInfinite(res)) {
-    		System.out.println(evaluateSize(vis, responses) + " " + evaluateSimilarity(responses) + " " + evaluateInterestingness(responses));
-    		return 0;
-		}
-		return res;
+//    	double res = evaluateSize(vis, responses) * evaluateSimilarity(responses) * evaluateInterestingness(responses);
+//		return res;
+    	return evaluateGlobal(responses, vis) * evaluateLocal(responses, vis);
+    }
+
+    public static double evaluateGlobal(double[][][] responses, ScatterplotVisualization vis) {
+    	return evaluateSize(vis, responses);
+    }
+    
+    public static double evaluateLocal(double[][][] responses, ScatterplotVisualization vis) {
+    	double res = 0;
+    	int length = responses[0].length;
+    	for (int i = 0; i < length; i++) {
+    		res += evaluateLocalAt(responses, i, vis);
+    	}
+    	return res / length;
     }
     
 
-	protected double evaluateSize(ScatterplotVisualization vis, double[][][] responses) {
-		double yAxisRangeUpper = Double.NEGATIVE_INFINITY, yAxisRangeLower = Double.POSITIVE_INFINITY;
+	
+    public static double evaluateLocalAt(double[][][] responses, int i, ScatterplotVisualization vis) {
+		if (i == 0) { // TODO
+			return 0.0;
+		}
+    	
+    	double res = 0.0;
 		double[] values = new double[responses.length];
+		double[] prevValues = new double[responses.length];
+		for (int j = 0; j < responses.length; j++) {
+			prevValues[j] = responses[j][i - 1][0];
+			values[j] = responses[j][i][0];
+		}
+		java.util.Arrays.sort(values);
+		java.util.Arrays.sort(prevValues);
+		
+		// interestingness
+		double prevAvg = 0.0;
+		for (int j = 1; j < responses.length - 1; j++) {
+			if (!Double.isNaN(values[j])) {
+				res += values[j];
+				prevAvg += prevValues[j];
+			}
+		}
+		res /= responses.length;
+		prevAvg /= responses.length;
+
+		res -= prevAvg;
+		res = Math.abs(res);
+		res *= MODEL_OUTPUT_PRECISION;
+		
+		// similarity
+		double similarity = 0.0;
+    	for (int j = 0; j < responses.length; j++) {
+			values[j] = responses[j][i][0];
+		}
+		java.util.Arrays.sort(values);
+		int begin = 1;
+		int end = values.length - 2;
+		double div = 1;
+		while (begin != end) {
+			similarity += Math.abs(values[end] - values[begin]);
+			similarity *= 2;
+			if (Math.abs(values[begin + 1] - values[begin])
+					> Math.abs(values[end] - values[end - 1])) {
+				begin++;
+			} else {
+				end--;
+			}
+			div *= 2;
+		}
+		similarity /= div;
+//		similarity = 0.1 - similarity;
+		similarity = BASE - Math.exp(similarity);
+//		if (similarity < 0) {
+//			similarity = Math.pow(similarity, 5);
+//		}
+//		similarity = Math.pow(CONST2 / (CONST + similarity) + CONST3, CONST4);
+//		if (similarity < 0) {
+//			similarity = Math.pow(similarity, CONST5);
+//		}
+//		System.out.println("I: "  + res + " S: " + similarity + " -> " + res * similarity);
+		res *= similarity;
+		if (Double.isNaN(res)) { // added 2013-03-09 12:08
+			return Double.NEGATIVE_INFINITY;
+		} else {
+			return res;
+		}
+    }
+	
+	public static void adjustFitness(DataSource data, ModelSource[] models) {
+		double[][] inputs = data.getInputDataVectors();
+		double[][][] responses = new double[models.length][][];
+		for (int i = 0; i < responses.length; i++) {
+			responses[i] = models[i].getModelResponses(inputs);
+		}
+		double[] similarity = new double[inputs.length];
 		for (int i = 0; i < responses[0].length; i++) {
-			for (int j = 0; j < responses.length; j++) {
+			double[] values = new double[responses.length];
+			java.util.Arrays.sort(values);
+			similarity[i] = 0.0;
+	    	for (int j = 0; j < responses.length; j++) {
 				values[j] = responses[j][i][0];
 			}
 			java.util.Arrays.sort(values);
-			yAxisRangeUpper = Math.max(yAxisRangeUpper, values[values.length - 2]);
-			yAxisRangeLower = Math.min(yAxisRangeLower, values[1]);
+			int begin = 1;
+			int end = values.length - 2;
+			double div = 1;
+			while (begin != end) {
+				similarity[i] += Math.abs(values[end] - values[begin]);
+				similarity[i] *= 2;
+				if (Math.abs(values[begin + 1] - values[begin])
+						> Math.abs(values[end] - values[end - 1])) {
+					begin++;
+				} else {
+					end--;
+				}
+				div *= 2;
+			}
+			similarity[i] /= div;
+			similarity[i] = Math.exp(similarity[i]);
 		}
+//		double avg = 0.0, var = 0.0;
+//		for (int i = 0; i < similarity.length; i++) {
+//			avg += similarity[i];
+//		}
+//		avg /= similarity.length;
+//		for (int i = 0; i < similarity.length; i++) {
+//			var += Math.pow(similarity[i] - avg, 2.0);
+//		}
+//		var /= similarity.length;
+//		org.fabi.visualizations.evolution.scatterplot.ScatterplotChromosomeFitnessFunction.BASE = avg + var;
+//		double max = Double.NEGATIVE_INFINITY;
+//		for (int i = 0; i < similarity.length; i++) {
+//			if (!Double.isInfinite(similarity[i]) && !Double.isNaN(similarity[i])) {
+//				max = Math.max(max, similarity[i]);
+//			}
+//		}
+		java.util.Arrays.sort(similarity);
+		org.fabi.visualizations.evolution.scatterplot.ScatterplotChromosomeFitnessFunction.BASE = similarity[similarity.length  * 3 / 4];
+		System.out.println("org.fabi.visualizations.evolution.scatterplot.ScatterplotChromosomeFitnessFunction.BASE = " + org.fabi.visualizations.evolution.scatterplot.ScatterplotChromosomeFitnessFunction.BASE);
+	}
+    
+    public static double BASE = 1.2;
+	
+//    public static double evaluateLocalAt(double[][][] responses, int i, ScatterplotVisualization vis) {
+//		if (i == 0) { // TODO
+//			return 0.0;
+//		}
+//    	
+//    	double res = 0.0;
+//		double[] values = new double[responses.length];
+//		double[] prevValues = new double[responses.length];
+//		for (int j = 0; j < responses.length; j++) {
+//			prevValues[j] = responses[j][i - 1][0];
+//			values[j] = responses[j][i][0];
+//		}
+//		java.util.Arrays.sort(values);
+//		java.util.Arrays.sort(prevValues);
+//		
+//		// interestingness
+//		double prevAvg = 0.0;
+//		for (int j = 1; j < responses.length - 1; j++) {
+//			if (!Double.isNaN(values[j])) {
+//				res += values[j];
+//				prevAvg += prevValues[j];
+//			}
+//		}
+//		res /= responses.length;
+//		prevAvg /= responses.length;
+//
+//		res -= prevAvg;
+//		res = Math.abs(res);
+//		
+//		// similarity
+//		double similarity = 0.0;
+//    	for (int j = 0; j < responses.length; j++) {
+//			values[j] = responses[j][i][0];
+//		}
+//		java.util.Arrays.sort(values);
+//		int begin = 1;
+//		int end = values.length - 2;
+//		double div = 1;
+//		while (begin != end) {
+//			similarity += Math.abs(values[end] - values[begin]);
+//			similarity *= 2;
+//			if (Math.abs(values[begin + 1] - values[begin])
+//					> Math.abs(values[end] - values[end - 1])) {
+//				begin++;
+//			} else {
+//				end--;
+//			}
+//			div *= 2;
+//		}
+//		similarity /= div;
+//		similarity = Math.pow(CONST2 / (CONST + similarity) + CONST3, CONST4);
+//		if (similarity < 0) {
+//			similarity = Math.pow(similarity, CONST5);
+//		}
+//		res *= similarity;
+//		return res;
+//    }
+//    
+//    protected static double CONST = 0.25;
+//    protected static double CONST2 = 3;
+//    protected static double CONST3 = -2.8;
+//    protected static double CONST4 = 1;
+//    protected static double CONST5 = 3;
+    
+//    public static double evaluateLocalAt(double[][][] responses, int i, ScatterplotVisualization vis) {
+//		if (i == 0) { // TODO
+//			return 0.0;
+//		}
+//    	
+//    	double res = 0.0;
+//		double[] values = new double[responses.length];
+//		
+//		// interestingness
+//		double[] prevValues = new double[responses.length];
+//		for (int j = 0; j < responses.length; j++) {
+//			prevValues[j] = responses[j][i - 1][0];
+//			values[j] = responses[j][i][0];
+//		}
+//		java.util.Arrays.sort(values);
+//		java.util.Arrays.sort(prevValues);
+//		double prevAvg = 0.0;
+//		for (int j = 1; j < responses.length - 1; j++) {
+//			if (!Double.isNaN(values[j])) {
+//				res += values[j];
+//				prevAvg += prevValues[j];
+//			}
+//		}
+//		res /= responses.length;
+//		prevAvg /= responses.length;
+//
+//		res -= prevAvg;
+//		res = Math.abs(res);
+////		res -= 0.1; // ................................................ !!!!!! MAGIC NUMBER
+//		
+//		// similarity
+//		double similarity = 0.0;
+//    	for (int j = 0; j < responses.length; j++) {
+//			values[j] = responses[j][i][0];
+//		}
+//		java.util.Arrays.sort(values);
+//		int begin = 1;
+//		int end = values.length - 2;
+//		while (begin != end) {
+//			similarity += Math.abs(values[end] - values[begin]);
+//			similarity *= 2;
+//			if (Math.abs(values[begin + 1] - values[begin])
+//					> Math.abs(values[end] - values[end - 1])) {
+//				begin++;
+//			} else {
+//				end--;
+//			}
+//		}
+//		similarity = 15 - similarity;
+////		similarity = 1 / (1 + similarity);
+////		if (similarity < 0.5) { // ................................................ !!!!!! MAGIC NUMBER
+////			similarity = -similarity;
+////		}
+//		res *= similarity;
+//		return res;
+//    }
+//    
+//    public static double evaluateLocalAt(double[][][] responses, int i, ScatterplotVisualization vis) {
+//		if (i == 0) { // TODO
+//			return 0.0;
+//		}
+//    	
+//    	double res = 0.0;
+//		double[] values = new double[responses.length];
+//		
+//		// interestingness
+//		double[] prevValues = new double[responses.length];
+//		for (int j = 0; j < responses.length; j++) {
+//			prevValues[j] = responses[j][i - 1][0];
+//		}
+//		java.util.Arrays.sort(prevValues);
+//		double prevAvg = 0.0;
+//		for (int j = 1; j < responses.length - 1; j++) {
+//			if (!Double.isNaN(values[j])) {
+//				res += values[j];
+//				prevAvg += prevValues[j];
+//			}
+//		}
+//		res /= responses.length;
+//		prevAvg /= responses.length;
+//
+//		res -= prevAvg;
+//		res = Math.abs(res);
+////		res -= 0.1; // ................................................ !!!!!! MAGIC NUMBER
+//		
+//		// similarity
+//		double similarity = 0.0;
+//    	for (int j = 0; j < responses.length; j++) {
+//			values[j] = responses[j][i][0];
+//		}
+//		java.util.Arrays.sort(values);
+//		int begin = 1;
+//		int end = values.length - 2;
+//		while (begin != end) {
+//			similarity += Math.abs(values[end] - values[begin]);
+//			similarity *= 2;
+//			if (Math.abs(values[begin + 1] - values[begin])
+//					> Math.abs(values[end] - values[end - 1])) {
+//				begin++;
+//			} else {
+//				end--;
+//			}
+//		}
+//		similarity = 15 - similarity;
+////		similarity = 1 / similarity;
+////		if (similarity < 0.5) { // ................................................ !!!!!! MAGIC NUMBER
+////			similarity = -similarity;
+////		}
+//		res *= similarity;
+//		return res;
+//    }
+
+	protected static double evaluateSize(ScatterplotVisualization vis, double[][][] responses) {
+//		double yAxisRangeUpper = Double.NEGATIVE_INFINITY, yAxisRangeLower = Double.POSITIVE_INFINITY;
+//		double[] values = new double[responses.length];
+//		for (int i = 0; i < responses[0].length; i++) {
+//			for (int j = 0; j < responses.length; j++) {
+//				values[j] = responses[j][i][0];
+//			}
+//			java.util.Arrays.sort(values);
+//			yAxisRangeUpper = Math.max(yAxisRangeUpper, values[values.length - 2]);
+//			yAxisRangeLower = Math.min(yAxisRangeLower, values[1]);
+//		}
 		return Math.sqrt((vis.getxAxisRangeUpper() - vis.getxAxisRangeLower())
-			 * (yAxisRangeUpper - yAxisRangeLower));
+			/* * (yAxisRangeUpper - yAxisRangeLower)*/);
 	}
 	
-	protected double[][][] getResponses(ScatterplotVisualization vis, ModelSource[] models) {
+	public static double[][][] getResponses(ScatterplotVisualization vis, ModelSource[] models) {
 		return getModelOutputs(vis, models);
 	}
 	
@@ -158,7 +441,7 @@ public class ScatterplotChromosomeFitnessFunction implements FitnessFunction {
 	
 	// NOTE: copy of ScatterplotVisualization methods [encapsulation of package org.fabi.visualizations.scatter2]
 	
-	protected double[][] getModelInputs(ScatterplotVisualization vis) {
+	public static double[][] getModelInputs(ScatterplotVisualization vis) {
 		double[][] res = null;
 		if (vis.getyAxisAttributeIndex() == ScatterplotVisualization.OUTPUT_AXIS) {
 				res = getCurveInputs(vis);
@@ -173,8 +456,9 @@ public class ScatterplotChromosomeFitnessFunction implements FitnessFunction {
 		}
 	}
 	
-	protected double[][] getHeatMapInputs(ScatterplotVisualization vis) {
-		int outputPrecision = vis.getOutputPrecision();
+	// TODO ... (diff getCurveInputs)
+	protected static double[][] getHeatMapInputs(ScatterplotVisualization vis) {
+		int outputPrecision = MODEL_OUTPUT_PRECISION;
 		double[] inputsSetting = vis.getInputsSetting();
 		double[][] modelInputs = new double[outputPrecision * outputPrecision][inputsSetting.length];
         double[] steps = new double[2];
@@ -194,20 +478,20 @@ public class ScatterplotChromosomeFitnessFunction implements FitnessFunction {
         return modelInputs;
 	}
 	
-	protected double[][] getCurveInputs(ScatterplotVisualization vis) {
-		int outputPrecision = vis.getOutputPrecision();
+	protected static double[][] getCurveInputs(ScatterplotVisualization vis) {
+		int outputPrecision = MODEL_OUTPUT_PRECISION;
 		double[] inputsSetting = vis.getInputsSetting();
-		double[][] modelInputs = new double[outputPrecision][inputsSetting.length];
-        double step = (vis.getxAxisRangeUpper() - vis.getxAxisRangeLower()) / (double) (outputPrecision - 1);
-        for (int i = 0; i < outputPrecision; i++) {
-        	double x = vis.getxAxisRangeLower() + i * step;
+		double[][] modelInputs = new double[outputPrecision + 1][inputsSetting.length];
+        double step = (vis.getxAxisRangeUpper() - vis.getxAxisRangeLower()) / (double) (outputPrecision);
+        for (int i = 0; i < outputPrecision + 1; i++) {
+        	double x = vis.getxAxisRangeLower() + (i - 0.5) * step;
             System.arraycopy(inputsSetting, 0, modelInputs[i], 0, inputsSetting.length);
             	modelInputs[i][vis.getxAxisAttributeIndex()] = x;
         }
         return modelInputs;
 	}
 	
-	protected double[][][] getModelOutputs(ScatterplotVisualization vis, ModelSource[] models) {
+	protected static double[][][] getModelOutputs(ScatterplotVisualization vis, ModelSource[] models) {
 		int modelCnt = models.length;
 		double[][][] modelOutputs = new double[modelCnt][][];
 		double[][] modelInputs = getModelInputs(vis);

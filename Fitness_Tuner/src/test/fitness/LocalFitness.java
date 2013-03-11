@@ -42,7 +42,7 @@ public class LocalFitness implements FitnessFunction {
 	protected double[] lowerInputs;
 	protected double[] inputsRange; 
 	
-	protected static int MODEL_OUTPUT_PRECISION = 20;
+	public static int MODEL_OUTPUT_PRECISION = 20;
 
 	public static double SIMILARITY_SIGNIFICANCE = 10;
 	public static double SIMILARITY_SIGNIFICANCE2 = 10;
@@ -100,7 +100,8 @@ public class LocalFitness implements FitnessFunction {
     	}
     	return Math.tanh(res / length);
     }
-    
+
+	
     public static double evaluateLocalAt(double[][][] responses, int i, ScatterplotVisualization vis) {
 		if (i == 0) { // TODO
 			return 0.0;
@@ -113,7 +114,9 @@ public class LocalFitness implements FitnessFunction {
 		double[] prevValues = new double[responses.length];
 		for (int j = 0; j < responses.length; j++) {
 			prevValues[j] = responses[j][i - 1][0];
+			values[j] = responses[j][i][0];
 		}
+		java.util.Arrays.sort(values);
 		java.util.Arrays.sort(prevValues);
 		double prevAvg = 0.0;
 		for (int j = 1; j < responses.length - 1; j++) {
@@ -148,13 +151,68 @@ public class LocalFitness implements FitnessFunction {
 			}
 		}
 		similarity = 15 - similarity;
-//		similarity = 1 / similarity;
+//		similarity = 1 / (1 + similarity);
 //		if (similarity < 0.5) { // ................................................ !!!!!! MAGIC NUMBER
 //			similarity = -similarity;
 //		}
 		res *= similarity;
 		return res;
     }
+    
+//    public static double evaluateLocalAt(double[][][] responses, int i, ScatterplotVisualization vis) {
+//		if (i == 0) { // TODO
+//			return 0.0;
+//		}
+//    	
+//    	double res = 0.0;
+//		double[] values = new double[responses.length];
+//		
+//		// interestingness
+//		double[] prevValues = new double[responses.length];
+//		for (int j = 0; j < responses.length; j++) {
+//			prevValues[j] = responses[j][i - 1][0];
+//		}
+//		java.util.Arrays.sort(prevValues);
+//		double prevAvg = 0.0;
+//		for (int j = 1; j < responses.length - 1; j++) {
+//			if (!Double.isNaN(values[j])) {
+//				res += values[j];
+//				prevAvg += prevValues[j];
+//			}
+//		}
+//		res /= responses.length;
+//		prevAvg /= responses.length;
+//
+//		res -= prevAvg;
+//		res = Math.abs(res);
+////		res -= 0.1; // ................................................ !!!!!! MAGIC NUMBER
+//		
+//		// similarity
+//		double similarity = 0.0;
+//    	for (int j = 0; j < responses.length; j++) {
+//			values[j] = responses[j][i][0];
+//		}
+//		java.util.Arrays.sort(values);
+//		int begin = 1;
+//		int end = values.length - 2;
+//		while (begin != end) {
+//			similarity += Math.abs(values[end] - values[begin]);
+//			similarity *= 2;
+//			if (Math.abs(values[begin + 1] - values[begin])
+//					> Math.abs(values[end] - values[end - 1])) {
+//				begin++;
+//			} else {
+//				end--;
+//			}
+//		}
+//		similarity = 15 - similarity;
+////		similarity = 1 / similarity;
+////		if (similarity < 0.5) { // ................................................ !!!!!! MAGIC NUMBER
+////			similarity = -similarity;
+////		}
+//		res *= similarity;
+//		return res;
+//    }
 
 	public double evaluateSimilarity_relative(Chromosome chrmsm, ScatterplotVisualization vis, double[][][] responses) {
 		double similarity = 0.0;
@@ -246,7 +304,7 @@ public class LocalFitness implements FitnessFunction {
 	
 	// TODO ... (diff getCurveInputs)
 	protected static double[][] getHeatMapInputs(ScatterplotVisualization vis) {
-		int outputPrecision = vis.getOutputPrecision();
+		int outputPrecision = MODEL_OUTPUT_PRECISION;
 		double[] inputsSetting = vis.getInputsSetting();
 		double[][] modelInputs = new double[outputPrecision * outputPrecision][inputsSetting.length];
         double[] steps = new double[2];
@@ -267,7 +325,7 @@ public class LocalFitness implements FitnessFunction {
 	}
 	
 	protected static double[][] getCurveInputs(ScatterplotVisualization vis) {
-		int outputPrecision = vis.getOutputPrecision();
+		int outputPrecision = MODEL_OUTPUT_PRECISION;
 		double[] inputsSetting = vis.getInputsSetting();
 		double[][] modelInputs = new double[outputPrecision + 1][inputsSetting.length];
         double step = (vis.getxAxisRangeUpper() - vis.getxAxisRangeLower()) / (double) (outputPrecision);

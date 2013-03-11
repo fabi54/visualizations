@@ -40,17 +40,18 @@ public class BestFitnessVisualizationObserver extends BestFitnessObserver {
 		cm.setColor(Color.RED);
 		visualization.setColorModel(cm);
 		if (fileToSave != null) {
+			File f = fileToSave;
 			BufferedImage img = visualization.getVisualizationAsImage(800, 600);
 			try {
-				if (fileToSave.exists()) {
+				if (f.exists()) {
 					int i = 1;
-					String orig = fileToSave.getAbsolutePath();
+					String orig = f.getAbsolutePath();
 					orig = orig.substring(0, orig.length() - 4);
-					while (fileToSave.exists()) {
-						fileToSave = new File(orig + "_" + i++ + ".png");
+					while (f.exists()) {
+						f = new File(orig + "_" + i++ + ".png");
 					}
 				}
-				ImageIO.write(img, "png", fileToSave);
+				ImageIO.write(img, "png", f);
 			} catch (IOException e) {
 				throw new RuntimeException("IOException: " + e.getMessage());
 			}

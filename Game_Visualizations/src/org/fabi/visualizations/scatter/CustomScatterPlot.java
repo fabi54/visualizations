@@ -113,6 +113,9 @@ public class CustomScatterPlot extends ScatterPlot {
         double[][] modelInputs = visualization.getModelInputs();
         double[][][] modelOutputs = visualization.getModelOutputs();
         
+        double[] inputs = visualization.getInputsSetting();
+        double[] outputs = new double[visualization.getSource().getOutputsNumber()];
+        
         // draw
         for (int i = 0; i < modelOutputs.length; i++) {
         	// TODO whole model not visible
@@ -121,15 +124,45 @@ public class CustomScatterPlot extends ScatterPlot {
 	            	int[] inputsIndices = new int[]{visualization.getxAxisAttributeIndex()};
 	            	int[] outputsIndices = new int[]{j};
 	        		for (int k = 1; k < modelOutputs[i].length; k++) {
-	        			draw.setColor(colorModel.getColor(modelInputs[i], modelOutputs[i][k], ColorModel.MODEL, i, inputsIndices, outputsIndices));
-	        			// TODO color should correspond to ?average? of adjacent outputs
-	        			draw.drawLine( // TODO don't draw outputs out of axis range
-	        					new double[]{modelInputs[k - 1][xIndex], modelOutputs[i][k - 1][j]},
-	        					new double[]{modelInputs[k][xIndex], modelOutputs[i][k][j]});
+	        			inputs[xIndex] = (modelInputs[k - 1][xIndex] + modelInputs[k][xIndex]) / 2;
+	        			for (int l = 0; l < outputs.length; l++) {
+	        				outputs[l] = (modelOutputs[i][k - 1][l] + modelOutputs[i][k][l]) / 2;
+	        			}
+	        			draw.setColor(colorModel.getColor(modelInputs[i], outputs, ColorModel.MODEL, i, inputsIndices, outputsIndices));
+	        			double[][] points = getActualCurvePoints(modelInputs[k - 1][xIndex], modelInputs[k][xIndex],
+	        					modelOutputs[i][k - 1][j], modelOutputs[i][k][j]);
+	        			if (points != null) {
+	        				draw.drawLine(points[0], points[1]);
+						}
 	        		}
         		}
         	}
         }
+	}
+	
+	protected double[][] getActualCurvePoints(double i1, double i2, double o1, double o2) {
+		double[][] bounds = visualization.actualAxesBounds;
+		if ((o1 > bounds[1][1] || o1 < bounds[1][0]) && (o2 > bounds[1][1] || o2 < bounds[1][0])) {
+			return null;
+		}
+		double[][] res = new double[][]{{i1, o1}, {i2, o2}};
+		if (o1 > bounds[1][1]) {
+			res[0][0] = i2 - (i2 - i1) * (bounds[1][1] - o2) / (o1 - o2);
+			res[0][1] = bounds[1][1];
+		}
+		if (o1 < bounds[1][0]) {
+			res[0][0] = i2 - (i2 - i1) * (o2 - bounds[1][0]) / (o2 - o1);
+			res[0][1] = bounds[1][0];
+		}
+		if (o2 > bounds[1][1]) {
+			res[1][0] = i1 + (i2 - i1) * (bounds[1][1] - o1) / (o2 - o1);
+			res[1][1] = bounds[1][1];
+		}
+		if (o2 < bounds[1][0]) {
+			res[1][0] = i1 + (i2 - i1) * (o1 - bounds[1][0]) / (o1 - o2);
+			res[1][1] = bounds[1][0];
+		}
+		return res;
 	}
 	
 	protected void plotDataII(AbstractDrawer draw) {
