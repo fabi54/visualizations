@@ -12,12 +12,10 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import org.fabi.visualizations.config.VisualizationConfig;
 import org.fabi.visualizations.rapidminer.tree.BasicTreeVisualizationInitializer;
 import org.fabi.visualizations.rapidminer.tree.TreeIOObject;
 import org.fabi.visualizations.rapidminer.tree.TreeIOObjectVisualization;
 import org.fabi.visualizations.rapidminer.tree.TreeNode;
-import org.fabi.visualizations.tree.AbstractTreeVisualization;
 import org.freehep.util.export.ExportDialog;
 
 import com.rapidminer.gui.renderer.AbstractRenderer;
@@ -58,14 +56,12 @@ public class TreeVisualizationRenderer extends AbstractRenderer {
 		if (resultName == null) {
 			resultName = "";
 		}
-		VisualizationConfig defaultConfig = new VisualizationConfig(TreeIOObjectVisualization.class);
-		defaultConfig.setTypedProperty(AbstractTreeVisualization.PROPERTY_LEVELS_HORIZONTAL, false);
-		BasicTreeVisualizationInitializer initializer = new BasicTreeVisualizationInitializer(defaultConfig);
+		BasicTreeVisualizationInitializer initializer = new BasicTreeVisualizationInitializer();
 		RadioCardPanel visualizationComponent = new RadioCardPanel(null, null, false, false);
 		Collection<TreeNode> trees = renderable.getRoots();
 	    for (TreeNode root : trees) {
 	    	try {
-	    		TreeIOObjectVisualization visualization = initializer.getVisualization(root);
+	    		TreeIOObjectVisualization visualization = initializer.initialize(new TreeIOObjectVisualization(root));
 	    		if (visualization != null) {
 	    			JPanel panel = new JPanel(new BorderLayout());
 	    			final JComponent mainComponent = visualization.getVisualizationAsComponent();

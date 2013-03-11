@@ -1,8 +1,6 @@
 
 package org.fabi.visualizations.rapidminer;
 
-import org.fabi.visualizations.Global;
-
 import com.rapidminer.gui.MainFrame;
 
 public class VisualizationsPluginInit {
@@ -13,7 +11,6 @@ public class VisualizationsPluginInit {
 	 * or renderers has taken place when this is called.
 	 */
 	public static void initPlugin() {
-		Global.getInstance().init();
 	}
 	
 	/**

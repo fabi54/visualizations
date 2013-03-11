@@ -6,7 +6,6 @@
 	<classpathentry kind="lib" path="lib/collections-generic.jar"/>
 	<classpathentry kind="lib" path="lib/commons-collections.jar"/>
 	<classpathentry kind="lib" path="lib/jcommon.jar"/>
-	<classpathentry kind="lib" path="lib/jfreechart-1.0.9.jar" sourcepath="C:/Users/janf/.m2/repository/jfree/jfreechart/1.0.9/jfreechart-1.0.9-sources.jar"/>
 	<classpathentry kind="lib" path="lib/jmatharray.jar"/>
 	<classpathentry kind="lib" path="lib/jung-algorithms.jar"/>
 	<classpathentry kind="lib" path="lib/jung-api.jar"/>
@@ -14,6 +13,7 @@
 	<classpathentry kind="lib" path="lib/jung-visualization.jar"/>
 	<classpathentry kind="lib" path="lib/configurations.jar" sourcepath="D:/Data/Dokumenty/Skola/B102/Y36BP/fakegame-old/configurations/trunk/src/main/java"/>
 	<classpathentry kind="lib" path="lib/groovy-all-1.7.7.jar"/>
-	<classpathentry kind="lib" path="lib/jmathplot.jar"/>
+	<classpathentry kind="lib" path="C:/Users/janf/Documents/Skola/Dip/rapidminer/rapidminer/Vega/lib/jmathplot.jar"/>
+	<classpathentry kind="lib" path="lib/jfreechart.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

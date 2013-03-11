@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Observable;
 
@@ -13,7 +12,6 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import org.fabi.visualizations.Visualization;
-import org.fabi.visualizations.config.VisualizationConfig;
 import org.fabi.visualizations.scatter.additional.AdditionalDrawer;
 import org.fabi.visualizations.scatter.color.ColorModel;
 import org.fabi.visualizations.scatter.dotsize.DotSizeModel;
@@ -267,12 +265,12 @@ public class ScatterplotVisualization extends Visualization<ScatterplotSource> {
 			if (metadata != null) {
 				List<AttributeInfo> inputs = metadata.getInputAttributeInfo();
 				// depends on jmathplot version:
-				c.setAxisLabel(X_AXIS, inputs.get(xAxisAttributeIndex).getName());
-//				c.setAxeLabel(X_AXIS, inputs.get(xAxisAttributeIndex).getName());
+//				c.setAxisLabel(X_AXIS, inputs.get(xAxisAttributeIndex).getName());
+				c.setAxeLabel(X_AXIS, inputs.get(xAxisAttributeIndex).getName());
 			} else {
 				// depends on jmathplot version:
-				 c.setAxisLabel(X_AXIS, "attr" + xAxisAttributeIndex);
-//				c.setAxeLabel(X_AXIS, "attr" + xAxisAttributeIndex);
+//				 c.setAxisLabel(X_AXIS, "attr" + xAxisAttributeIndex);
+				c.setAxeLabel(X_AXIS, "attr" + xAxisAttributeIndex);
 			}
 		}
 		
@@ -283,22 +281,22 @@ public class ScatterplotVisualization extends Visualization<ScatterplotSource> {
 				List<AttributeInfo> inputs = metadata.getInputAttributeInfo();
 				if (yAxisAttributeIndex == OUTPUT_AXIS) {
 					// depends on jmathplot version:
-					 c.setAxisLabel(Y_AXIS, "output");
-//					c.setAxeLabel(Y_AXIS, "output");
+//					 c.setAxisLabel(Y_AXIS, "output");
+					c.setAxeLabel(Y_AXIS, "output");
 				} else {
 					// depends on jmathplot version:
-					 c.setAxisLabel(Y_AXIS, inputs.get(yAxisAttributeIndex).getName());
-//					c.setAxeLabel(Y_AXIS, inputs.get(yAxisAttributeIndex).getName());
+//					 c.setAxisLabel(Y_AXIS, inputs.get(yAxisAttributeIndex).getName());
+					c.setAxeLabel(Y_AXIS, inputs.get(yAxisAttributeIndex).getName());
 				}
 			} else {
 				if (yAxisAttributeIndex == OUTPUT_AXIS) {
 					// depends on jmathplot version:
-					 c.setAxisLabel(Y_AXIS, "output");
-//					c.setAxeLabel(Y_AXIS, "output");
+//					 c.setAxisLabel(Y_AXIS, "output");
+					c.setAxeLabel(Y_AXIS, "output");
 				} else {
 					// depends on jmathplot version:
-					 c.setAxisLabel(Y_AXIS, "attr" + yAxisAttributeIndex);
-//					c.setAxeLabel(Y_AXIS, "attr" + yAxisAttributeIndex);
+//					 c.setAxisLabel(Y_AXIS, "attr" + yAxisAttributeIndex);
+					c.setAxeLabel(Y_AXIS, "attr" + yAxisAttributeIndex);
 				}
 			}
 		}
@@ -425,7 +423,7 @@ public class ScatterplotVisualization extends Visualization<ScatterplotSource> {
 			lowerInputs[index] = Double.POSITIVE_INFINITY;
 			upperInputs[index] = Double.NEGATIVE_INFINITY;
 			for (int i = 0; i < source.getDataSourceCount(); i++) {
-				org.jfree.data.Range rng = Arrays.getBounds(source.getDataSource(i).getInputDataVectors(), index);
+				org.jfree.data.Range rng = Arrays.getBounds(source.getDataSource(i).getInputDataVectors(), index); // TODO eliminate org.jfree.data.Range from whole project
 				lowerInputs[index] = Math.min(lowerInputs[index], rng.getLowerBound());
 				upperInputs[index] = Math.max(upperInputs[index], rng.getUpperBound());
 			}
@@ -535,22 +533,6 @@ public class ScatterplotVisualization extends Visualization<ScatterplotSource> {
 	        }
 		}
 		return modelOutputs;
-	}
-
-	@Override
-	@Deprecated
-	public VisualizationConfig getConfig() {
-		return new VisualizationConfig(this.getClass());
-	}
-
-	@Override
-	@Deprecated
-	protected void setConfiguration(VisualizationConfig cfg, Collection<String> changedProperties) { }
-
-	@Override
-	@Deprecated
-	public VisualizationConfig getDefaultConfig() {
-		return new VisualizationConfig(this.getClass());
 	}
 	
 	public void setAxisAttributeIndex(int index, int axis) {

@@ -5,18 +5,14 @@ import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
 import org.fabi.visualizations.Visualization;
-import org.fabi.visualizations.config.VisualizationConfig;
 import org.fabi.visualizations.tree.gui.NodeContentsComboBox;
-import org.ytoh.configurations.DefaultArrayProperty;
 import org.ytoh.configurations.annotations.Component;
 import org.ytoh.configurations.annotations.Property;
 
@@ -44,19 +40,18 @@ public abstract class AbstractTreeVisualization<T> extends Visualization<T> {
 		return new TreeGenerator<T>(this, source);
 	}
 	
-	public AbstractTreeVisualization(T source) {
-		super(source);
+	public AbstractTreeVisualization() {
+		super();
 		preparator = new VisualizationServerPreparator<T>(this);
 		viewer = null;
 	}
 	
-	public AbstractTreeVisualization(T source, VisualizationConfig cfg) {
-		super(source, cfg);
-		preparator = new VisualizationServerPreparator<T>(this);
-		viewer = null;
+	public AbstractTreeVisualization(T source) {
+		this();
+		setSource(source);
 	}
 
-/* configurations ******************************************************************************/
+/* property labels *****************************************************************************/
 
 	public static final String PROPERTY_DISPLAY_NODE_LABELS = "display_node_labels";
 	public static final String PROPERTY_NODE_CONTENTS = "node_contents";
@@ -70,6 +65,35 @@ public abstract class AbstractTreeVisualization<T> extends Visualization<T> {
 	public static final String PROPERTY_EDGE_FONT_SIZE = "edge_font_size";
 	public static final String PROPERTY_VISUALIZATION_PADDING = "visualization_padding";
 	public static final String PROPERTY_NODE_PADDING = "node_padding";
+
+/* properties **********************************************************************************/
+
+	@Property(name=PROPERTY_DISPLAY_NODE_LABELS)
+	boolean displayNodeLabels = true;
+	@Property(name=PROPERTY_NODE_CONTENTS)
+	int nodeContents = NodeContents.NONE;
+	@Property(name=PROPERTY_NODE_WIDTH)
+	int nodeWidth = 100;
+	@Property(name=PROPERTY_NODE_HEIGHT)
+	int nodeHeight = 50;
+	@Property(name=PROPERTY_NODE_SPACING_HORIZONTAL)
+	int nodeSpacingHorizontal = 10;
+	@Property(name=PROPERTY_NODE_SPACING_VERTICAL)
+	int nodeSpacingVertical = 10;
+	@Property(name=PROPERTY_MAXIMAL_DEPTH)
+	int maxDepth = -1;
+	@Property(name=PROPERTY_VERTEX_FONT_SIZE)
+	int vertexFontSize = 10;
+	@Property(name=PROPERTY_EDGE_FONT_SIZE)
+	int edgeFontSize = 10;
+	@Property(name=PROPERTY_VISUALIZATION_PADDING)
+	int visualizationPadding = 15;
+	@Property(name=PROPERTY_LEVELS_HORIZONTAL)
+	boolean levelsHorizontal = false;
+	@Property(name=PROPERTY_NODE_PADDING)
+	int nodePadding = 5;
+
+/* *********************************************************************************************/
 	
 	public static class NodeContents {
 		public static final int NONE = 0;
@@ -87,15 +111,6 @@ public abstract class AbstractTreeVisualization<T> extends Visualization<T> {
 		}
 	}
 	
-	@Override
-	public void setProperty(String key, Object value) {
-		VisualizationConfig cfg = getConfig();
-		cfg.setTypedProperty(key, value);
-		List<String> changedList = new ArrayList<String>(1);
-		changedList.add(key);
-		setConfiguration(cfg, changedList);
-	}
-	
 	public final List<String> getNodeContentsLabels() {
 		List<NodeContentRenderer<T>> renderers = getNodeContentRenderers();
 		List<String> names = new ArrayList<String>(renderers.size());
@@ -109,106 +124,6 @@ public abstract class AbstractTreeVisualization<T> extends Visualization<T> {
 	
 	NodeContentRenderer<T> getActualNodeContentRenderer() {
 		return getNodeContentRenderer(nodeContents);
-	}
-
-	static {
-		VisualizationConfig.addTypeCast(PROPERTY_DISPLAY_NODE_LABELS, Boolean.class);
-		VisualizationConfig.addTypeCast(PROPERTY_LEVELS_HORIZONTAL, Boolean.class);
-		VisualizationConfig.addTypeCast(PROPERTY_NODE_CONTENTS, Integer.class);
-		VisualizationConfig.addTypeCast(PROPERTY_NODE_WIDTH, Integer.class);
-		VisualizationConfig.addTypeCast(PROPERTY_NODE_HEIGHT, Integer.class);
-		VisualizationConfig.addTypeCast(PROPERTY_NODE_SPACING_HORIZONTAL, Integer.class);
-		VisualizationConfig.addTypeCast(PROPERTY_NODE_SPACING_VERTICAL, Integer.class);
-		VisualizationConfig.addTypeCast(PROPERTY_MAXIMAL_DEPTH, Integer.class);
-		VisualizationConfig.addTypeCast(PROPERTY_VERTEX_FONT_SIZE, Integer.class);
-		VisualizationConfig.addTypeCast(PROPERTY_EDGE_FONT_SIZE, Integer.class);
-		VisualizationConfig.addTypeCast(PROPERTY_VISUALIZATION_PADDING, Integer.class);
-		VisualizationConfig.addTypeCast(PROPERTY_NODE_PADDING, Integer.class);
-	}
-
-	@Override
-	public VisualizationConfig getDefaultConfig() {
-		VisualizationConfig defaultConfig = new VisualizationConfig(this.getClass());
-		defaultConfig.setTypedProperty(PROPERTY_LEVELS_HORIZONTAL, false);
-		defaultConfig.setTypedProperty(PROPERTY_DISPLAY_NODE_LABELS, true);
-		defaultConfig.setTypedProperty(PROPERTY_NODE_CONTENTS, NodeContents.NONE);
-		defaultConfig.setTypedProperty(PROPERTY_NODE_WIDTH, 100);
-		defaultConfig.setTypedProperty(PROPERTY_NODE_HEIGHT, 50);
-		defaultConfig.setTypedProperty(PROPERTY_NODE_SPACING_HORIZONTAL, 10);
-		defaultConfig.setTypedProperty(PROPERTY_NODE_SPACING_VERTICAL, 10);
-		defaultConfig.setTypedProperty(PROPERTY_MAXIMAL_DEPTH, -1);
-		defaultConfig.setTypedProperty(PROPERTY_VERTEX_FONT_SIZE, 10);
-		defaultConfig.setTypedProperty(PROPERTY_EDGE_FONT_SIZE, 10);
-		defaultConfig.setTypedProperty(PROPERTY_VISUALIZATION_PADDING, 15);
-		defaultConfig.setTypedProperty(PROPERTY_NODE_PADDING, 5);
-		return defaultConfig;
-	}
-	
-	@Property(name=PROPERTY_DISPLAY_NODE_LABELS)
-	boolean displayNodeLabels;
-	@Property(name=PROPERTY_NODE_CONTENTS)
-	int nodeContents;
-	@Property(name=PROPERTY_NODE_WIDTH)
-	int nodeWidth;
-	@Property(name=PROPERTY_NODE_HEIGHT)
-	int nodeHeight;
-	@Property(name=PROPERTY_NODE_SPACING_HORIZONTAL)
-	int nodeSpacingHorizontal;
-	@Property(name=PROPERTY_NODE_SPACING_VERTICAL)
-	int nodeSpacingVertical;
-	@Property(name=PROPERTY_MAXIMAL_DEPTH)
-	int maxDepth;
-	@Property(name=PROPERTY_VERTEX_FONT_SIZE)
-	int vertexFontSize;
-	@Property(name=PROPERTY_EDGE_FONT_SIZE)
-	int edgeFontSize;
-	@Property(name=PROPERTY_VISUALIZATION_PADDING)
-	int visualizationPadding;
-	@Property(name=PROPERTY_LEVELS_HORIZONTAL)
-	boolean levelsHorizontal;
-	@Property(name=PROPERTY_NODE_PADDING)
-	int nodePadding;
-
-	@Override
-	public VisualizationConfig getConfig() {
-		VisualizationConfig cfg = new VisualizationConfig(this.getClass());
-		cfg.setTypedProperty(PROPERTY_DISPLAY_NODE_LABELS, displayNodeLabels);
-		cfg.setTypedProperty(PROPERTY_LEVELS_HORIZONTAL, levelsHorizontal);
-		cfg.setTypedProperty(PROPERTY_NODE_CONTENTS, nodeContents);
-		cfg.setTypedProperty(PROPERTY_NODE_WIDTH, nodeWidth);
-		cfg.setTypedProperty(PROPERTY_NODE_HEIGHT, nodeHeight);
-		cfg.setTypedProperty(PROPERTY_NODE_SPACING_HORIZONTAL, nodeSpacingHorizontal);
-		cfg.setTypedProperty(PROPERTY_NODE_SPACING_VERTICAL, nodeSpacingVertical);
-		cfg.setTypedProperty(PROPERTY_MAXIMAL_DEPTH, maxDepth);
-		cfg.setTypedProperty(PROPERTY_VERTEX_FONT_SIZE, vertexFontSize);
-		cfg.setTypedProperty(PROPERTY_EDGE_FONT_SIZE, edgeFontSize);
-		cfg.setTypedProperty(PROPERTY_VISUALIZATION_PADDING, visualizationPadding);
-		cfg.setTypedProperty(PROPERTY_NODE_PADDING, nodePadding);
-		return cfg;
-	}
-
-	@Override
-	protected void setConfiguration(VisualizationConfig cfg, Collection<String> changedProperties) {
-		if (changedProperties.contains(PROPERTY_NODE_CONTENTS)) {
-			setNodeContents(cfg.<Integer>getTypedProperty(PROPERTY_NODE_CONTENTS), viewer);
-		}
-		
-		// TODO improve also:
-		displayNodeLabels = cfg.<Boolean>getTypedProperty(PROPERTY_DISPLAY_NODE_LABELS);
-		nodeWidth = cfg.<Integer>getTypedProperty(PROPERTY_NODE_WIDTH);
-		nodeHeight = cfg.<Integer>getTypedProperty(PROPERTY_NODE_HEIGHT);
-		nodeSpacingHorizontal = cfg.<Integer>getTypedProperty(PROPERTY_NODE_SPACING_HORIZONTAL);
-		nodeSpacingVertical = cfg.<Integer>getTypedProperty(PROPERTY_NODE_SPACING_VERTICAL);
-		maxDepth = cfg.<Integer>getTypedProperty(PROPERTY_MAXIMAL_DEPTH);
-		levelsHorizontal = cfg.<Boolean>getTypedProperty(PROPERTY_LEVELS_HORIZONTAL);
-		vertexFontSize = cfg.<Integer>getTypedProperty(PROPERTY_VERTEX_FONT_SIZE);
-		edgeFontSize = cfg.<Integer>getTypedProperty(PROPERTY_EDGE_FONT_SIZE);
-		visualizationPadding = cfg.<Integer>getTypedProperty(PROPERTY_VISUALIZATION_PADDING);
-		nodePadding = cfg.<Integer>getTypedProperty(PROPERTY_NODE_PADDING);
-		
-		if (viewer != null) {
-			viewer.repaint();
-		}
 	}
 	
 /* *********************************************************************************************/
@@ -235,6 +150,7 @@ public abstract class AbstractTreeVisualization<T> extends Visualization<T> {
 	protected void update() {
 		if (viewer != null) {
 			preparator.prepareVisualizationServer(viewer);
+			viewer.repaint();
 		}
 	}
 
@@ -280,5 +196,118 @@ public abstract class AbstractTreeVisualization<T> extends Visualization<T> {
 	        }
         	server.getRenderer().setVertexRenderer(new TreeVertexRenderer<T>(preparator));
         }
+		update();
 	}
+
+	public boolean isDisplayNodeLabels() {
+		return displayNodeLabels;
+	}
+
+	public void setDisplayNodeLabels(boolean displayNodeLabels) {
+		this.displayNodeLabels = displayNodeLabels;
+		update();
+	}
+
+	public int getNodeContents() {
+		return nodeContents;
+	}
+
+	public void setNodeContents(int nodeContents) {
+		this.nodeContents = nodeContents;
+		update();
+	}
+
+	public int getNodeWidth() {
+		return nodeWidth;
+	}
+
+	public void setNodeWidth(int nodeWidth) {
+		this.nodeWidth = nodeWidth;
+		update();
+	}
+
+	public int getNodeHeight() {
+		return nodeHeight;
+	}
+
+	public void setNodeHeight(int nodeHeight) {
+		this.nodeHeight = nodeHeight;
+		update();
+	}
+
+	public int getNodeSpacingHorizontal() {
+		return nodeSpacingHorizontal;
+	}
+
+	public void setNodeSpacingHorizontal(int nodeSpacingHorizontal) {
+		this.nodeSpacingHorizontal = nodeSpacingHorizontal;
+		update();
+	}
+
+	public int getNodeSpacingVertical() {
+		return nodeSpacingVertical;
+	}
+
+	public void setNodeSpacingVertical(int nodeSpacingVertical) {
+		this.nodeSpacingVertical = nodeSpacingVertical;
+		update();
+	}
+
+	public int getMaxDepth() {
+		return maxDepth;
+	}
+
+	public void setMaxDepth(int maxDepth) {
+		this.maxDepth = maxDepth;
+		update();
+	}
+
+	public int getVertexFontSize() {
+		return vertexFontSize;
+	}
+
+	public void setVertexFontSize(int vertexFontSize) {
+		this.vertexFontSize = vertexFontSize;
+		update();
+	}
+
+	public int getEdgeFontSize() {
+		return edgeFontSize;
+	}
+
+	public void setEdgeFontSize(int edgeFontSize) {
+		this.edgeFontSize = edgeFontSize;
+		update();
+	}
+
+	public int getVisualizationPadding() {
+		return visualizationPadding;
+	}
+
+	public void setVisualizationPadding(int visualizationPadding) {
+		this.visualizationPadding = visualizationPadding;
+		update();
+	}
+
+	public boolean isLevelsHorizontal() {
+		return levelsHorizontal;
+	}
+
+	public void setLevelsHorizontal(boolean levelsHorizontal) {
+		this.levelsHorizontal = levelsHorizontal;
+		update();
+	}
+
+	public int getNodePadding() {
+		return nodePadding;
+	}
+
+	public void setNodePadding(int nodePadding) {
+		this.nodePadding = nodePadding;
+		update();
+	}
+	
+/* getters and setters *************************************************************************/
+	
+	
 }

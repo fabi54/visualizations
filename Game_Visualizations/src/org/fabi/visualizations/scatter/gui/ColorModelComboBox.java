@@ -24,7 +24,6 @@ public class ColorModelComboBox extends JComboBox implements Observer {
 			ConstantColorModel.class,
 			GradientColorModel.class,
 			RegressionRainbowColorModel.class,
-			RegressionMonochromaticGradientColorModel.class,
 			SeriesDependentColorModel.class//,
 			//CustomGroovyColorModel.class
 	};

@@ -5,54 +5,50 @@ import game.models.Model;
 
 import java.awt.Component;
 import java.awt.Dimension;
-import java.util.ArrayList;
-import java.util.List;
 
-import org.fabi.visualizations.config.VisualizationConfig;
 import org.fabi.visualizations.rapidminer.tree.TreeNode;
 import org.fabi.visualizations.scatter.sources.ModelSource;
-import org.fabi.visualizations.scatter_old.DatasetGenerator;
-import org.fabi.visualizations.scatter_old.ScatterplotVisualization;
+import org.fabi.visualizations.scatter.sources.ScatterplotSource;
+import org.fabi.visualizations.scatter.sources.ScatterplotSourceBase;
+import org.fabi.visualizations.scatter.ScatterplotVisualization;
 import org.fabi.visualizations.tree.NodeContentRenderer;
 import org.modgen.rapidminer.modelling.datasource.GameClassifierSource;
 import org.modgen.rapidminer.modelling.datasource.GameModelSource;
 
 public class ModgenTreeNodeScatterplotContentRenderer implements NodeContentRenderer<TreeNode> {
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public Component getVertexContentComponent(TreeNode node) {
 		if (!(node instanceof ModgenTreeNode)) {
 			return null;
 		}
 		Object item = ((ModgenTreeNode) node).item;
-		DatasetGenerator generator = null;
+		ScatterplotSource source = null;
 		ModelSource modelSource = null;
 		if (item instanceof Classifier) {
 			modelSource = new GameClassifierSource((Classifier) item);
-			generator = new DatasetGenerator(modelSource, null);
+			source = new ScatterplotSourceBase(new ModelSource[]{modelSource});
 		} else if (item instanceof Model) {
 			modelSource = new GameModelSource((Model) item);
-			generator = new DatasetGenerator(modelSource, null);
+			source = new ScatterplotSourceBase(new ModelSource[]{modelSource});
 		}
-		if (generator == null) {
+		if (source == null) {
 			return null;
 		}
-		VisualizationConfig cfg = new VisualizationConfig(ScatterplotVisualization.class);
-		cfg.setTypedProperty(ScatterplotVisualization.PROPERTY_Y_AXIS_INPUT, (modelSource.outputsNumber() > 1));
-		cfg.setTypedProperty(ScatterplotVisualization.PROPERTY_X_AXIS_RANGE_LOWER, new Double(0));
-		cfg.setTypedProperty(ScatterplotVisualization.PROPERTY_X_AXIS_RANGE_UPPER, new Double(1));
-		cfg.setTypedProperty(ScatterplotVisualization.PROPERTY_Y_AXIS_RANGE_LOWER, new Double(0));
-		cfg.setTypedProperty(ScatterplotVisualization.PROPERTY_Y_AXIS_RANGE_UPPER, new Double(1));
-		List inputsSetting = new ArrayList(modelSource.inputsNumber());
+		ScatterplotVisualization vis = new ScatterplotVisualization(source);
+		vis.setyAxisAttributeIndex((modelSource.outputsNumber() > 1) ? ScatterplotVisualization.OUTPUT_AXIS : 1);
+		vis.setxAxisRangeLower(0.0);
+		vis.setxAxisRangeUpper(1.0);
+		vis.setyAxisRangeLower(0.0);
+		vis.setyAxisRangeUpper(1.0);
+		double[] inputs = new double[modelSource.inputsNumber()];
 		for (int i = 0; i < modelSource.inputsNumber(); i++) {
-			inputsSetting.add(0.5);
+			inputs[i] = 0.5;
 		}
-		cfg.setTypedProperty(ScatterplotVisualization.PROPERTY_INPUTS_SETTING, inputsSetting);
-		cfg.setTypedProperty(ScatterplotVisualization.PROPERTY_LEGEND_VISIBLE, false);
-		cfg.setTypedProperty(ScatterplotVisualization.PROPERTY_AXES_TICK_UNITS_VISIBLE, false);
-		ScatterplotVisualization visualization = new ScatterplotVisualization(generator, cfg);
-		return visualization.getVisualizationAsComponent();
+		vis.setInputsSetting(inputs);
+		vis.setLegendVisible(false);
+		vis.setGridVisible(false);
+		return vis.getVisualizationAsComponent();
 	}
 
 	@Override

@@ -2,12 +2,10 @@ package org.fabi.visualizations.rapidminer.tree;
 
 import java.util.List;
 
-import org.fabi.visualizations.config.VisualizationConfig;
 import org.fabi.visualizations.tree.AbstractTreeVisualization;
 import org.fabi.visualizations.tree.NodeContentRenderer;
 import org.fabi.visualizations.tree.TreeDFS;
 import org.fabi.visualizations.tree.TreeVisualizationGraphicStyleProvider;
-import org.ytoh.configurations.Property;
 
 public class TreeIOObjectVisualization extends AbstractTreeVisualization<TreeNode> {
 
@@ -15,11 +13,6 @@ public class TreeIOObjectVisualization extends AbstractTreeVisualization<TreeNod
 	
 	public TreeIOObjectVisualization(TreeNode source) {
 		super(source);
-		nodeContentRenderers = null;
-	}
-	
-	public TreeIOObjectVisualization(TreeNode source, VisualizationConfig config) {
-		super(source, config);
 		nodeContentRenderers = null;
 	}
 
